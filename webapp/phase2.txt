@@ -8,6 +8,9 @@ Then, we clicked on each country we were interested in.
 On each country's page is a link that says "csv", which gives csv data.
 We got data from many countries in the Middle East.
 
+To get religion data specifically, we are using:
+http://www.pewforum.org/2009/10/07/mapping-the-global-muslim-population/
+
 The dataset for each country includes statistics about:
  - Crime
  - Economic indicators
@@ -29,7 +32,7 @@ Categories we tentativeley are including in our final application:
  - Health indicators (e.g. infant mortality, life expectancy, etc.)
  - Gender equality (e.g. school enrollment by gender, etc.)
  - Demographic indicators (population age, male/female)
- - Religion data (if we can find some)
+ - Religion data (%Muslim, %Shia, %Sunni)
 
 
 User stories:
