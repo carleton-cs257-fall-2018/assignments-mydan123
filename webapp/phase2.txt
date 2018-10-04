@@ -1,0 +1,29 @@
+Daniel Busis
+Will Thompson
+
+
+To get our data we went to:
+https://data.worldbank.org/country/
+Then, we clicked on each country we were interested in.
+On each country's page is a link that says "csv", which gives csv data.
+We chose countries in the Middle East.
+
+The dataset for each country includes statistics about:
+ - Crime
+ - Economic indicators
+   - Import/export data
+   - Tariff data
+   - Infrastructure data
+   - Internal economy
+ - Health data
+   - Smoking
+   - Infant/maternal mortality
+   - Prevalence of certain diseases
+   - Per c/apita doctors/nurses
+   - Population age
+ - Gender equality data
+ - Environmental data
+
+
+User stories:
+ - 
