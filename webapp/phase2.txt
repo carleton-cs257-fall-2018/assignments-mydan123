@@ -112,6 +112,24 @@ User stories:
     their search by the economy, religion, etc. as if they have clicked a link for a country. The data displayed, such as GDP, 
     is aggregated data for the entire region. Thus, selecting "The Middle East" and searching by GDP will present a breakdown
     of average GDP for the region per year. 
+    
+    
+14. As a first time user, I have no idea what I can search by or what this website displays. At the top, there are a series of 
+    tabs and one of them is labeled: "Glossary."
+    
+    When I click this tab, I see an alphabetized list of each data type I can search by, such as infrastructure, GDP, percent Muslim.
+    For each data type, there is a defintion for data type explaining what it means. 
+    
+15. As someone who needs quick and easy facts on Iraq, I see a button on a horizontal list of tabs at the top of the screen labeled: "Country Profiles."
+    
+    When I click this link, there is a list of country profiles organized alphabetically. I do not want to scroll through each one, so I go to 
+    a search bar at the top of the page and enter: "Iraq." The page reloads and displayed just the profile of Iraq.
+    
+    This profile is under a header titled "The Republic of Iraq." There is a picture of the country showing the geography of the region, as well as its flag.
+    Below this picture, there are quick facts on Iraq such as a breakdown of the languages and religions of Iraq. I see Iraq's most recent
+    GDP, and a few other pieces of economic data. 
+    
+    The summary is brief, but highlights major facts of Iraq.
 
  
  
