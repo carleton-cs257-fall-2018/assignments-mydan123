@@ -1,12 +1,18 @@
 Daniel Busis
 Will Thompson
-
+Phase 2- Data sets and User Stories
 
 To get our data we went to:
 https://data.worldbank.org/country/
+
 Then, we clicked on each country we were interested in.
-On each country's page is a link that says "csv", which gives csv data.
-We got data from many countries in the Middle East.
+For this project, we are compiling data on the Middle East and all Middle Eastern countries.
+On the world bank's website, there is a breakdown of data by country. 
+On each Middle Eastern country's page is a link that says "csv", which gives the data for that country in a csv file. 
+We currently have large datasets from the World Bank on 23 Middle Eastern countries. 
+
+These datasets are missing data on religion, so we will combine data sets on religion from another source with the data we
+have from the world bank.
 
 To get religion data specifically, we are using:
 http://www.pewforum.org/2009/10/07/mapping-the-global-muslim-population/
@@ -36,14 +42,71 @@ Categories we tentativeley are including in our final application:
 
 
 User stories:
- 1. As an economist, I want statistics on public health, GDP, economic performance, spending, etc.,
-    in order to understand the economy of Middle Eastern countries.
- 2. As a researcher, I need reliable data for each ME country on economics, demographics,
-    religion, and gender.
- 3. As a student, I can get economic data in order to compare statistics for each country in the ME.
- 4. As a civilian, I wasnt access to readable data regarding religion, terrorism, the economy, 
-    and demographic info.
- 5. As a policy maker, I would like digestible diplomatic information by country in order to
-    familiarize myself with foreign nations.
- 6. As someone who knows little about the Middle East, I would like easy and readable stats
-    on Middle Eastern countries.
+
+1. A user opens the website and wants to know the statistics on Turkey. There should be a list of each country in alphabetical order
+   on the left side of the screen. The user clicks that link and is directed to a page only on Turkey. There will be six or seven
+   headers that say: Economics, Health Care, Religion, etc. When the user clicks on the tab labeled economics, a dropdown menu will
+   display options for viewing certain types of data: GDP, Debt, etc. 
+   
+   The user selects GDP, and there is a dropdown display of information for Turkey's yearly GDP.
+   
+2. A similar user goes to the left portion of the screen and selects Saudi Arabia. The user is redirected to another page with six tabs with different titles, such as Economy or Religion.
+   The user selects Economy and sees a dropdown menu with a dozen or so titles specifying the economic data the user might want. 
+   
+   The user clicks on the first tab, which is titled "General Summary," and all economic data for Saudi Arabic is displayed.
+   
+   The user collapses the "General Summary" tab and instead selects a tab called "Debt." Only economic data related to the country's debt 
+   is displayed.
+
+
+3. As a student, I open the website and the first thing I see is a series of search bars. I have the option to select one or several countries, 
+   and various types of data ranging from the economy to crime data. 
+   
+   There is a tab for selecting counties, type of data, and a "sort by" option. 
+   
+   I want to see the GDP for each Middle Eastern country so I select "All" under the tab for country, GDP under "Search By," and 'Alphabetical" under "Sort By"
+   
+   I see a display of each country's GDP per year organized alphabetically. 
+   
+
+4. As an economist studying Egypt, I want to make a general search query for Egypt and have a full display of 
+   all relevant information for Egypt. When I make this search, I want to see several tables and graphs
+   breaking down all kinds of data on Egypt. 
+   
+   In this search, there should be several sections, such as economics, public health, religious affiliations, and data
+   under each section.
+
+5. A user selects Sudan, Egypt, and Yemen and has modified her search to gender statistics. The website should
+   display tabular and graphical comparisons of Egypt, Yemen, and Sudan regarding gender statistics for each country in alphabetical order.
+   
+   If the user selects an option to sort by those statistics, then the first country shown will be the one with
+   the highest or lowest statistic. 
+   
+6. A political scientist selects Tunisia, Algeria, and hits search. A display of all data on these two countries
+   should be presented. Under each diagram or table, data for both Tunisia and Algeria should be presented next to 
+   one another before the user sees the next diagram/ table.
+    
+7. A user searches by mortality rates. No country was specified so the website should display tables for each 
+   country, in alphabetical order, and that country's mortality rates.
+   
+8. If a user selects GDP, there should be a display for each country organized alphabetically showing 
+   GDP per year. There should be an option for a table or line graph. 
+   
+9. If a user selects GDP and a country, there should just be a table or line graph displaying GDP for that country.
+
+10. If a user selects GDP and chooses to sort by GDP and not alphabetically, then the first table or graph displayed
+   should be for the country with the highest or lowest average GDP.
+   
+   Additionally, if the user modifies the search to a few select countries, those countries will follow this breakdown.
+   
+11. If a user selects GDP, a specific year, and chooses to sort by GDP, then the first table or graph displayed
+   should be for the country with the highest or lowest GDP for that year.
+   
+   Additionally, if the user modifies the search to a few select countries, those countries will follow this breakdown.
+ 
+12. If a user selects Jordan, birth rates, and GDP then there should be tabular and graphical displays of that 
+    data for Jordan shown.
+    
+
+ 
+ 
