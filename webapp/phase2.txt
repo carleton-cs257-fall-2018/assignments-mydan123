@@ -107,6 +107,11 @@ User stories:
 12. If a user selects Jordan, birth rates, and GDP then there should be tabular and graphical displays of that 
     data for Jordan shown.
     
+13. If a user wants summary data on the entire region, there will be a link on the left portion of the website titled
+    "Middle East." When the user clicks this tab, the same interface as a country will be displayed. The user may sort and modify
+    their search by the economy, religion, etc. as if they have clicked a link for a country. The data displayed, such as GDP, 
+    is aggregated data for the entire region. Thus, selecting "The Middle East" and searching by GDP will present a breakdown
+    of average GDP for the region per year. 
 
  
  
