@@ -1,27 +1,29 @@
 SQL Table Format:
 
 CREATE TABLE data_gdp_usd (
-    country_name TEXT,
+	country_name TEXT,
 	year INT,
-    gdp_usd INT,
+	gdp_usd FLOAT
 );
 
 CREATE TABLE data_gdp_ppp (
-    country_name TEXT,
+	country_name TEXT,
 	year INT,
-	gdp_ppp INT,
+	gdp_ppp FLOAT
 );
 
 CREATE TABLE data_gdp_capita_usd (
-    country_name TEXT,
+	country_name TEXT,
 	year INT,
-	gdp_capita_usd INT,
+	gdp_capita_usd FLOAT
 );
 
 CREATE TABLE data_gdp_capita_ppp (
-    country_name TEXT,
+	country_name TEXT,
 	year INT,
-	gdp_capita_ppp INT
+	gdp_capita_ppp FLOAT
 );
 
 
+NOTE:
+\copy data_gdp_usd from 'gdp_usd_data.csv' DELIMITER ',' CSV NULL as ''

@@ -51,7 +51,7 @@ def load_from_data_folder(folder):
 					gdp_usd_data.append([country_name, year, gdp_usd_value])
 	
 	return (gdp_ppp_capita_data, gdp_ppp_data, gdp_usd_capita_data, gdp_usd_data)
-	
+
 def save_table(cur_data, file_name):
 	output_file = open(file_name, 'w')
 	writer = csv.writer(output_file)
