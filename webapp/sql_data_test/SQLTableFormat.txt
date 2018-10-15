@@ -1,0 +1,27 @@
+SQL Table Format:
+
+CREATE TABLE data_gdp_usd (
+    country_name TEXT,
+	year INT,
+    gdp_usd INT,
+);
+
+CREATE TABLE data_gdp_ppp (
+    country_name TEXT,
+	year INT,
+	gdp_ppp INT,
+);
+
+CREATE TABLE data_gdp_capita_usd (
+    country_name TEXT,
+	year INT,
+	gdp_capita_usd INT,
+);
+
+CREATE TABLE data_gdp_capita_ppp (
+    country_name TEXT,
+	year INT,
+	gdp_capita_ppp INT
+);
+
+
