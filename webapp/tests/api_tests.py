@@ -44,63 +44,72 @@ class APIQueryUnitTests(unittest.TestCase)
                           {'name' : 'Algeria', 'year' : 2005, 'GDP_USD' : 1.03198E+11}])
         
     def test_query_retrieving_Spending_for_one_country_in_one_year(self):
-        url = 'http://perlman.mathcs.carleton.edu:portnumber/economicdata/Spending/?country=Jordan?year=2017'
+        url = 'http://perlman.mathcs.carleton.edu:portnumber/economicdata/Spending/?country=Jordan&year=2017'
         data_from_server = urllib.request.urlopen(url).read()
         decoded_data_from_server = data_from_server.decode('utf-8')
         server_return_string = json.loads(string_from_server)
         self.assertEqual(server_return_string, [{'name' : 'Jordan', 'year' : 2017, 'spending' :48663097248.6698}])
 		
     def test_query_retrieving_government_debt_for_one_country_in_one_year(self):
-        url = 'http://perlman.mathcs.carleton.edu:portnumber/economicdata/govt_debt/?country=Jordan?year=2017'
+        url = 'http://perlman.mathcs.carleton.edu:portnumber/economicdata/govt_debt/?country=Jordan&year=2017'
         data_from_server = urllib.request.urlopen(url).read()
         decoded_data_from_server = data_from_server.decode('utf-8')
         server_return_string = json.loads(string_from_server)
         self.assertEqual(server_return_string, [{'name' : 'Jordan', 'year' : 2017, 'govt_debt' :12340520389.1094}])
 
     def test_query_retrieving_military_expenditure_for_one_country_in_one_year(self):
-        url = 'http://perlman.mathcs.carleton.edu:portnumber/economicdata/military_expenditure/?country=Jordan?year=2017'
+        url = 'http://perlman.mathcs.carleton.edu:portnumber/economicdata/military_expenditure/?country=Jordan&year=2017'
         data_from_server = urllib.request.urlopen(url).read()
         decoded_data_from_server = data_from_server.decode('utf-8')
         server_return_string = json.loads(string_from_server)
         self.assertEqual(server_return_string, [{'name' : 'Jordan', 'year' : 2017, 'military_expenditure' :1939718309.85915}])
+        
+    def test_query_retrieving_military_expenditure_for_two_countries_in_one_year(self):
+        url = 'http://perlman.mathcs.carleton.edu:portnumber/economicdata/military_expenditure/?country=Jordan&country=Bahrain&year=2017'
+        data_from_server = urllib.request.urlopen(url).read()
+        decoded_data_from_server = data_from_server.decode('utf-8')
+        server_return_string = json.loads(string_from_server)
+        self.assertEqual(server_return_string, [
+            {'name' : 'Bahrain', 'year' : 2017, 'military_expenditure' : 1396808511}
+            {'name' : 'Jordan', 'year' : 2017, 'military_expenditure' :1939718309.85915}])
 
     def test_query_retrieving_literacy_rate_for_one_country_in_one_year(self):
-        url = 'http://perlman.mathcs.carleton.edu:portnumber/economicdata/literacy_rate/?country=Jordan?year=2017'
+        url = 'http://perlman.mathcs.carleton.edu:portnumber/economicdata/literacy_rate/?country=Jordan&year=2017'
         data_from_server = urllib.request.urlopen(url).read()
         decoded_data_from_server = data_from_server.decode('utf-8')
         server_return_string = json.loads(string_from_server)
         self.assertEqual(server_return_string, [{'name' : 'Jordan', 'year' : 2017, 'literacy_rate' : None}])
 
     def test_query_retrieving_unemployment_for_one_country_in_one_year(self):
-        url = 'http://perlman.mathcs.carleton.edu:portnumber/economicdata/unemployment/?country=Jordan?year=2014'
+        url = 'http://perlman.mathcs.carleton.edu:portnumber/economicdata/unemployment/?country=Jordan&year=2014'
         data_from_server = urllib.request.urlopen(url).read()
         decoded_data_from_server = data_from_server.decode('utf-8')
         server_return_string = json.loads(string_from_server)
         self.assertEqual(server_return_string, [{'name' : 'Jordan', 'year' : 2014, 'unemployment' : 11.89999962}])
 
     def test_query_retrieving_population_below_poverty_line_for_one_country_in_one_year(self):
-        url = 'http://perlman.mathcs.carleton.edu:portnumber/economicdata/population_below_poverty_line/?country=Jordan?year=2010'
+        url = 'http://perlman.mathcs.carleton.edu:portnumber/economicdata/population_below_poverty_line/?country=Jordan&year=2010'
         data_from_server = urllib.request.urlopen(url).read()
         decoded_data_from_server = data_from_server.decode('utf-8')
         server_return_string = json.loads(string_from_server)
         self.assertEqual(server_return_string, [{'name' : 'Jordan', 'year' : 2010, 'population_below_poverty_line' : 14.4}])
 
     def test_query_retrieving_infant_mortality_per_1000_for_one_country_in_one_year(self):
-        url = 'http://perlman.mathcs.carleton.edu:portnumber/healthdata/infant_mortality_per_1000/?country=Jordan?year=2017'
+        url = 'http://perlman.mathcs.carleton.edu:portnumber/healthdata/infant_mortality_per_1000/?country=Jordan&year=2017'
         data_from_server = urllib.request.urlopen(url).read()
         decoded_data_from_server = data_from_server.decode('utf-8')
         server_return_string = json.loads(string_from_server)
         self.assertEqual(server_return_string, [{'name' : 'Jordan', 'year' : 2017, 'infant_mortality_per_1000' : 14.6}])
 
 	def test_query_retrieving_death_rate_per_1000_people_for_one_country_in_one_year(self):
-        url = 'http://perlman.mathcs.carleton.edu:portnumber/healthdata/death_rate_per_1000_people/?country=Jordan?year=2016'
+        url = 'http://perlman.mathcs.carleton.edu:portnumber/healthdata/death_rate_per_1000_people/?country=Jordan&year=2016'
         data_from_server = urllib.request.urlopen(url).read()
         decoded_data_from_server = data_from_server.decode('utf-8')
         server_return_string = json.loads(string_from_server)
         self.assertEqual(server_return_string, [{'name' : 'Jordan', 'year' : 2016, 'death_rate_per_1000_people' : 3.828}])
 
 	def test_query_retrieving_Percent_population_using_basic_sanitation_services_for_one_country_in_one_year(self):
-        url = 'http://perlman.mathcs.carleton.edu:portnumber/healthdata/Percent_population_using_basic_sanitation_services/?country=Jordan?year=2016'
+        url = 'http://perlman.mathcs.carleton.edu:portnumber/healthdata/Percent_population_using_basic_sanitation_services/?country=Jordan&year=2016'
         data_from_server = urllib.request.urlopen(url).read()
         decoded_data_from_server = data_from_server.decode('utf-8')
         server_return_string = json.loads(string_from_server)
