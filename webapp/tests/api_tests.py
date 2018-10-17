@@ -3,13 +3,14 @@
 #@author Daniel Busis
 
 import urllib
+import unittest
 
-countries = ['Jordan', 'Algeria', 'Morocco', 'Tunisia', 'Libya', 'Egypt', 'Sudan', 'South Sudan', 'Somalia', 'Israel', 'Lebanon', 'Syria'
-             'Iraq', 'Turkey', 'West Bank and Gaza', 'Iran', 'Qatar', 'Saudi Arabia', 'Bahrain', 'United Arab Emirates', 'Oman', 'Yemen', 'Mauritania']
-        
         
     
 class APIQueryUnitTests(unittest.TestCase)
+
+
+    #As of right now, we are not catching errors or exceptions  when a query is typed incorrectly since we are not sure how this error will be thrown
     
     def test_query_retrieving_GDP_for_one_country_in_one_year(self):
         url = 'http://perlman.mathcs.carleton.edu:portnumber/countries/gdp/?country=Jordan?year=2017'
@@ -110,7 +111,14 @@ class APIQueryUnitTests(unittest.TestCase)
         data_from_server = urllib.request.urlopen(url).read()
         decoded_data_from_server = data_from_server.decode('utf-8')
         server_return_string = json.loads(string_from_server)
-        self.assertEqual(server_return_string, [{'name' : 'gdp_usd', 'description':'GDP (current US$)'])
+        self.assertEqual(server_return_string, [{'name' : 'gdp_usd', 'description':'GDP (current US$)'}])
+        
+    def test_query_that_returns_an_empty_list(self):
+        url = 'http://perlman.mathcs.carleton.edu:portnumber/economicdata/gdp/?year=5'
+        data_from_server = urllib.request.urlopen(url).read()
+        decoded_data_from_server = data_from_server.decode('utf-8')
+        server_return_string = json.loads(string_from_server)
+        self.assertEqual(server_return_string, [])
 
 		
 if __name__ == '__main__':
