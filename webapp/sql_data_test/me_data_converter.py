@@ -66,3 +66,5 @@ if __name__ == '__main__':
 	save_table(gdp_ppp_data, 'gdp_ppp_data.csv')
 	save_table(gdp_ppp_capita_data, 'gdp_ppp_capita_data.csv')
 	
+#Note: To put tables into SQL, use:
+#\copy data_gdp_usd from 'gdp_usd_data.csv' DELIMITER ',' CSV NULL as ''
