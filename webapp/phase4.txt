@@ -1,30 +1,66 @@
-Web based API Project phase 4
+﻿Web based API Project phase 4
 CS257
 Daniel Busis and Will Thompson
 
 
-SQL Table Structure mockups:
+                                                           SQL Table Structure mockups:
 
-#Has many data statistics about all the countries for each year
-CREATE TABLE time_series_data (
-	country_name TEXT,
-	year INT,
-	gdp_usd FLOAT,
-	gdp_ppp FLOAT,
-	gdp_capita_usd FLOAT,
-	gdp_capita_ppp FLOAT,
-	infant_mortality_per_1000 FLOAT,
-	birth_rate FLOAT,
-	death_rate FLOAT
+
+CREATE TABLE economic_data(
+	country text,
+	Year integer, 
+	Gdp integer,
+ 	Spending integer,
+	Government_debt integer,
+	Military_expenditure integer,
+	Literacy_rate integer,
+	Currency_strength integer,
+	Unemployment_rate integer,
+	Percent_population_below_poverty_line integer,
 );
 
-#Describes
-CREATE TABLE decription_table (
-	column_name TEXT,
-	column_description TEXT
+
+
+CREATE TABLE public_health_data(
+	country text,
+	Year integer, 
+	Infant_mortality_rate_per_1000 integer,
+	Mortality_rate_for_adults_per_1000 integer,
+	Percent_adults_with_college_degrees integer,
+	Percent_adults_with_high_school_education integer,
+	Percent_adults_no_education integer,
+	Morbidity_rates integer,
+	Percent_population_using_basic_sanitation_services integer,
 );
 
-API Query Structure:
+
+
+CREATE TABLE religion_data(
+	country text
+	Religion text,
+	Percent_population_practicing integer,
+);
+
+CREATE TABLE demographic_data(
+	country text,
+	Percent_male integer,
+	Percent_female integer,
+	Total_population integer,
+	Percent_of_families_suffering_domestic_abuse integer,
+	Attainment_of_high_school_diploma_male integer,
+	Attainment_of_high_school_diploma_female integer,
+	Attainment_of_bachelor_degree_male integer,
+	Attainment_of_bachelor_degree_female integer,
+	Attainment_of_master_degree_male integer,
+	Attainment_of_bachelor_degree_female integer,
+	Attainment_of_doctoral_degree_male integer,
+	Attainment_of_doctoral_degree_female integer,
+);
+
+
+
+                                                     
+                                                  API Query Structure:
 
 The database has several different types of data. For each data statistic being looked at, the query structure
 will be the same, with the form of /countries/[data wanted]/?[optional-argument]
@@ -50,18 +86,34 @@ Example: http://apiquery.com/countries/gdp_usd/
 
 2. Synopsis: Get a list of one country's GDP for each year in the database
     
-Query: /countries/gdp_usd?country_name=somecountry
+Query: /countries/gdp_usd?country=somecountry
 	 
 Response: returns a list of dictionaries. This list of dictionaries contains the specified country’s name along with its GDP per year. 
 
-Example: http://apiquery.com/countries/gdp_usd/?country_name=Jordan
+Example: http://apiquery.com/countries/gdp_usd/?country=Jordan
 [{‘name’ : ‘Jordan’, ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars},
  {‘name’ : ‘Jordan’, ‘year’ : 1961, ‘GDP_USD’ : 50 million dollars}, …
  {‘name’ : ‘Jordan’, ‘year’ : 2017, ‘GDP_USD’ : 50 million dollars}
 ]
 
 
-3. Synopsis: Get a list of country's GDP for one specified year. (Mutually exclusive with the start_year and end_year arguments).
+3. Synopsis: Get a list of several countries' GDP for each year in the database
+    
+Query: /countries/gdp_usd?country=somecountry&country=somecountry
+	 
+Response: returns a list of dictionaries. This list of dictionaries contains the specified countries along with their GDP per year. 
+
+Example: http://apiquery.com/countries/gdp_usd/?country=Jordan&country=Oman
+[{‘name’ : ‘Jordan’, ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars},
+ {‘name’ : ‘Jordan’, ‘year’ : 1961, ‘GDP_USD’ : 50 million dollars}, …
+ {‘name’ : ‘Jordan’, ‘year’ : 2017, ‘GDP_USD’ : 50 million dollars}
+ {‘name’ : ‘Oman’, ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars},
+ {‘name’ : ‘Oman’, ‘year’ : 1961, ‘GDP_USD’ : 50 million dollars},… 
+ {‘name’ : ‘Oman’, ‘year’ : 2017, ‘GDP_USD’ : 50 million dollars}
+]
+
+
+4. Synopsis: Get a list of country's GDP for one specified year. (Mutually exclusive with the start_year and end_year arguments).
     
 Query: /countries/gdp_usd/?year=someyear
 	 
@@ -71,57 +123,71 @@ each country is paried with a dictionary containing a key representing GDP_USD a
 Example: http://apiquery.com/countries/gdp_usd/?year=1960
 [{‘name’ : ‘Algeria’, ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars} 
  {‘name’ : ‘Bahrain’, ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars}
- {‘name’ : ‘Tunisia’, ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars}
  {‘name’ : ‘Jordan’, ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars}
+ {‘name’ : ‘Tunisia’, ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars}...
 ]
 
 
-4. Synopsis: Get a list of country's GDP for a set of years from start_year to end_year, inclusively. 
-(Mutually exclusive with the year argument).
+5. Synopsis: Get a list of two countries and their GDP for one specified year. (Mutually exclusive with the start_year and end_year arguments).
+    
+Query: /countries/gdp_usd/?country=somecountry&country=somecountry&year=someyear
+	 
+Response: returns a list of dictionaries. Each dictionary corresponds to a country, 
+each country is paried with a dictionary containing a key representing GDP_USD and a value representing the specified year.
 
-Query: /countries/gdp_usd/?country_name=somecountry&start_year=someyear&end_year=someyear
+Example: http://apiquery.com/countries/gdp_usd/?country=Saudi Arabia&country=Iran&year=1960
+[{‘name’ : ‘Iran’, ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars} 
+ {‘name’ : 'Saudi Arabia', ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars}
+]
 
-Response: Returns a list of dictionaries with the country’s name, the year, and the GDP_USD during that year. 
+
+6. Synopsis: Get a list of country's GDP for a set of years from start_year to end_year, inclusively. (Mutually exclusive with the year argument).
+
+Query: /countries/gdp_usd/?country=somecountry&start_year=someyear&end_year=someyear
+
+Response: Returns a list of dictionaries with the country’s name, the year, and the GDP_usd during that year. 
 Returns dictionaries with year values within the start_year and end_year endpoints inclusively. 
 
-Example: http://apiquery.com/countries/gdp_usd/?country_name=Jordan&start_year=1960&end_year=1963 
+Example: http://apiquery.com/countries/gdp_usd/?country=Jordan&start_year=1960&end_year=1963 
 [{‘name’ : ‘Jordan’, ‘year’ : 1961, ‘GDP_USD’ : 50 million dollars}
  {‘name’ : ‘Jordan’, ‘year’ : 1962, ‘GDP_USD’ : 50 million dollars}
  {‘name’ : ‘Jordan’, ‘year’ : 1963, ‘GDP_USD’ : 50 million dollars}
 ]
 
 
-5. Synopsis: Get a list of country's GDP for all years except years where no value is available
+7. Synopsis: Get a list of country's GDP for all years except years where no value is available
 
-Query: /countries/gdp_usd/?country_name=Jordan&ignore_null=True
+Query: /countries/gdp_usd/?country=Jordan&ignore_null=True
 
 Response: Returns a list of dictionaries with the country’s name, the year, and the GDP_USD during that year.
 Does not return dictionaries where no data is available for that year.
 
-Example: http://apiquery.com/countries/gdp_usd/?country_name=Jordan&start_year=1960&end_year=1963 
+Example: http://apiquery.com/countries/gdp_usd/?country=Jordan&start_year=1960&end_year=1963 
 [{‘name’ : ‘Jordan’, ‘year’ : 1961, ‘GDP_USD’ : 50 million dollars}
  {‘name’ : ‘Jordan’, ‘year’ : 1962, ‘GDP_USD’ : 50 million dollars}
  {‘name’ : ‘Jordan’, ‘year’ : 1963, ‘GDP_USD’ : 50 million dollars}
 ]
+
 (While the dictionary {‘name’ : ‘Jordan’, ‘year’ : 1940, ‘GDP_USD’ : NULL} would NOT be returned.)
 
 
-6. Synopsis: Get a list of country's GDP for all years except years where no value is available
+8. Synopsis: Get a list of country's GDP for all years except years where no value is available
 
-Query: /countries/gdp_usd/?country_name=Jordan&ignore_null=True
+Query: /countries/gdp_usd/?country=Jordan&ignore_null=True
 
 Response: Returns a list of dictionaries with the country’s name, the year, and the GDP_USD during that year.
 Does not return dictionaries where no data is available for that year.
 
-Example: http://apiquery.com/countries/gdp_usd/?country_name=Jordan&start_year=1960&end_year=1963 
+Example: http://apiquery.com/countries/gdp_usd/?country=Jordan&start_year=1960&end_year=1963 
 [{‘name’ : ‘Jordan’, ‘year’ : 1961, ‘GDP_USD’ : 50 million dollars}
  {‘name’ : ‘Jordan’, ‘year’ : 1962, ‘GDP_USD’ : 50 million dollars}
  {‘name’ : ‘Jordan’, ‘year’ : 1963, ‘GDP_USD’ : 50 million dollars}
 ]
+
 (While the dictionary {‘name’ : ‘Jordan’, ‘year’ : 1940, ‘GDP_USD’ : NULL} would NOT be returned.)
 
 
-7. Synopsis: Get a list of country's GDP, sorting by country name first and then by year.
+9. Synopsis: Get a list of country's GDP, sorting by country name first and then by year.
 
 Query: /countries/gdp_usd/?sort_by=Name
 
