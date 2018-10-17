@@ -104,5 +104,13 @@ class APIQueryUnitTests(unittest.TestCase)
         server_return_string = json.loads(string_from_server)
         self.assertEqual(server_return_string, [{'name' : 'Jordan', 'year' : 2016, 'Percent_population_using_basic_sanitation_services' : 96.70805802}])
 
+	def test_query_retrieving_description_of_gdp_usd_for_one_country_in_one_year(self):
+        url = 'http://perlman.mathcs.carleton.edu:portnumber/description/?data_type=gdp_usd'
+        data_from_server = urllib.request.urlopen(url).read()
+        decoded_data_from_server = data_from_server.decode('utf-8')
+        server_return_string = json.loads(string_from_server)
+        self.assertEqual(server_return_string, [{'name' : 'gdp_usd', 'description':'GDP (current US$)'])
+
+		
 if __name__ == '__main__':
     unittest.main()
