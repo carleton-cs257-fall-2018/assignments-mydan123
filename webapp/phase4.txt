@@ -251,3 +251,4 @@ Example: http://apiquery.com/countries/gdp_PPP_capita/
 ]
 
 
+We will have exactly this same structure for every other data field in our tables at the top. 
