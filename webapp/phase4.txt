@@ -278,9 +278,6 @@ Example: http://apiquery.com/economicdata/gdp_PPP_capita/
 ]
 
 
-
-
-
 14. Synopsis: Get a list of each country's practiced religions as a percentage of the population.
     
 Query: /religiondata/religion
@@ -333,12 +330,4 @@ Response: Returns a list of dictionaries. Each dictionary contains the data type
 
 Example: http://apiquery.com/description/?data_type=gdp
 [{gdp: 'definition for gdp'}]
-
-
-
-
-
-
-
-
 
