@@ -332,7 +332,7 @@ Query: /description/?data_type=somedatatype
 Response: Returns a list of dictionaries. Each dictionary contains the data type, and the corresponding value is a definition for that data type. 
 
 Example: http://apiquery.com/description/?data_type=gdp
-[{gdp: 'definition for gdp'}]
+[{name: 'gdp_usd', description: 'definition for gdp'}]
 
 
 
