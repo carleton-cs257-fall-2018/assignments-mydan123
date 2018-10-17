@@ -318,9 +318,9 @@ Query: /description/
 Response: Returns a list of dictionaries. Each dictionary contains the data type, and the corresponding value is a definition for that data type. 
 
 Example: http://apiquery.com/description/
-[{gdp: 'definition for gdp'},           
-{gdp_ppp : ‘Definition for gdp_ppp'},
-{mortality rates' : ‘Definition for mortality rates'…]
+[{'name' : gdp: description : 'definition for gdp'},           
+{'name' : gdp_ppp : 'description' : ‘Definition for gdp_ppp'},
+{'name' : mortality rates' : 'description' : ‘Definition for mortality rates'…]
 
 18. Synopsis: Get a definition for one specified data type.
     
