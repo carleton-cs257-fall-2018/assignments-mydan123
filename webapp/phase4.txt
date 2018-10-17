@@ -8,53 +8,52 @@ Daniel Busis and Will Thompson
 
 CREATE TABLE economic_data(
 	country text,
-	Year integer, 
-	Gdp integer,
- 	Spending integer,
-	Government_debt integer,
-	Military_expenditure integer,
-	Literacy_rate integer,
-	Currency_strength integer,
-	Unemployment_rate integer,
-	Percent_population_below_poverty_line integer,
+	Year float, 
+	gdp_usd float,
+ 	Spending float,
+	Government_debt float,
+	Military_expenditure float,
+	Literacy_rate float,
+	Currency_strength float,
+	Unemployment_rate float,
+	Percent_population_below_poverty_line float,
 );
-
-
-
-CREATE TABLE public_health_data(
-	country text,
-	Year integer, 
-	Infant_mortality_rate_per_1000 integer,
-	Mortality_rate_for_adults_per_1000 integer,
-	Percent_adults_with_college_degrees integer,
-	Percent_adults_with_high_school_education integer,
-	Percent_adults_no_education integer,
-	Morbidity_rates integer,
-	Percent_population_using_basic_sanitation_services integer,
-);
-
 
 
 CREATE TABLE religion_data(
 	country text
 	Religion text,
-	Percent_population_practicing integer,
+	Percent_population_practicing float,
 );
+
+
+CREATE TABLE public_health_data(
+	country text,
+	Year float, 
+	Infant_mortality_rate_per_1000 float,
+	Mortality_rate_for_adults_per_1000 float,
+	Percent_adults_with_college_degrees float,
+	Percent_adults_with_high_school_education float,
+	Percent_adults_no_education float,
+	Morbidity_rates float,
+	Percent_population_using_basic_sanitation_services float,
+);
+
 
 CREATE TABLE demographic_data(
 	country text,
-	Percent_male integer,
-	Percent_female integer,
-	Total_population integer,
-	Percent_of_families_suffering_domestic_abuse integer,
-	Attainment_of_high_school_diploma_male integer,
-	Attainment_of_high_school_diploma_female integer,
-	Attainment_of_bachelor_degree_male integer,
-	Attainment_of_bachelor_degree_female integer,
-	Attainment_of_master_degree_male integer,
-	Attainment_of_bachelor_degree_female integer,
-	Attainment_of_doctoral_degree_male integer,
-	Attainment_of_doctoral_degree_female integer,
+	Percent_male float,
+	Percent_female float,
+	Total_population float,
+	Percent_of_families_suffering_domestic_abuse float,
+	Attainment_of_high_school_diploma_male float,
+	Attainment_of_high_school_diploma_female float,
+	Attainment_of_bachelor_degree_male float,
+	Attainment_of_bachelor_degree_female float,
+	Attainment_of_master_degree_male float,
+	Attainment_of_bachelor_degree_female float,
+	Attainment_of_doctoral_degree_male float,
+	Attainment_of_doctoral_degree_female float,
 );
 
 
@@ -69,12 +68,12 @@ and then list each other query type without any optional GET arguments.
 
 1. Synopsis: Get a list of each country's GDP (in USD) for each year in the database
     
-Query: /countries/gdp_usd
+Query: /economicdata/gdp_usd
 	 
 Response: returns a list of dictionaries containing every country in the database alongwith that country’s GDP per year. 
 Each dictionary contains a country’s name, one specific year, and the country’s GDP during that year.  
 
-Example: http://apiquery.com/countries/gdp_usd/
+Example: http://apiquery.com/economicdata/gdp_usd/
 [{‘name’ : ‘Algeria’, ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars},
  {‘name’ : ‘Algeria’, ‘year’ : 1961, ‘GDP_USD’ : 50 million dollars}, …
  {‘name’ : ‘Algeria’, ‘year’ : 2017, ‘GDP_USD’ : 50 million dollars},
@@ -86,11 +85,11 @@ Example: http://apiquery.com/countries/gdp_usd/
 
 2. Synopsis: Get a list of one country's GDP for each year in the database
     
-Query: /countries/gdp_usd?country=somecountry
+Query: /economicdata/gdp_usd?country=somecountry
 	 
 Response: returns a list of dictionaries. This list of dictionaries contains the specified country’s name along with its GDP per year. 
 
-Example: http://apiquery.com/countries/gdp_usd/?country=Jordan
+Example: http://apiquery.com/economicdata/gdp_usd/?country=Jordan
 [{‘name’ : ‘Jordan’, ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars},
  {‘name’ : ‘Jordan’, ‘year’ : 1961, ‘GDP_USD’ : 50 million dollars}, …
  {‘name’ : ‘Jordan’, ‘year’ : 2017, ‘GDP_USD’ : 50 million dollars}
@@ -99,11 +98,11 @@ Example: http://apiquery.com/countries/gdp_usd/?country=Jordan
 
 3. Synopsis: Get a list of several countries' GDP for each year in the database
     
-Query: /countries/gdp_usd?country=somecountry&country=somecountry
+Query: /economicdata/gdp_usd?country=somecountry&country=somecountry
 	 
 Response: returns a list of dictionaries. This list of dictionaries contains the specified countries along with their GDP per year. 
 
-Example: http://apiquery.com/countries/gdp_usd/?country=Jordan&country=Oman
+Example: http://apiquery.com/economicdata/gdp_usd/?country=Jordan&country=Oman
 [{‘name’ : ‘Jordan’, ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars},
  {‘name’ : ‘Jordan’, ‘year’ : 1961, ‘GDP_USD’ : 50 million dollars}, …
  {‘name’ : ‘Jordan’, ‘year’ : 2017, ‘GDP_USD’ : 50 million dollars}
@@ -115,12 +114,12 @@ Example: http://apiquery.com/countries/gdp_usd/?country=Jordan&country=Oman
 
 4. Synopsis: Get a list of country's GDP for one specified year. (Mutually exclusive with the start_year and end_year arguments).
     
-Query: /countries/gdp_usd/?year=someyear
+Query: /economicdata/gdp_usd/?year=someyear
 	 
 Response: returns a list of dictionaries. Each dictionary corresponds to a country, 
 each country is paried with a dictionary containing a key representing GDP_USD and a value representing the specified year.
 
-Example: http://apiquery.com/countries/gdp_usd/?year=1960
+Example: http://apiquery.com/economicdata/gdp_usd/?year=1960
 [{‘name’ : ‘Algeria’, ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars} 
  {‘name’ : ‘Bahrain’, ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars}
  {‘name’ : ‘Jordan’, ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars}
@@ -130,12 +129,12 @@ Example: http://apiquery.com/countries/gdp_usd/?year=1960
 
 5. Synopsis: Get a list of two countries and their GDP for one specified year. (Mutually exclusive with the start_year and end_year arguments).
     
-Query: /countries/gdp_usd/?country=somecountry&country=somecountry&year=someyear
+Query: /economicdata/gdp_usd/?country=somecountry&country=somecountry&year=someyear
 	 
 Response: returns a list of dictionaries. Each dictionary corresponds to a country, 
 each country is paried with a dictionary containing a key representing GDP_USD and a value representing the specified year.
 
-Example: http://apiquery.com/countries/gdp_usd/?country=Saudi Arabia&country=Iran&year=1960
+Example: http://apiquery.com/economicdata/gdp_usd/?country=Saudi Arabia&country=Iran&year=1960
 [{‘name’ : ‘Iran’, ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars} 
  {‘name’ : 'Saudi Arabia', ‘year’ : 1960, ‘GDP_USD’ : 50 million dollars}
 ]
@@ -143,12 +142,12 @@ Example: http://apiquery.com/countries/gdp_usd/?country=Saudi Arabia&country=Ira
 
 6. Synopsis: Get a list of country's GDP for a set of years from start_year to end_year, inclusively. (Mutually exclusive with the year argument).
 
-Query: /countries/gdp_usd/?country=somecountry&start_year=someyear&end_year=someyear
+Query: /economicdata/gdp_usd/?country=somecountry&start_year=someyear&end_year=someyear
 
 Response: Returns a list of dictionaries with the country’s name, the year, and the GDP_usd during that year. 
 Returns dictionaries with year values within the start_year and end_year endpoints inclusively. 
 
-Example: http://apiquery.com/countries/gdp_usd/?country=Jordan&start_year=1960&end_year=1963 
+Example: http://apiquery.com/economicdata/gdp_usd/?country=Jordan&start_year=1960&end_year=1963 
 [{‘name’ : ‘Jordan’, ‘year’ : 1961, ‘GDP_USD’ : 50 million dollars}
  {‘name’ : ‘Jordan’, ‘year’ : 1962, ‘GDP_USD’ : 50 million dollars}
  {‘name’ : ‘Jordan’, ‘year’ : 1963, ‘GDP_USD’ : 50 million dollars}
@@ -157,12 +156,12 @@ Example: http://apiquery.com/countries/gdp_usd/?country=Jordan&start_year=1960&e
 
 7. Synopsis: Get a list of country's GDP for all years except years where no value is available
 
-Query: /countries/gdp_usd/?country=Jordan&ignore_null=True
+Query: /economicdata/gdp_usd/?country=Jordan&ignore_null=True
 
 Response: Returns a list of dictionaries with the country’s name, the year, and the GDP_USD during that year.
 Does not return dictionaries where no data is available for that year.
 
-Example: http://apiquery.com/countries/gdp_usd/?country=Jordan&start_year=1960&end_year=1963 
+Example: http://apiquery.com/economicdata/gdp_usd/?country=Jordan&start_year=1960&end_year=1963 
 [{‘name’ : ‘Jordan’, ‘year’ : 1961, ‘GDP_USD’ : 50 million dollars}
  {‘name’ : ‘Jordan’, ‘year’ : 1962, ‘GDP_USD’ : 50 million dollars}
  {‘name’ : ‘Jordan’, ‘year’ : 1963, ‘GDP_USD’ : 50 million dollars}
@@ -173,12 +172,12 @@ Example: http://apiquery.com/countries/gdp_usd/?country=Jordan&start_year=1960&e
 
 8. Synopsis: Get a list of country's GDP for all years except years where no value is available
 
-Query: /countries/gdp_usd/?country=Jordan&ignore_null=True
+Query: /economicdata/gdp_usd/?country=Jordan&ignore_null=True
 
 Response: Returns a list of dictionaries with the country’s name, the year, and the GDP_USD during that year.
 Does not return dictionaries where no data is available for that year.
 
-Example: http://apiquery.com/countries/gdp_usd/?country=Jordan&start_year=1960&end_year=1963 
+Example: http://apiquery.com/economicdata/gdp_usd/?country=Jordan&start_year=1960&end_year=1963 
 [{‘name’ : ‘Jordan’, ‘year’ : 1961, ‘GDP_USD’ : 50 million dollars}
  {‘name’ : ‘Jordan’, ‘year’ : 1962, ‘GDP_USD’ : 50 million dollars}
  {‘name’ : ‘Jordan’, ‘year’ : 1963, ‘GDP_USD’ : 50 million dollars}
@@ -189,7 +188,7 @@ Example: http://apiquery.com/countries/gdp_usd/?country=Jordan&start_year=1960&e
 
 9. Synopsis: Get a list of country's GDP, sorting by country name first and then by year.
 
-Query: /countries/gdp_usd/?sort_by=Name
+Query: /economicdata/gdp_usd/?sort_by=Name
 
 Response: Returns a list of dictionaries with the country’s name, the year, and the GDP_USD during that year.
 Returns in order first by country name, then by year.
@@ -200,16 +199,54 @@ Returns in order first by country name, then by year.
  {‘name’ : 'Bahrain', ‘year’ : 1961, ‘GDP_USD’ : 50 million dollars}, …
 ]
 
+10. Synopsis: Get a list of each country's practiced religions as a percentage of the population.
+    
+Query: /religiondata/religion
+	 
+Response: Returns a list of dictionaries. Each dictionary contains a country’s name, various religions, and percent of the populations that practice that religion. 
+
+Example: http://apiquery.com/religiondata
+[{name: ‘Algeria’ , ‘Islam’ : 92%, ‘Shia Islam’ : 1%… ‘Christianity’ : 5%},           
+{name : ‘Bahrain’ , ‘Islam’ : 79%, ‘Shia Islam’ : 68%… ‘Christianity’ : 11%},
+{name : ‘Iraq’ , ‘Islam’ : 90%, ‘Shia Islam’ : 9%… ‘Christianity’ : 1%}]
+
+
+11. Synopsis: Get a list of one country's practiced religions 
+    
+Query: /religiondata/?country_name=somecountry
+	 
+Response: Returns one dictionary containing th3e specified country’s name, the religions practiced in that country, and the percent of the population practicing that religion. 
+
+Example: http://apiquery.com/religiondata/religion/?country_name=Jordan
+{name: ‘Jordan’ , ‘Islam’ : 92%, ‘Shia Islam’ : 1%… ‘Christianity’ : 5%}
+
+
+12. Synopsis: Get a list of how much one specified religion is practiced in each country.
+    
+Query: /religiondata/?religion=somereligion
+	 
+Response: Returns a list of dictionaries. Each dictionary contains the country’s name, and the percent of its population that practice the specified religion.
+
+Example: http://apiquery.com/religiondata/?religion=Judaism
+[{name: ‘Algeria’ , ‘Judaism’ : 3%, },           
+{name : ‘Bahrain’ , ‘Judaism’ : 2%},
+{name : ‘Iraq’ , ‘Judaism’ : 11%}…]
+
+
+
+
+
+
 
  --- Other basic queries: ---
 
 Synopsis: Get a list of each country's GDP (normalized by Purchase Power Parity) for each year in the database
     
-Query: /countries/gdp_ppp
+Query: /economicdata/gdp_ppp
 	 
 Response: returns a list of dictionaries containing every country in the database alongwith that country’s GDP in PPP units per year.
 
-Example: http://apiquery.com/countries/gdp_ppp/
+Example: http://apiquery.com/economicdata/gdp_ppp/
 [{‘name’ : ‘Algeria’, ‘year’ : 1960, ‘GDP_PPP’ : 50 million dollars},
  {‘name’ : ‘Algeria’, ‘year’ : 1961, ‘GDP_PPP’ : 50 million dollars}, …
  {‘name’ : ‘Algeria’, ‘year’ : 2017, ‘GDP_PPP’ : 50 million dollars},
@@ -221,11 +258,11 @@ Example: http://apiquery.com/countries/gdp_ppp/
 
 Synopsis: Get a list of each country's GDP per capita, in USD, for each year in the database
     
-Query: /countries/gdp_usd_capita
+Query: /economicdata/gdp_usd_capita
 	 
 Response: returns a list of dictionaries containing every country in the database alongwith that country’s GDP per capita in USD per year.
 
-Example: http://apiquery.com/countries/gdp_usd_capita/
+Example: http://apiquery.com/economicdata/gdp_usd_capita/
 [{‘name’ : ‘Algeria’, ‘year’ : 1960, ‘GDP_USD_CAPITA’ : 10,000},
  {‘name’ : ‘Algeria’, ‘year’ : 1961, ‘GDP_USD_CAPITA’ : 10,000}, …
  {‘name’ : ‘Algeria’, ‘year’ : 2017, ‘GDP_USD_CAPITA’ : 10,000},
@@ -237,11 +274,11 @@ Example: http://apiquery.com/countries/gdp_usd_capita/
 
 Synopsis: Get a list of each country's GDP per capita, in Purchasing Power Parity units, for each year in the database
     
-Query: /countries/gdp_ppp_capita
+Query: /economicdata/gdp_ppp_capita
 	 
 Response: returns a list of dictionaries containing every country in the database alongwith that country’s GDP per capita in PPP units per year.
 
-Example: http://apiquery.com/countries/gdp_PPP_capita/
+Example: http://apiquery.com/economicdata/gdp_PPP_capita/
 [{‘name’ : ‘Algeria’, ‘year’ : 1960, ‘GDP_PPP_CAPITA’ : 10,000},
  {‘name’ : ‘Algeria’, ‘year’ : 1961, ‘GDP_PPP_CAPITA’ : 10,000}, …
  {‘name’ : ‘Algeria’, ‘year’ : 2017, ‘GDP_PPP_CAPITA’ : 10,000},
