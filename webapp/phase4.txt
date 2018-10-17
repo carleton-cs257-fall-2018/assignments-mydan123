@@ -5,30 +5,24 @@ Daniel Busis and Will Thompson
 
 SQL Table Structure mockups:
 
-CREATE TABLE data_gdp_usd (
+#Has many data statistics about all the countries for each year
+CREATE TABLE time_series_data (
 	country_name TEXT,
 	year INT,
-	gdp_usd FLOAT
+	gdp_usd FLOAT,
+	gdp_ppp FLOAT,
+	gdp_capita_usd FLOAT,
+	gdp_capita_ppp FLOAT,
+	infant_mortality_per_1000 FLOAT,
+	birth_rate FLOAT,
+	death_rate FLOAT
 );
 
-CREATE TABLE data_gdp_ppp (
-	country_name TEXT,
-	year INT,
-	gdp_ppp FLOAT
+#Describes
+CREATE TABLE decription_table (
+	column_name TEXT,
+	column_description TEXT
 );
-
-CREATE TABLE data_gdp_capita_usd (
-	country_name TEXT,
-	year INT,
-	gdp_capita_usd FLOAT
-);
-
-CREATE TABLE data_gdp_capita_ppp (
-	country_name TEXT,
-	year INT,
-	gdp_capita_ppp FLOAT
-);
-
 
 API Query Structure:
 
