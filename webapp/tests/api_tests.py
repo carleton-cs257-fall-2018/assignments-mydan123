@@ -2,6 +2,7 @@
 #@author Will Thompson
 #@author Daniel Busis
 
+import urllib
 
 countries = ['Jordan', 'Algeria', 'Morocco', 'Tunisia', 'Libya', 'Egypt', 'Sudan', 'South Sudan', 'Somalia', 'Israel', 'Lebanon', 'Syria'
              'Iraq', 'Turkey', 'West Bank and Gaza', 'Iran', 'Qatar', 'Saudi Arabia', 'Bahrain', 'United Arab Emirates', 'Oman', 'Yemen', 'Mauritania']
