@@ -34,9 +34,6 @@ CREATE TABLE public_health_data(
 	Year float, 
 	Infant_mortality_rate_per_1000 float,
 	Mortality_rate_for_adults_per_1000 float,
-	Percent_adults_with_college_degrees float,
-	Percent_adults_with_high_school_education float,
-	Percent_adults_no_education float,
 	Morbidity_rates float,
 	Percent_population_using_basic_sanitation_services float,
 );
@@ -56,6 +53,9 @@ CREATE TABLE demographic_data(
 	Attainment_of_bachelor_degree_female float,
 	Attainment_of_doctoral_degree_male float,
 	Attainment_of_doctoral_degree_female float,
+	Percent_adults_with_college_degrees float,
+	Percent_adults_with_high_school_education float,
+	Percent_adults_no_education float,
 );
 
 CREATE TABLE description (
