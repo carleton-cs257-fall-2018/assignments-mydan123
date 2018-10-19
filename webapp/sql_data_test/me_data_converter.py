@@ -43,25 +43,19 @@ def load_from_data_folder(folder):
 	return (list_of_all_countries)
 
 
-def save_table (list_of_all_countries):
+def save_tables (list_of_all_countries):
 	for  list in list_of_all_countries:
-		filename = list_of_all_countries[0]+".csv"
+		filename = list[0]+"_data.csv"
 		
 		output_file = open(filename, 'w')
 		writer = csv.writer(output_file)
-		for entry in cur_data[1:]:
+		for entry in list[1:]:
 			writer.writerow(entry)
 		output_file.close()
 
 if __name__ == '__main__':
 	all_countries_list = load_from_data_folder('source_data')
-	#save_table(gdp_usd_data, 'gdp_usd_data.csv')
-	#save_table(gdp_usd_capita_data, 'gdp_usd_capita_data.csv')
-	#save_table(gdp_ppp_data, 'gdp_ppp_data.csv')
-	#save_table(gdp_ppp_capita_data, 'gdp_ppp_capita_data.csv')
-	
-	#[["Bahrain", rest of list ] ["Arab World", rest of list] [] [] []]
-	print(all_countries_list[0]	)
+	save_tables(all_countries_list)
 	
 #Note: To put tables into SQL, use:
 #\copy data_gdp_usd from 'gdp_usd_data.csv' DELIMITER ',' CSV NULL as ''
