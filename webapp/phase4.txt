@@ -6,6 +6,7 @@ Daniel Busis and Will Thompson
                                                            SQL Table Structure mockups:
 
 
+<<<<<<< HEAD
 CREATE TABLE country(
 	country_id INT
 	name TEXT,
@@ -65,6 +66,68 @@ CREATE TABLE 2017_demographic_data(
 CREATE TABLE glossary(
 	data_name TEXT,
 	description TEXT,
+=======
+CREATE TABLE economic_data (
+	country_id int,
+	Year float, 
+	gdp_usd float,
+	gdp_usd_capita float,
+	gdp_ppp float,
+	gdp_ppp_capita float,
+ 	Spending float,
+	Government_debt float,
+	Military_expenditure float,
+	Literacy_rate float,
+	Currency_strength float,
+	Unemployment_rate float,
+	Percent_population_below_poverty_line float,
+);
+
+CREATE TABLE countries (
+	country_id INT,
+	country_name TEXT
+);
+
+CREATE TABLE religion_data(
+	country_id INT,
+	Religion text,
+	Percent_population_practicing float
+);
+
+
+CREATE TABLE public_health_data(
+	country_id INT,
+	Year float, 
+	Infant_mortality_rate_per_1000 float,
+	Mortality_rate_for_adults_per_1000 float,
+	Morbidity_rates float,
+	Percent_population_using_basic_sanitation_services float
+);
+
+
+CREATE TABLE demographic_data(
+	country_id INT,
+	Percent_male float,
+	Percent_female float,
+	Total_population float,
+	Percent_of_families_suffering_domestic_abuse float,
+	Attainment_of_high_school_diploma_male float,
+	Attainment_of_high_school_diploma_female float,
+	Attainment_of_bachelor_degree_male float,
+	Attainment_of_bachelor_degree_female float,
+	Attainment_of_master_degree_male float,
+	Attainment_of_bachelor_degree_female float,
+	Attainment_of_doctoral_degree_male float,
+	Attainment_of_doctoral_degree_female float,
+	Percent_adults_with_college_degrees float,
+	Percent_adults_with_high_school_education float,
+	Percent_adults_no_education float
+);
+
+CREATE TABLE description (
+	data_name text,
+	description text,
+>>>>>>> 4e80e33b10b052ab34062e9f249626bd33b8abfa
 );
 	
 
