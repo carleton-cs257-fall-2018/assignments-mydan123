@@ -62,7 +62,7 @@ def load_from_data_folder(folder):
 		list_of_years = []
 		
 		for row in reader:
-			if len(row) < 4:
+                        if len(row) < 4:
 				continue
 
 			if row[0] == "Country Name":
