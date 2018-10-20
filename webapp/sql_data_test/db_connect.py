@@ -2,7 +2,7 @@
 	Daniel Busis
 	Messing around with psycopg2
 	Pretty sure this works, as long as it's run from inside perlman
-	(At least, it worked by typing into a pytohn3 shell there)
+	(At least, it worked by typing into a python3 shell there)
 '''
 
 import psycopg2
