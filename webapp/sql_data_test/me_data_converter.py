@@ -46,13 +46,14 @@ categories_list = [
 	"Population, male",
 	"Population, female (% of total)",
 	"Population, female",
-	"Population, total",
-
+	"Population, total"
 ]
 
 def load_from_data_folder(folder):
 	file_list = os.listdir(folder)
 	list_of_all_countries = []
+	
+	dict_of_stat_ids = {}
 	
 	for file_name in file_list:
 		
@@ -68,25 +69,26 @@ def load_from_data_folder(folder):
 			if row[0] == "Country Name":
 				list_of_years = row
 				continue
-				
+			
 			if len(cur_country_data) == 0:
 				cur_country_data.append(row[0])
 				
-			current_data_category = row[2]
-			if current_data_category in categories_list:
-				current_category_list = []
-				current_category_list.append(row[2])
-				current_category_list.extend(row[4:])
-				cur_country_data.append(current_category_list)
+			cur_data_category = row[2]
+			if cur_data_category in categories_list:
+				if cur_data_category not in dict_of_stat_ids:
+					dict_of_stat_ids[cur_data_category] = len(dict_of_stat_ids)
+					
+				cur_category_list = []
+				cur_category_list.append(dict_of_stat_ids[cur_data_category])
+				cur_category_list.extend(row[4:len(row)-1])
+				cur_country_data.append(cur_category_list)
 						
 		list_of_all_countries.append(cur_country_data)
-	return (list_of_all_countries)
+	return (list_of_all_countries, dict_of_stat_ids)
 
 
-def save_tables(list_of_all_countries):
-	
+def save_country_tables(list_of_all_countries):
 	for  list in list_of_all_countries:
-		
 		filename = "data_output/"+list[0]+"_data.csv"		
 		output_file = open(filename, 'w')
 		writer = csv.writer(output_file)
@@ -94,9 +96,18 @@ def save_tables(list_of_all_countries):
 			writer.writerow(entry)
 		output_file.close()
 
+def save_stat_id_tables(dict_of_stat_ids):
+	filename = "data_output/stat_ids.csv"
+	output_file = open(filename, 'w')
+	writer = csv.writer(output_file)
+	for key in dict_of_stat_ids:
+		writer.writerow([dict_of_stat_ids[key], key])
+	output_file.close()
+
 if __name__ == '__main__':
-	all_countries_list = load_from_data_folder('source_data')
-	save_tables(all_countries_list)
+	all_countries_list, all_stats_dict = load_from_data_folder('source_data')
+	save_country_tables(all_countries_list)
+	save_stat_id_tables(all_stats_dict)
 	
 #Note: To put tables into SQL, use:
 #\copy data_gdp_usd from 'gdp_usd_data.csv' DELIMITER ',' CSV NULL as ''

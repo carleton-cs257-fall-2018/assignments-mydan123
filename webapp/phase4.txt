@@ -10,107 +10,112 @@ CREATE TABLE country(
 	name TEXT,
 );
 
-CREATE TABLE country_name(
-	country_id INT,
-	year INT,
-	gdp_usd INT,
-	gdp_usd_capita INT,
-	gdp_ppp INT,
- 	Spending INT,
-	Government_debt INT,
-	military_expenditure INT,
-	literacy_rate INT,
-	currency_strength INT,
-	unemployment_rate INT,
-	percent_population_below_poverty_line INT,
-	mortality_rate_for_adults_per_1000 INT,
-	morbidity_rate INT ,
-	percent_population_using_basic_sanitation_services INT,
-	Infant_mortality_rate_per_1000 INT,
-	Percent_male INT,
-	Percent_female INT,
-	Total_population INT,
-	Percent_of_families_suffering_domestic_abuse INT,
-	Attainment_of_high_school_diploma_male INT,
-	Attainment_of_high_school_diploma_female INT,
-	Attainment_of_bachelor_degree_male INT,
-	Attainment_of_bachelor_degree_female INT,
-	Attainment_of_master_degree_male INT,
-	Attainment_of_bachelor_degree_female INT,
-	Attainment_of_doctoral_degree_male INT,
-	Attainment_of_doctoral_degree_female INT,
-	Percent_adults_with_college_degrees INT,
-	Percent_adults_with_high_school_education INT,
-	Percent_adults_no_education INT,
+#The following are possible categories in each country's category_name:
+country_id FLOAT,
+year FLOAT,
+gdp_usd FLOAT,
+gdp_usd_capita FLOAT,
+gdp_ppp FLOAT,
+Spending FLOAT,
+Government_debt FLOAT,
+military_expenditure FLOAT,
+literacy_rate FLOAT,
+currency_strength FLOAT,
+unemployment_rate FLOAT,
+percent_population_below_poverty_line FLOAT,
+mortality_rate_for_adults_per_1000 FLOAT,
+morbidity_rate FLOAT ,
+percent_population_using_basic_sanitation_services FLOAT,
+Infant_mortality_rate_per_1000 FLOAT,
+Percent_male FLOAT,
+Percent_female FLOAT,
+Total_population FLOAT,
+Percent_of_families_suffering_domestic_abuse FLOAT,
+Attainment_of_high_school_diploma_male FLOAT,
+Attainment_of_high_school_diploma_female FLOAT,
+Attainment_of_bachelor_degree_male FLOAT,
+Attainment_of_bachelor_degree_female FLOAT,
+Attainment_of_master_degree_male FLOAT,
+Attainment_of_bachelor_degree_female FLOAT,
+Attainment_of_doctoral_degree_male FLOAT,
+Attainment_of_doctoral_degree_female FLOAT,
+Percent_adults_with_college_degrees FLOAT,
+Percent_adults_with_high_school_education FLOAT,
+Percent_adults_no_education FLOAT,
+
+CREATE TABLE algeria_data (
+	stat_id INT,
+	year_1960 FLOAT,
+	year_1961 FLOAT,
+	year_1962 FLOAT,
+	year_1963 FLOAT,
+	year_1964 FLOAT,
+	year_1965 FLOAT,
+	year_1966 FLOAT,
+	year_1967 FLOAT,
+	year_1968 FLOAT,
+	year_1969 FLOAT,
+	year_1970 FLOAT,
+	year_1971 FLOAT,
+	year_1972 FLOAT,
+	year_1973 FLOAT,
+	year_1974 FLOAT,
+	year_1975 FLOAT,
+	year_1976 FLOAT,
+	year_1977 FLOAT,
+	year_1978 FLOAT,
+	year_1979 FLOAT,
+	year_1980 FLOAT,
+	year_1981 FLOAT,
+	year_1982 FLOAT,
+	year_1983 FLOAT,
+	year_1984 FLOAT,
+	year_1985 FLOAT,
+	year_1986 FLOAT,
+	year_1987 FLOAT,
+	year_1988 FLOAT,
+	year_1989 FLOAT,
+	year_1990 FLOAT,
+	year_1991 FLOAT,
+	year_1992 FLOAT,
+	year_1993 FLOAT,
+	year_1994 FLOAT,
+	year_1995 FLOAT,
+	year_1996 FLOAT,
+	year_1997 FLOAT,
+	year_1998 FLOAT,
+	year_1999 FLOAT,
+	year_2000 FLOAT,
+	year_2001 FLOAT,
+	year_2002 FLOAT,
+	year_2003 FLOAT,
+	year_2004 FLOAT,
+	year_2005 FLOAT,
+	year_2006 FLOAT,
+	year_2007 FLOAT,
+	year_2008 FLOAT,
+	year_2009 FLOAT,
+	year_2010 FLOAT,
+	year_2011 FLOAT,
+	year_2012 FLOAT,
+	year_2013 FLOAT,
+	year_2014 FLOAT,
+	year_2015 FLOAT,
+	year_2016 FLOAT,
+	year_2017 FLOAT
 );
 
-
-CREATE TABLE glossary(
-	data_name TEXT,
-	description TEXT,
-=======
-CREATE TABLE economic_data (
-	country_id int,
-	Year float, 
-	gdp_usd float,
-	gdp_usd_capita float,
-	gdp_ppp float,
-	gdp_ppp_capita float,
- 	Spending float,
-	Government_debt float,
-	Military_expenditure float,
-	Literacy_rate float,
-	Currency_strength float,
-	Unemployment_rate float,
-	Percent_population_below_poverty_line float,
+CREATE TABLE stat_ids (
+	stat_id INT,
+	stat_name TEXT
 );
+
 
 CREATE TABLE countries (
 	country_id INT,
 	country_name TEXT
 );
 
-CREATE TABLE religion_data(
-	country_id INT,
-	Religion text,
-	Percent_population_practicing float
-);
-
-
-CREATE TABLE public_health_data(
-	country_id INT,
-	Year float, 
-	Infant_mortality_rate_per_1000 float,
-	Mortality_rate_for_adults_per_1000 float,
-	Morbidity_rates float,
-	Percent_population_using_basic_sanitation_services float
-);
-
-
-CREATE TABLE demographic_data(
-	country_id INT,
-	Percent_male float,
-	Percent_female float,
-	Total_population float,
-	Percent_of_families_suffering_domestic_abuse float,
-	Attainment_of_high_school_diploma_male float,
-	Attainment_of_high_school_diploma_female float,
-	Attainment_of_bachelor_degree_male float,
-	Attainment_of_bachelor_degree_female float,
-	Attainment_of_master_degree_male float,
-	Attainment_of_bachelor_degree_female float,
-	Attainment_of_doctoral_degree_male float,
-	Attainment_of_doctoral_degree_female float,
-	Percent_adults_with_college_degrees float,
-	Percent_adults_with_high_school_education float,
-	Percent_adults_no_education float
-);
-
-CREATE TABLE description (
-	data_name text,
-	description text,
->>>>>>> 4e80e33b10b052ab34062e9f249626bd33b8abfa
-);
 	
 
 
