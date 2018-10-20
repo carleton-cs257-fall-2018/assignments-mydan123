@@ -57,10 +57,9 @@ def load_from_data_folder(folder):
 	for file_name in file_list:
         
 		csv_file = open(folder+'/'+file_name)
-		reader = csv.reader(csv_file)
-		
+        reader = csv.reader(csv_file)
         currnet_country_data = []
-		list_of_years = []
+        list_of_years = []
         
 		for row in reader:
 			if len(row) < 4:
