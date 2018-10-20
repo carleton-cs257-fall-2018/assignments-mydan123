@@ -5,19 +5,12 @@ Daniel Busis and Will Thompson
 
                                                            SQL Table Structure mockups:
 
-
-<<<<<<< HEAD
 CREATE TABLE country(
 	country_id INT
 	name TEXT,
 );
 
-CREATE TABLE religion(
-	religion_id INT,
-	name TEXT,
-); 
-
-CREATE TABLE annual_data(
+CREATE TABLE country_name(
 	country_id INT,
 	year INT,
 	gdp_usd INT,
@@ -34,17 +27,6 @@ CREATE TABLE annual_data(
 	morbidity_rate INT ,
 	percent_population_using_basic_sanitation_services INT,
 	Infant_mortality_rate_per_1000 INT,
-
-
-CREATE TABLE religion_data(
-	country TEXT
-	Religion TEXT,
-	Percent_population_practicing float,
-);
-
-
-CREATE TABLE 2017_demographic_data(
-	country TEXT,
 	Percent_male INT,
 	Percent_female INT,
 	Total_population INT,
