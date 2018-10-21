@@ -31,7 +31,6 @@ def data(country_name):
 		if stat_name is not None:
 			select_string += " WHERE stat_id = "+str(stat_id[0])
 		
-	
 	try:
 		cursor.execute(select_string)
 	except Exception as e:
