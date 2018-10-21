@@ -149,6 +149,49 @@ def return_one_country_and_id(country_name):
 
 
 
+@app.route('/stats/')
+def return_all_stats_and_ids():
+	stat_list = []
+	select_string = "SELECT * FROM stats"
+	
+	try:
+		cursor.execute(select_string)
+	except Exception as e:
+		print(e)
+		exit()
+	
+	for row in cursor:
+		cur_stat_dict = {}
+		cur_stat_dict['stat_id'] = row[0]
+		cur_stat_dict['stat_name'] = row[1]
+		stat_list.append(cur_stat_dict)
+		
+	return json.dumps(stat_list)
+
+
+	
+@app.route('/stats/<stat_name>')
+def return_one_stat_and_id(stat_name):
+	stat_list = []
+	select_string = "SELECT * FROM stats"
+	select_string += " WHERE LOWER(name) LIKE LOWER('%"+stat_name+"%')"
+	
+	try:
+		cursor.execute(select_string)
+	except Exception as e:
+		print(e)
+		exit()
+	
+	for row in cursor:
+		cur_stat_dict = {}
+		cur_stat_dict['stat_id'] = row[0]
+		cur_stat_dict['stat_name'] = row[1]
+		stat_list.append(cur_stat_dict)
+		
+	return json.dumps(stat_list)
+	
+	
+
 conn = None
 cursor = None
 if __name__ == '__main__':
