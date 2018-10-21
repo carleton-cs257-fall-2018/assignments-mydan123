@@ -24,8 +24,9 @@ def data_for_country():
 	
 	start_year = flask.request.args.get('start_year')
 	end_year = flask.request.args.get('end_year')
-
-	list_of_years_requested = make_years_list(start_year, end_year)
+	specified_years_list = flask.request.args.getlist('year')
+	
+	list_of_years_requested = make_years_list(start_year, end_year, specified_years_list)
 	column_string = make_column_string(list_of_years_requested)
 	select_string = "SELECT "+column_string+" FROM annual_data"
 	
@@ -83,19 +84,31 @@ def data_for_country():
 	return json.dumps(data_list)
 	
 #Must return a SORTED list of years!
-def make_years_list(start_year, end_year):
+def make_years_list(start_year, end_year, specified_years_list):
+	start_year_was_none = False
+	end_year_was_none = False
 	if start_year is None:
 		start_year = 1960
+		start_year_was_none = True
 	else:
 		start_year = int(start_year)
 	if end_year is None:
 		end_year = 2017
+		end_year_was_none = True
 	else:
 		end_year = int(end_year)
 
 	year_list = []
-	for i in range(start_year, end_year+1):
-		year_list.append("year_"+str(i))
+	if len(specified_years_list)==0 or not start_year_was_none or not end_year_was_none:
+		for i in range(start_year, end_year+1):
+			year_list.append("year_"+str(i))
+	for i in specified_years_list:
+		if int(i) >= 1960 and int(i) <= 2017:
+			if ((start_year_was_none and end_year_was_none)
+					or int(i) > end_year
+					or int(i) < start_year):
+				year_list.append("year_"+str(i))
+	year_list.sort()
 	return year_list
 
 def make_column_string(year_list):
