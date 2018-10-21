@@ -17,7 +17,18 @@ def hello():
 
 
 
-#You can't use start_year/end_year and year arguments
+'''
+	GET arguments:
+	 - start_year: return data for years after this date.
+	 - end_year: return data for years before this date.
+	 - year: for each year given, returns years in the list
+	         if start_year and end_year not given, gives only 
+			 years in this list.
+	 - country_name: returns only data whose country matches the given string(s)
+	 - stat_name: returns only data whose stat name matches the given string(s)
+	 - country_id: returns only data whose country id matches the given id(s)
+	 - stat_id: returns only data whose stat id matches the given id(s)
+'''
 @app.route('/data/')
 def data_for_country():
 	data_list = []
