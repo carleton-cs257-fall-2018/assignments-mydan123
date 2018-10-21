@@ -16,9 +16,23 @@ def hello():
 @app.route('/country/<country_name>')
 def data(country_name):
 	data_list = []
+	select_string = "SELECT * FROM "+country_name+"_data"
+	
+	stat_id = flask.request.args.getlist('stat_id')
+	if len(stat_id) > 0:
+		select_string += " WHERE stat_id = "+str(stat_id[0])
+		for stat in stat_id[1:]:
+			select_string += " OR stat_id = "+str(stat)
+	
+	else:
+		#This line works:
+		#SELECT year_1960 FROM algeria_data,stat_ids WHERE stat_ids.stat_name LIKE 'GDP%' AND algeria_data.stat_id=stat_ids.stat_id;
+		stat_name = flask.request.args.get('stat_name')
+		if stat_name is not None:
+			select_string += " WHERE stat_id = "+str(stat_id[0])
+		
 	
 	try:
-		select_string = "SELECT * FROM "+country_name+"_data"
 		cursor.execute(select_string)
 	except Exception as e:
 		print(e)
