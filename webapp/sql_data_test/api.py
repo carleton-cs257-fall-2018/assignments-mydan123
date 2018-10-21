@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 '''
-	Daniel Busis, WIll Thompson
+	API Implementation
+    @author Daniel Busis
+    @author Will Thompson
 '''
 import sys
 import flask
@@ -42,6 +44,8 @@ def data(country_name):
 		data_list.append(row)
 	
 	return json.dumps(data_list)
+
+@app.route('/country/<country_name>')
 
 conn = None
 cursor = None
