@@ -18,7 +18,7 @@ def hello():
 
 
 #You can't use start_year/end_year and year arguments
-@app.route('/country/data/')
+@app.route('/data/')
 def data_for_country():
 	data_list = []
 	
@@ -119,7 +119,7 @@ def make_column_string(year_list):
 	
 	
 	
-@app.route('/country/')
+@app.route('/countries/')
 def return_all_countries_and_ids():
 	country_list = []
 	select_string = "SELECT * FROM countries"
@@ -140,7 +140,7 @@ def return_all_countries_and_ids():
 
 	
 	
-@app.route('/country/<country_name>')
+@app.route('/countries/<country_name>')
 def return_one_country_and_id(country_name):
 	country_list = []
 	select_string = "SELECT * FROM countries"
