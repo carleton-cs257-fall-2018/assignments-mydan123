@@ -15,7 +15,7 @@ app = flask.Flask(__name__)
 def hello():
 	return 'No data requested.'
 
-@app.route('/country/data/?country_name=<country_name>')
+@app.route('/country/data/')
 def data_for_one_country(country_name):
 	data_list = []
 	column_string = make_column_string(start_year, end_year)
@@ -51,7 +51,8 @@ def make_column_string(start_year, end_year):
 		column_string+=",year_"+str(i)
 	return column_string
 	
-@app.route('/country/')
+
+    @app.route('/country/')
 def return_all_countries_and_ids():
     pass
     
@@ -59,22 +60,6 @@ def return_all_countries_and_ids():
 def return_one_country_and_id(country_name):
     pass
     
-@app.route('/country/?search_text=<some_text>')
-def return_all_countries_and_ids(some_text):
-    pass
-    
-@app.route('/country/data/')
-def return_all_countries_and_ids():
-    pass
-    
-@app.route('/country/data/?year=<some_year>')
-def return_all_countries_and_ids(some_year):
-    pass
-    
-@app.route('/country/data/?data_type=<some_data_type>')
-def return_all_countries_and_ids(some_data_type):
-    pass
-
 conn = None
 cursor = None
 if __name__ == '__main__':
