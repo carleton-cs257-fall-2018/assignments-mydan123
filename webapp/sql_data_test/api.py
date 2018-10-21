@@ -19,7 +19,7 @@ def hello():
 def data(country_name):
 	data_list = []
 	column_string = make_column_string(start_year, end_year)
-	select_string = "SELECT "+column_string" FROM "+country_name+"_data"
+	select_string = "SELECT "+column_string+" FROM "+country_name+"_data"
 	
 	stat_id = flask.request.args.getlist('stat_id')
 	if len(stat_id) > 0:
@@ -45,6 +45,9 @@ def data(country_name):
 	
 	return json.dumps(data_list)
 
+def make_column_string(start_year, end_year):
+	
+	
 conn = None
 cursor = None
 if __name__ == '__main__':
