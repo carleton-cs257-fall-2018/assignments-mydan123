@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 '''
 	API Implementation
-    @author Daniel Busis
-    @author Will Thompson
+	@author Daniel Busis
+	@author Will Thompson
 '''
 import sys
 import flask
@@ -15,10 +15,11 @@ app = flask.Flask(__name__)
 def hello():
 	return 'No data requested.'
 
-	
+
+
 #You can't use start_year/end_year and year arguments
 @app.route('/country/data/')
-def data_for_one_country():
+def data_for_country():
 	data_list = []
 	
 	start_year = flask.request.args.get('start_year')
@@ -66,7 +67,6 @@ def data_for_one_country():
 		select_string = select_string[:-4]
 	
 	try:
-		print(select_string)
 		cursor.execute(select_string)
 	except Exception as e:
 		print(e)
@@ -104,14 +104,51 @@ def make_column_string(year_list):
 		column_string+=","+i
 	return column_string
 	
+	
+	
 @app.route('/country/')
 def return_all_countries_and_ids():
-    pass
-    
+	country_list = []
+	select_string = "SELECT * FROM countries"
+	
+	try:
+		cursor.execute(select_string)
+	except Exception as e:
+		print(e)
+		exit()
+	
+	for row in cursor:
+		cur_country_dict = {}
+		cur_country_dict['country_id'] = row[0]
+		cur_country_dict['country_name'] = row[1]
+		country_list.append(cur_country_dict)
+		
+	return json.dumps(country_list)
+
+	
+	
 @app.route('/country/<country_name>')
 def return_one_country_and_id(country_name):
-    pass
-    
+	country_list = []
+	select_string = "SELECT * FROM countries"
+	select_string += " WHERE LOWER(name) LIKE LOWER('%"+country_name+"%')"
+	
+	try:
+		cursor.execute(select_string)
+	except Exception as e:
+		print(e)
+		exit()
+	
+	for row in cursor:
+		cur_country_dict = {}
+		cur_country_dict['country_id'] = row[0]
+		cur_country_dict['country_name'] = row[1]
+		country_list.append(cur_country_dict)
+		
+	return json.dumps(country_list)
+
+
+
 conn = None
 cursor = None
 if __name__ == '__main__':
