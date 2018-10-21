@@ -73,7 +73,6 @@ def load_from_data_folder(folder):
 				continue
 			
 			if len(cur_country_data) == 0:
-				cur_country_data.append(row[0])
 				dict_of_country_ids[row[0]] = cur_country_id
 				
 			cur_data_category = row[2]
@@ -87,18 +86,17 @@ def load_from_data_folder(folder):
 				cur_category_list.extend(row[4:len(row)-1])
 				cur_country_data.append(cur_category_list)
 						
-		list_of_all_countries.append(cur_country_data)
+		list_of_all_countries.extend(cur_country_data)
 	return (list_of_all_countries, dict_of_stat_ids, dict_of_country_ids)
 
 
 def save_country_tables(list_of_all_countries):
+	filename = "data_output/annual_data.csv"		
+	output_file = open(filename, 'w')
+	writer = csv.writer(output_file)
 	for  list in list_of_all_countries:
-		filename = "data_output/"+list[0]+"_data.csv"		
-		output_file = open(filename, 'w')
-		writer = csv.writer(output_file)
-		for entry in list[1:]:
-			writer.writerow(entry)
-		output_file.close()
+		writer.writerow(list)
+	output_file.close()
 
 def save_stat_id_tables(dict_of_stat_ids):
 	filename = "data_output/stat_ids.csv"
@@ -109,7 +107,7 @@ def save_stat_id_tables(dict_of_stat_ids):
 	output_file.close()
 
 def save_country_id_tables(dict_of_country_ids):
-	filename = "data_output/country_ids_auto.csv"
+	filename = "data_output/country_ids.csv"
 	output_file = open(filename, 'w')
 	writer = csv.writer(output_file)
 	for key in dict_of_country_ids:

@@ -5,10 +5,6 @@ Daniel Busis and Will Thompson
 
                                                            SQL Table Structure mockups:
 
-CREATE TABLE country(
-	country_id INT
-	name TEXT,
-);
 
 #The following are possible categories in each country's category_name:
 country_id FLOAT,
@@ -43,7 +39,8 @@ Percent_adults_with_college_degrees FLOAT,
 Percent_adults_with_high_school_education FLOAT,
 Percent_adults_no_education FLOAT,
 
-CREATE TABLE algeria_data (
+CREATE TABLE annual_data (
+	country_id INT,
 	stat_id INT,
 	year_1960 FLOAT,
 	year_1961 FLOAT,
@@ -105,10 +102,16 @@ CREATE TABLE algeria_data (
 	year_2017 FLOAT
 );
 
-CREATE TABLE stat_ids (
-	stat_id INT,
-	stat_name TEXT
+CREATE TABLE stats (
+	id INT,
+	name TEXT
 );
+
+CREATE TABLE countries (
+	id INT,
+	name TEXT
+);
+
 
 	
 
