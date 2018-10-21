@@ -110,18 +110,92 @@ CREATE TABLE stat_ids (
 	stat_name TEXT
 );
 
-
-CREATE TABLE countries (
-	country_id INT,
-	country_name TEXT
-);
-
 	
 
 
 
                                                      
-                                                  API Query Structure:
+                                                  API Endpoint Structure Revised:
+
+
+
+
+1.) /country/
+
+	-Returns all countries and their ids
+
+
+2.) /country/<country_name>
+ 
+	-Returns a single country and their id
+
+3.) /country/?search_text=some_text
+
+	-Returns all countries containing the text specified
+
+4.) /country/data/
+
+	-Returns all countries with all of the data 
+
+5.) /country/data/?year=some_year
+
+	-Returns all data for each country during the specified year
+
+6.) /country/data/?country_name=some_name
+
+	-Returns all of the data for the specified country
+
+7.) /country/data/?data_type=some_data_type
+
+	-Returns the value of the specified data for each country during each year
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================================================
+
+                                      API Query Structure - Original Design
 
 The database has several different types of data. For each data statistic being looked at, the query structure
 will be the same, with the form of /countries/[data wanted]/?[optional-argument]
