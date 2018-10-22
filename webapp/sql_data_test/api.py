@@ -219,13 +219,13 @@ def return_one_stat_and_id(stat_name):
 conn = None
 cursor = None
 if __name__ == '__main__':
-	if len(sys.argv) != 3:
-		print('Usage: {0} host port'.format(sys.argv[0]))
-		print('  Example: {0} perlman.mathcs.carleton.edu 5101'.format(sys.argv[0]))
+	if len(sys.argv) != 4:
+		print('Usage: {0} host port dbname'.format(sys.argv[0]))
+		print('  Example: {0} perlman.mathcs.carleton.edu 5101 dbname'.format(sys.argv[0]))
 		exit()
 	
 	try:
-		conn = psycopg2.connect(dbname="busisd")
+		conn = psycopg2.connect(dbname=sys.argv[3])
 		cursor = conn.cursor()
 	except Exception as e:
 		print(e)
