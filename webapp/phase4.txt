@@ -6,38 +6,8 @@ Daniel Busis and Will Thompson
                                                            SQL Table Structure mockups:
 
 
-#The following are possible categories in each country's category_name:
-country_id FLOAT,
-year FLOAT,
-gdp_usd FLOAT,
-gdp_usd_capita FLOAT,
-gdp_ppp FLOAT,
-Spending FLOAT,
-Government_debt FLOAT,
-military_expenditure FLOAT,
-literacy_rate FLOAT,
-currency_strength FLOAT,
-unemployment_rate FLOAT,
-percent_population_below_poverty_line FLOAT,
-mortality_rate_for_adults_per_1000 FLOAT,
-morbidity_rate FLOAT ,
-percent_population_using_basic_sanitation_services FLOAT,
-Infant_mortality_rate_per_1000 FLOAT,
-Percent_male FLOAT,
-Percent_female FLOAT,
-Total_population FLOAT,
-Percent_of_families_suffering_domestic_abuse FLOAT,
-Attainment_of_high_school_diploma_male FLOAT,
-Attainment_of_high_school_diploma_female FLOAT,
-Attainment_of_bachelor_degree_male FLOAT,
-Attainment_of_bachelor_degree_female FLOAT,
-Attainment_of_master_degree_male FLOAT,
-Attainment_of_bachelor_degree_female FLOAT,
-Attainment_of_doctoral_degree_male FLOAT,
-Attainment_of_doctoral_degree_female FLOAT,
-Percent_adults_with_college_degrees FLOAT,
-Percent_adults_with_high_school_education FLOAT,
-Percent_adults_no_education FLOAT,
+Final Table Structure: 
+
 
 CREATE TABLE annual_data (
 	country_id INT,
@@ -115,90 +85,51 @@ CREATE TABLE countries (
 
 	
 
-
-
                                                      
-                                                  API Endpoint Structure Revised:
-
-
+                                                                     API Endpoint Structure Revised:
 
 
 1.) /country/
 
-	-Returns all countries and their ids
+	GET parameters:
+		
+		-search_text
+		-id
+
+	-Returns countries and their ids
 
 
-2.) /country/<country_name>
- 
-	-Returns a single country and their id
+2.) /stats/
 
-3.) /country/?search_text=some_text
+	GET parameters:
+		
+		-search_text
+		-id
 
-	-Returns all countries containing the text specified
+	-Returns statistics and their ids
 
-4.) /country/data/
+3.) /data/
 
-	-Returns all countries with all of the data 
+	GET parameters:
+		
+		-start_year
+		-end_year
+		-year
+		-country_name
+		-stat_name
+		-country_id
+		-stat_id
 
-5.) /country/data/?year=some_year
-
-	-Returns all data for each country during the specified year
-
-6.) /country/data/?country_name=some_name
-
-	-Returns all of the data for the specified country
-
-7.) /country/data/?data_type=some_data_type
-
-	-Returns the value of the specified data for each country during each year
-
-
-
-
-
-
-
+	-Returns data given the specified GET parameters 
 
 
 
 
 
 
+==========================================================================================================================================================================================
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-==========================================================================================
-
-                                      API Query Structure - Original Design
+                                                                 API Query Structure - Original Design
 
 The database has several different types of data. For each data statistic being looked at, the query structure
 will be the same, with the form of /countries/[data wanted]/?[optional-argument]
