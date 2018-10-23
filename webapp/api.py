@@ -134,7 +134,7 @@ def make_column_string(year_list):
 @app.route('/countries/')
 def return_all_countries_and_ids():
 	country_list = []
-	select_string = "SELECT * FROM countries"
+	select_string = "SELECT * FROM country_ids"
     
     country_name = flask.request.args.getlist('country_name')
 	country_id = flask.request.args.getlist('country_id')	
@@ -166,7 +166,7 @@ def return_all_countries_and_ids():
 @app.route('/countries/<country_name>')
 def return_one_country_and_id(country_name):
 	country_list = []
-	select_string = "SELECT * FROM countries"
+	select_string = "SELECT * FROM country_ids"
 	select_string += " WHERE LOWER(name) LIKE LOWER('%"+country_name+"%')"
 	
 	try:
