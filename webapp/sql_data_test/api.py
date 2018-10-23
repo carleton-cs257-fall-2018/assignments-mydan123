@@ -134,6 +134,19 @@ def make_column_string(year_list):
 def return_all_countries_and_ids():
 	country_list = []
 	select_string = "SELECT * FROM countries"
+    
+    country_name = flask.request.args.getlist('country_name')
+	country_id = flask.request.args.getlist('country_id')	
+	
+	if len(country_id) > 0
+			or len(country_name) > 0:
+		select_string += " WHERE"
+
+
+	for id in country_id:
+		select_string += " country_id = "+id+" AND"
+	for country in country_name:
+		select_string += " LOWER(countries.name) LIKE LOWER('%"+country+"%') AND"	 
 	
 	try:
 		cursor.execute(select_string)
@@ -149,8 +162,6 @@ def return_all_countries_and_ids():
 		
 	return json.dumps(country_list)
 
-	
-	
 @app.route('/countries/<country_name>')
 def return_one_country_and_id(country_name):
 	country_list = []
