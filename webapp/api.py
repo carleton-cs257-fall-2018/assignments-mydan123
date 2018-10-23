@@ -122,6 +122,7 @@ def make_years_list(start_year, end_year, specified_years_list):
 	year_list.sort()
 	return year_list
 
+#Turns [1960, 1961, ...] into 'year_1960,year_1961,...'
 def make_column_string(year_list):
 	column_string = "country_id,stat_id"
 	for i in year_list:
