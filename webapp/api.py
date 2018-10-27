@@ -135,12 +135,12 @@ def make_column_string(year_list):
 def return_all_countries_and_ids():
 	country_list = []
 	select_string = "SELECT * FROM countries"
-    
-        country_name = flask.request.args.getlist('country_name')
+	
+	country_name = flask.request.args.getlist('country_name')
 	country_id = flask.request.args.getlist('country_id')	
 	
 	if (len(country_id) > 0) or (len(country_name) > 0):
-                select_string += " WHERE"
+				select_string += " WHERE"
 
 
 	for id in country_id:
