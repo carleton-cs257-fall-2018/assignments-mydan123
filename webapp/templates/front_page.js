@@ -4,22 +4,23 @@
     A small demo of some simple Javascript techniques.
     For CS257 Software Design, Carleton College
  */
- function getInputtedCountries() {
+ function getInputfromUser() {
       var selectedCountries = [];
       var country = document.getElementById('Algeria');
       if country.checked {
           selectedCountries.push(country);
           SubmitButtonClicked(selectedCountries);
       }
-  function getDesiredData() {
+
       var dataSelected = [];
       var data = document.getElementById('gdp_usd');
       if data.checked {
           dataSelected.push(data);
-          SubmitButtonClicked(dataSelected);
       }
+      SubmitButtonClicked(listOfCountries, listOfData);
+  }
 
-  function SubmitButtonClicked(listOfCountries) {
+  function SubmitButtonClicked(listOfCountries, listOfData) {
         var url = getBaseURL() + '/countries/';
 
         // Send the request to the Books API /authors/ endpoint
