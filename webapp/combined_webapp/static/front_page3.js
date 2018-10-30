@@ -23,7 +23,16 @@ function initialize() {
 	if (SubmitButton) {
 		SubmitButton.onclick = onSubmitButtonClicked;
 	}
-	getCountryListNavbar()
+	getCountryListNavbar();
+	initializeBackButton();
+}
+
+function initializeBackButton(){
+    var url = getBaseURLSite();
+    var backButton = document.getElementById('backButton');
+    if (backButton){
+        backButton.href = url;
+    }
 }
 
 function getBaseURL() {
