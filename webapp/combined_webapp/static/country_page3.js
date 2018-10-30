@@ -34,7 +34,7 @@ function changeHeader() {
 
 function initializeBackButton(){
     var url = getBaseURLSite();
-    var backButton = document.getElementsById('backButton');
+    var backButton = document.getElementById('backButton');
     if (backButton){
         backButton.href = url;
     }

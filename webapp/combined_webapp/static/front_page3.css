@@ -13,6 +13,28 @@
     color: black;
 }
 
+.Header-Div {
+	width: 100%;
+	height: 20%;
+	background-color: #FFEEFF;
+	margin: 0px 0px 20px 0;
+}
+
+.Navbar-Div {
+	width: 15%;
+	float: left;
+	height: 1000px;
+	background-color: #FFFFEE;
+}
+
+.Content-Div {
+	height: 1000px;
+	width: 85%;
+	float: left;
+	overflow-x: scroll;
+	overflow: scroll;
+	background-color: #EEFFFF;
+}
 
 /* Vertical navigation */
 ul.vertical-navbar {
