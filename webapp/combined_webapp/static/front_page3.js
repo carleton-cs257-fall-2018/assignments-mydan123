@@ -88,13 +88,13 @@ function initializeCountriesDiv() {
 			}
 		}
 		checkboxes += '</tr></table>';
-		
+
 		var countriesDiv = document.getElementById('Select-Countries-Div');
 		if (countriesDiv) {
 			countriesDiv.innerHTML = checkboxes;
 			countriesDiv.style.display = "none";
 		}
-		
+
 	})
 	.catch(function(error) {
 		console.log(error);
@@ -132,7 +132,7 @@ function initializeStatsDiv() {
 			statsDiv.innerHTML = checkboxes;
 			statsDiv.style.display = "none";
 		}
-		
+
 	})
 	.catch(function(error) {
 		console.log(error);
@@ -225,24 +225,24 @@ function onSubmitButtonClicked() {
 	country_input = getCountryInputfromUser();
 	stat_input = getStatInputfromUser();
 	year_input = getYearInputfromUser();
-	
+
 	if (country_input.length === 0){
 		alert("Please select at least one country!");
 		return
 	}
-	
+
 	if (year_input.length === 0){
 		for (year = 1960; year <= 2017; year++){
 			year_input.push(year.toString())
 		}
 	}
-	
+
 	table_dict = []
 	for (k = 0; k < country_input.length; k++){
 		cur_country_name = country_input[k]
 		table_dict[cur_country_name] = '<h3>'+cur_country_name+"</h3>";
 		table_dict[cur_country_name] += ('<table>');
-	
+
 		//Creates the year headers table
 		table_dict[cur_country_name] += '<tr>'
 		table_dict[cur_country_name] += '<th></th>'
@@ -251,17 +251,17 @@ function onSubmitButtonClicked() {
 		}
 		table_dict[cur_country_name] += '</tr>';
 	}
-	
+
 	var url = getBaseURL() + '/data/?';
 	for (i=0; i< year_input.length; i++){
 		url += 'year='+year_input[i]+'&';
 	}
-	
+
 	var stat_id_url = getBaseURL() + '/stats/'
 	fetch(stat_id_url, {method: 'get'})
 	.then((response) => response.json())
 	.then(function(stat_id_list) {
-		
+
 		var country_id_url = getBaseURL() + '/countries/'
 		fetch(country_id_url, {method: 'get'})
 		.then((response) => response.json())
@@ -285,16 +285,16 @@ function onSubmitButtonClicked() {
 						cur_country_id = country_id_list[j]['country_id']
 					}
 				}
-				url += 'country_id='+cur_country_id.toString()+'&';			
+				url += 'country_id='+cur_country_id.toString()+'&';
 			}
-			
+
 			fetch(url, {method: 'get'})
 			.then((response) => response.json())
 			.then(function(data_list) {
 
 				for (var k = 0; k < data_list.length; k++) {
 					cur_data_dict = data_list[k];
-					
+
 					cur_country_id = cur_data_dict['country_id']
 					cur_country_name = "fail"
 					for (var i = 0; i < country_id_list.length; i++) {
@@ -302,7 +302,7 @@ function onSubmitButtonClicked() {
 							cur_country_name = country_id_list[i]['country_name']
 						}
 					}
-					
+
 					cur_stat_id = cur_data_dict['stat_id'];
 					cur_stat_name = 'fail'
 					for (var i = 0; i < stat_id_list.length; i++) {
@@ -310,35 +310,38 @@ function onSubmitButtonClicked() {
 							cur_stat_name = stat_id_list[i]['stat_name']
 						}
 					}
-					
+
 					var table_html = '';
 					table_html += '<tr>';
 					table_html += '<td>';
 					table_html += cur_stat_name;
 					table_html += '</td>';
-					
+
 					for (var i = 0; i < year_input.length; i++) {
+						var cellTag = "";
 						cur_key = 'year_'+year_input[i];
 						cur_num = cur_data_dict[cur_key];
 						if (cur_num !== null) {
+							cellTag = "fullCell";
 							cur_num = cur_num.toString();
 						}
 						else {
-							cur_num='None';
+							cur_num='';
+							cellTag = "emptyCell";
 						}
 						table_html += '<td>'+cur_num.toString()+'</td>';
 					}
-					table_html += '</tr>';
+					table_html += '</tr"'+cellTag+'"">';
 					table_dict[cur_country_name] += table_html;
 				}
-				
+
 				final_html_string = ''
 				for (k = 0; k < country_input.length; k++){
 					cur_country_name = country_input[k]
 					table_dict[cur_country_name] += '</table>';
 					final_html_string += table_dict[cur_country_name];
 				}
-					
+
 				var results_div = document.getElementById('Results-Div');
 				if (results_div) {
 					results_div.innerHTML = final_html_string;
@@ -356,5 +359,5 @@ function onSubmitButtonClicked() {
 	.catch(function(error) {
 		console.log(error);
 	});
-	
+
 }

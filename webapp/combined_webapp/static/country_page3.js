@@ -83,7 +83,7 @@ function makeDataTable() {
 
 				for (var i=1960; i < 2018; i++) {
 					var cellTag = "";
-                    cur_key = 'year_'+i.toString();
+          cur_key = 'year_'+i.toString();
 					cur_num = cur_data_dict[cur_key];
 					if (cur_num !== null) {
 						cur_num = cur_num.toString();
