@@ -11,6 +11,7 @@
     border: 1px solid black;
     background-color: lightgrey;
     color: black;
+    display: block;
 }
 
 .Header-Div {
@@ -112,11 +113,11 @@ table, th, td {
 }
 
 .fullCell {
-    
+
     background-color: lightgreen;
 }
 
 .emptyCell {
-    
+
     background-color: lightcoral;
 }
