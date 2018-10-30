@@ -28,11 +28,14 @@
 }
 
 .Content-Div {
-	height: 1000px;
 	width: 85%;
 	float: left;
-	overflow-x: scroll;
-	overflow: scroll;
+	overflow-x: auto;
+}
+
+.Selection-Div {
+	width: 85%;
+	float: left;
 }
 
 /* Vertical navigation */
@@ -114,11 +117,9 @@ table, th, td {
 }
 
 .fullCell {
-
     background-color: lightgreen;
 }
 
 .emptyCell {
-
     background-color: lightcoral;
 }
