@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Front Page</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='front_page.css') }}" type="text/css" />
+    <script>var api_port = {{ api_port }};</script>
+    <script type="text/javascript" src="{{ url_for('static', filename='front_page2.js') }}" defer></script>
+</head>
+
+<body>
+    <h2 class = "title">Data on the Middle East</h2>
+
+    <div style="width:800px; margin:0 auto; position: relative">
+      <ul class = "horizontal-navbar">
+          <li><a href="https://duckduckgo.com/">Home</a></li>
+          <li><a href="https://www.google.com/">About the Data</a></li>
+          <li><a href="https://www.bing.com/">Country Profiles</a></li>
+          <li><a href="https://www.carleton.edu/">Glossary</a></li>
+      </ul>
+
+      <div style="position : absolute">
+        <button class = "Select-Countries" id="Select-Countries-Button">&#9776; Select Countries</button>
+        <br>
+            <input id="Algeria" type="checkbox"/>
+            <label for="Algeria">Algeria</label>
+            <input id="Tunisia" type="checkbox"/>
+            <label for="Tunisia">Tunisia</label>
+      </div>
+	  
+	  <div id="Select-Countries-Div">
+		<!-- To be filled by the Select-Countries-Button -->
+	  </div>
+	  
+    </div>
+
+    <div>
+        <h4 class = "title">Country Index</h4>
+        <ul class = "vertical-navbar" id = "navbar">
+
+        </ul>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</body>
+</html>
