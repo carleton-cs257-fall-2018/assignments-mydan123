@@ -5,6 +5,7 @@ function initialize() {
 	changeHeader();
 	makeDataTable();
     getCountryListNavbar()
+    initializeBackButton();
 }
 
 function getBaseURL() {
@@ -28,6 +29,14 @@ function changeHeader() {
     var header = document.getElementById('country-title');
     if (header) {
         header.innerHTML += country_name;
+    }
+}
+
+function initializeBackButton(){
+    var url = getBaseURLSite();
+    var backButton = document.getElementsById('backButton');
+    if (backButton){
+        backButton.href = url;
     }
 }
 
