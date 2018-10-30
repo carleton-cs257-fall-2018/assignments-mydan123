@@ -12,7 +12,9 @@
     background-color: lightgrey;
     color: black;
     display: block;
-	width: 50%
+	  width: 50%;
+    column-count: 5;
+    column-gap: 30px;
 }
 
 .Header-Div {
