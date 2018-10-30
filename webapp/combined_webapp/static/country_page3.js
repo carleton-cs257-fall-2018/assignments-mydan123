@@ -12,6 +12,11 @@ function getBaseURL() {
     return baseURL;
 }
 
+function getBaseURLSite() {
+	var baseURL = window.location.protocol + '//' + window.location.hostname + ':' + port;
+	return baseURL;
+}
+
 function changeTitle() {
     var titles = document.getElementsByTagName('title');
     if (titles.length > 0) {
