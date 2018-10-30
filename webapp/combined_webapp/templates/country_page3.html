@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Country Data: </title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='front_page.css') }}" type="text/css" />
+    <script>var api_port = {{ api_port }};</script>
+    <script>var country_name = '{{ country_name }}';</script>
+    <script type="text/javascript" src="{{ url_for('static', filename='country_page.js') }}" defer></script>
+</head>
+
+<body>
+    <h2 class = "title" id="country-title">Data for country: </h2>
+    <p><table id="results-table"></table></p>
+</body>
+</html>

@@ -1,13 +1,4 @@
 #!/usr/bin/env python3
-'''
-    books_api.py
-    Jeff Ondich, 25 April 2016
-    Simple Flask app used in the sample web app for
-    CS 257, Spring 2016. This is the Flask app for the
-    "books and authors" API and website. The API offers
-    JSON access to the data, while the website (at
-    route '/') offers end-user browsing of the data.
-'''
 import sys
 import flask
 
