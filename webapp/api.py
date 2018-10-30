@@ -51,25 +51,46 @@ def data_for_country():
 	if len(country_name) > 0:
 		select_string += ",countries"
 
+	exist_stat_ids = len(stat_id) > 0
+	exist_country_ids = len(country_id) > 0
+	exist_stat_names = len(stat_name) > 0
+	exist_country_names = len(country_name) > 0
+	
 	optional_args = False
-	if (len(stat_id) > 0
-			or len(country_id) > 0
-			or len(stat_name) > 0
-			or len(country_name) > 0):
+	if (exist_stat_ids or exist_country_ids or exist_country_names or exist_stat_names):
 		select_string += " WHERE"
 		optional_args = True
 
-	for id in stat_id:
-		select_string += " stat_id = "+id+" AND"
-	for id in country_id:
-		select_string += " country_id = "+id+" AND"
-	for name in stat_name:
-		select_string += " LOWER(stats.name) LIKE LOWER('%"+name+"%') AND"
-		select_string += " annual_data.stat_id=stats.id AND"
-	for name in country_name:
-		select_string += " LOWER(countries.name) LIKE LOWER('%"+name+"%') AND"
-		select_string += " annual_data.country_id=countries.id AND"
+	if exist_stat_ids:
+		select_string += " ("
+		for id in stat_id:
+			select_string += " stat_id = "+id+" OR"
+		select_string = select_string[:-3] #Trims off trailing " OR"
+		select_string += " ) AND"
 
+	if exist_country_ids:
+		select_string += " ("
+		for id in country_id:
+			select_string += " country_id = "+id+" OR"
+		select_string = select_string[:-3] #Trims off trailing " OR"
+		select_string += " ) AND"
+
+	if exist_stat_names:
+		select_string += " ("
+		for name in stat_name:
+			select_string += " (LOWER(stats.name) LIKE LOWER('%"+name+"%') AND"
+			select_string += " annual_data.stat_id=stats.id ) OR"
+		select_string = select_string[:-3] #Trims off trailing " OR"
+		select_string += " ) AND"
+
+	if exist_country_names:
+		select_string += " ("
+		for name in country_name:
+			select_string += " (LOWER(countries.name) LIKE LOWER('%"+name+"%') AND"
+			select_string += " annual_data.country_id=countries.id ) OR"
+		select_string = select_string[:-3] #Trims off trailing " OR"
+		select_string += " ) AND"
+	
 	#These lines works:
 	#SELECT year_1960 FROM algeria_data,stat_ids WHERE stats.name LIKE 'GDP%' AND annual_data.stat_id=stats.id;
 	#SELECT country_id,stat_id,year_1960 FROM annual_data,stats where stats.id=annual_data.stat_id AND stats.name LIKE 'Population, male%';
@@ -78,6 +99,8 @@ def data_for_country():
 	if optional_args:
 		select_string = select_string[:-4]
 
+	print(select_string)	
+	
 	try:
 		cursor.execute(select_string)
 	except Exception as e:
