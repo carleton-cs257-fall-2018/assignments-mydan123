@@ -12,6 +12,7 @@
     background-color: lightgrey;
     color: black;
     display: block;
+	width: 50%
 }
 
 .Header-Div {
@@ -23,7 +24,7 @@
 .Navbar-Div {
 	width: 15%;
 	float: left;
-	padding : 10px;
+	padding: 0px 0px 10px 0px;
 }
 
 .Content-Div {
