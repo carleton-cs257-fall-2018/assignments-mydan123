@@ -4,8 +4,8 @@ function initialize() {
 	changeTitle();
 	changeHeader();
 	makeDataTable();
-    getCountryListNavbar()
-    initializeBackButton();
+  getCountryListNavbar()
+  initializeBackButton();
 }
 
 function getBaseURL() {
@@ -50,8 +50,8 @@ function makeDataTable() {
 		table_html += '<th>'+(i).toString()+'</th>';
 	}
 	table_html += '</tr>';
-	
-	
+
+
 	var all_data = [];
 	var url = getBaseURL() + '/data/?country_name='+country_name;
 	fetch(url, {method: 'get'})
@@ -65,10 +65,10 @@ function makeDataTable() {
 		.then((response) => response.json())
 		.then(function(stat_id_list) {
 			stat_id_dicts = stat_id_list;
-			
+
 			for (var k = 0; k < all_data.length; k++) {
 				table_html += '<tr>';
-				
+
 				cur_data_dict = all_data[k];
 				cur_stat_id = cur_data_dict['stat_id'];
 				cur_stat_name = 'fail'
@@ -80,10 +80,10 @@ function makeDataTable() {
 				table_html += '<td>';
 				table_html += cur_stat_name;
 				table_html += '</td>';
-				
+
 				for (var i=1960; i < 2018; i++) {
 					var cellTag = "";
-                    cur_key = 'year_'+i.toString();
+          cur_key = 'year_'+i.toString();
 					cur_num = cur_data_dict[cur_key];
 					if (cur_num !== null) {
 						cur_num = cur_num.toString();
@@ -97,7 +97,7 @@ function makeDataTable() {
 				}
 				table_html += '</tr>';
 			}
-			
+
 			var results_table = document.getElementById('results-table');
 			if (results_table) {
 				results_table.innerHTML = table_html;
@@ -112,7 +112,7 @@ function makeDataTable() {
 	.catch(function(error) {
 		console.log(error);
 	});
-	
+
 }
 
 function getCountryListNavbar() {
