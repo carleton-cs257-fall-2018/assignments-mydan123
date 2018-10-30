@@ -48,10 +48,7 @@ function getBaseURLSite() {
 function initializeYearsDiv(){
 	var checkboxes = "";
 	for (var k = 1960; k < 2018; k++) {
-		checkboxes += '<label><input type="checkbox" name="year_vals" value="'+k+'"/>'+k+'</label>';
-		if (k%10 === 9){
-			checkboxes += '<br>'
-		}
+		checkboxes += '<label><input type="checkbox" name="year_vals" value="'+k+'"/>'+k+'</label><br>';
 	}
 
 	var yearsDiv = document.getElementById('Select-Years-Div');
@@ -79,15 +76,11 @@ function initializeCountriesDiv() {
 	fetch(url, {method: 'get'})
 	.then((response) => response.json())
 	.then(function(countries_list) {
-		var checkboxes = '<table><tr>';
+		var checkboxes = '';
 		for (var k = 0; k < countries_list.length; k++) {
 			cur_country_name = countries_list[k]['country_name']
-			checkboxes += '<td><label><input type="checkbox" name="country_vals" value="'+cur_country_name+'"/>'+cur_country_name+'</label></td>';
-			if (k%4 === 3){
-				checkboxes += '</tr><tr>'
-			}
+			checkboxes += '<label><input type="checkbox" name="country_vals" value="'+cur_country_name+'"/>'+cur_country_name+'</label><br>';
 		}
-		checkboxes += '</tr></table>';
 
 		var countriesDiv = document.getElementById('Select-Countries-Div');
 		if (countriesDiv) {
