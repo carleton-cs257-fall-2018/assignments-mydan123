@@ -19,14 +19,25 @@
       </ul>
 
       <div style="position : absolute">
-        <button class = "Select-Countries">&#9776; Select Countries</button>
+
+        <h4 class = "title" style = "margin: 50px 20px 0 300px">Modify Search by Year</h4>
+        <p>Start Year: <input id="start-year" type="text" /></p>
+        <p>End Year: <input id="end-year" type="text" /></p>
+        <button id = "select-year" class = "Selectyear" >Select Specific Year: </button>
+        <p id="text" style="display:none">Checkbox is CHECKED!</p>
         <br>
-            <input id="Algeria" type="checkbox"/>
-            <label for="Algeria">Algeria</label>
-            <input id="Tunisia" type="checkbox"/>
-            <label for="Tunisia">Tunisia</label>
-            <input id="gdp_usd" type="checkbox"/>
-            <label for="gdp_usd">GDP in US Dollars</label>
+
+        <h4 class = "title" style = "margin: 50px 20px 0 290px">Modify Search by Country</h4>
+        <br><br>
+            <input id="Algeria" type="checkbox"/><label for="Algeria">Algeria</label>
+            <input id="Tunisia" type="checkbox"/><label for="Tunisia">Tunisia</label>
+        <br>
+
+        <h4 class = "title" style = "margin: 50px 20px 0 300px">Modify Search by Data</h4>
+        <br><br>
+        <input id="gdp_usd" type="checkbox"/><label for="gdp_usd">GDP in US Dollars</label>
+        <br>
+        <button class = "Submit" id = "submit">Submit</h4>
       </div>
     </div>
 
@@ -59,11 +70,6 @@
             <li><a href="https://www.carleton.edu/">Turkey</a></li>
             <li><a href="https://www.carleton.edu/">Yemen, Rep.</a></li>
         </ul>
-
-        <div style = "margin : 0 0 0 500px">
-          <button id = "submit">Submit</h4>
-        </div>
-
     </div>
 </body>
 </html>

@@ -1,37 +1,53 @@
-/*
-    sample.js
-    Jeff Ondich, 5 May 2016
-    A small demo of some simple Javascript techniques.
-    For CS257 Software Design, Carleton College
- */
+function clickedOnSelectYear(){
+    var selectYearButton = document.getElementById('select-years');
+    var years = document.getElementById('years');
+    if (selectYearButton.onclick == true) {
+      years.style.display = "block";
+    }
+    else{
+      years.style.display = "none";
+
+    }
+}
+
+function initialize() {
+  var selectYearButton = document.getElementById('select-year');
+    selectYearButton.onclick = selectYearButton;
+}
+
  function getInputfromUser() {
       var selectedCountries = [];
       var country = document.getElementById('Algeria');
-      if country.checked {
+      if (country.checked) {
           selectedCountries.push(country);
-          SubmitButtonClicked(selectedCountries);
       }
 
       var dataSelected = [];
       var data = document.getElementById('gdp_usd');
-      if data.checked {
+      if (data.checked) {
           dataSelected.push(data);
       }
       SubmitButtonClicked(listOfCountries, listOfData);
   }
 
   function SubmitButtonClicked(listOfCountries, listOfData) {
-        var url = getBaseURL() + '/countries/';
+    url = getBaseURL() + "/data/";
 
-        // Send the request to the Books API /authors/ endpoint
-        fetch(url, {method: 'get'})
+    if len(listOfCountries != 0){
+      for(country in listOfCountries) {
+        url += "country_name=" + country + "&";
+      }
+    }
 
-        // When the results come back, transform them from JSON string into
-        // a Javascript object (in this case, a list of author dictionaries).
+    if len(listofData != 0){
+      for(country in listOfCountries) {
+        url += "stat_name=" + country + "&";
+      }
+    }
+
+    fetch(url, {method: 'get'})
+
         .then((response) => response.json())
-
-        // Once you have your list of author dictionaries, use it to build
-        // an HTML table displaying the author names and lifespan.
         .then(function(listOfCountries) {
             // Build the table body.
             var tableBody = '';
