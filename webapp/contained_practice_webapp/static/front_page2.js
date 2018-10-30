@@ -44,6 +44,11 @@ function getBaseURL() {
     return baseURL;
 }
 
+function getBaseURLSite() {
+    var baseURL = window.location.protocol + '//' + window.location.hostname + ':' + port;
+    return baseURL;
+}
+
 function onCountriesButtonClicked() {
     if (!countriesDisplayed) {
 		var url = getBaseURL() + '/countries/';
@@ -87,7 +92,8 @@ function getCountryListNavbar() {
         var navbar = '';
         for (var k = 0; k < countries_list.length; k++) {
             navbar += '<li>';
-			navbar += '<a href="https://www.google.com">'
+			button_url = getBaseURLSite()+'/country/'+countries_list[k]['country_name']
+			navbar += '<a href="'+button_url+'">'
 			navbar += countries_list[k]['country_name']
 			navbar += '</a>'
 			navbar += '</li>'
