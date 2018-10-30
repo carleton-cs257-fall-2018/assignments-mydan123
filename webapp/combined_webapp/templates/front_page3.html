@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Front Page</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='front_page3.css') }}" type="text/css" />
+    <script>var api_port = {{ api_port }};</script>
+    <script>var port = {{ port }};</script>
+    <script type="text/javascript" src="{{ url_for('static', filename='front_page3.js') }}" defer></script>
+</head>
+
+<body>
+    <h2 class = "title">Data on the Middle East</h2>
+
+    <div style="width:800px; margin:0 auto; position: relative">
+		<ul class = "horizontal-navbar">
+			<li><a href="https://duckduckgo.com/">Home</a></li>
+			<li><a href="https://www.google.com/">About the Data</a></li>
+			<li><a href="https://www.bing.com/">Country Profiles</a></li>
+			<li><a href="https://www.carleton.edu/">Glossary</a></li>
+		</ul>
+
+		<div style="position : absolute">
+
+			<h4 class = "title" style = "margin: 10px 20px 10px 300px">Modify Search by Year</h4>
+			<p>Start Year: <input id="start-year" type="text" /></p>
+			<p>End Year: <input id="end-year" type="text" /></p>
+			<button class = "Select-Button" id = "Select-Years-Button">&#9776; Select Years</button>
+			<div id="Select-Years-Div" class='Checkbox-Div'>
+			<!-- To be filled by the Select-Years-Button button -->
+			</div><br>
+
+			<h4 class = "title" style = "margin: 10px 20px 10px 290px">Modify Search by Country</h4><br><br>
+			<button class = "Select-Button" id="Select-Countries-Button">&#9776; Select Countries</button>
+			<div id="Select-Countries-Div" class='Checkbox-Div'>
+			<!-- To be filled by the Select-Countries-Button -->
+			</div>
+			
+			<h4 class = "title" style = "margin: 10px 20px 10px 300px">Modify Search by Data</h4><br><br>
+			<button class = "Select-Button" id="Select-Stats-Button">&#9776; Select Stats</button>
+			<div id="Select-Stats-Div" class='Checkbox-Div'>
+			<!-- To be filled by the Select-Stats-Button -->
+			</div>
+
+			<button class = "Submit" id = "Submit-Button">Submit</button>
+			<div id = "Results-Div"></div>
+
+		</div>
+    </div>
+
+    <div>
+        <h4 class = "title">Country Index</h4>
+        <ul class = "vertical-navbar" id = "vert-navbar"></ul>
+    </div>
+</body>
+</html>
+
+
+	  

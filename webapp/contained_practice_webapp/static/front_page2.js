@@ -58,7 +58,7 @@ function onCountriesButtonClicked() {
 			var checkboxes = '';
 			for (var k = 0; k < countries_list.length; k++) {
 				cur_country_name = countries_list[k]['country_name']
-				checkboxes += '<input type="checkbox" name="country_vals" value="'+cur_country_name+'">'+cur_country_name+'<br>';
+				checkboxes += '<label><input type="checkbox" name="country_vals" value="'+cur_country_name+'"/>'+cur_country_name+'</label><br>';
 			}
 
 			var countriesDiv = document.getElementById('Select-Countries-Div');
