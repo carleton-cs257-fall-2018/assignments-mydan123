@@ -4,6 +4,7 @@ function initialize() {
 	changeTitle();
 	changeHeader();
 	makeDataTable();
+    getCountryListNavbar()
 }
 
 function getBaseURL() {
@@ -95,4 +96,30 @@ function makeDataTable() {
 		console.log(error);
 	});
 	
+}
+
+function getCountryListNavbar() {
+	var url = getBaseURL() + '/countries/';
+
+	fetch(url, {method: 'get'})
+	.then((response) => response.json())
+	.then(function(countries_list) {
+		var navbar = '';
+		for (var k = 0; k < countries_list.length; k++) {
+			navbar += '<li>';
+			button_url = getBaseURLSite()+'/country/'+countries_list[k]['country_name']
+			navbar += '<a href="'+button_url+'">'
+			navbar += countries_list[k]['country_name']
+			navbar += '</a>'
+			navbar += '</li>'
+		}
+		var navbarElement = document.getElementById('vert-navbar');
+		if (navbarElement) {
+			navbarElement.innerHTML = navbar;
+		}
+	})
+
+	.catch(function(error) {
+		console.log(error);
+	});
 }
