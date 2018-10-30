@@ -217,20 +217,25 @@ function onSubmitButtonClicked() {
 	stat_input = getStatInputfromUser();
 	year_input = getYearInputfromUser();
 	
-	console.log(country_input)
-	console.log(stat_input)
-	console.log(year_input)
-
-	table_html = '<table>';
-
-	//Creates the year headers table
-	table_html += '<tr>'
-	table_html += '<th></th>'
-	for (var i = 0; i < year_input.length; i++) {
-		table_html += '<th>'+year_input[i]+'</th>';
+	if (country_input.length === 0){
+		alert("Please select at least one country!");
+		return
 	}
-	table_html += '</tr>';
 	
+	table_dict = []
+	for (k = 0; k < country_input.length; k++){
+		cur_country_name = country_input[k]
+		table_dict[cur_country_name] = '<h3>'+cur_country_name+"</h3>";
+		table_dict[cur_country_name] += ('<table>');
+	
+		//Creates the year headers table
+		table_dict[cur_country_name] += '<tr>'
+		table_dict[cur_country_name] += '<th></th>'
+		for (var i = 0; i < year_input.length; i++) {
+			table_dict[cur_country_name] += '<th>'+year_input[i]+'</th>';
+		}
+		table_dict[cur_country_name] += '</tr>';
+	}
 	
 	var url = getBaseURL() + '/data/?';
 	for (i=0; i< year_input.length; i++){
@@ -247,6 +252,7 @@ function onSubmitButtonClicked() {
 		.then((response) => response.json())
 		.then(function(country_id_list) {
 
+			//Turns stat names into stat ids
 			for (i=0; i< stat_input.length; i++){
 				var cur_stat_id = -1;
 				for (var j = 0; j < stat_id_list.length; j++) {
@@ -256,6 +262,7 @@ function onSubmitButtonClicked() {
 				}
 				url += 'stat_id='+cur_stat_id.toString()+'&';
 			}
+			//Turns country names into country ids
 			for (i=0; i< country_input.length; i++){
 				var cur_country_id = -1;
 				for (var j = 0; j < country_id_list.length; j++) {
@@ -263,16 +270,24 @@ function onSubmitButtonClicked() {
 						cur_country_id = country_id_list[j]['country_id']
 					}
 				}
-				url += 'country_id='+cur_country_id.toString()+'&';			}
-		
+				url += 'country_id='+cur_country_id.toString()+'&';			
+			}
+			
 			fetch(url, {method: 'get'})
 			.then((response) => response.json())
 			.then(function(data_list) {
 
 				for (var k = 0; k < data_list.length; k++) {
-					table_html += '<tr>';
-					
 					cur_data_dict = data_list[k];
+					
+					cur_country_id = cur_data_dict['country_id']
+					cur_country_name = "fail"
+					for (var i = 0; i < country_id_list.length; i++) {
+						if (cur_country_id === country_id_list[i]['country_id']) {
+							cur_country_name = country_id_list[i]['country_name']
+						}
+					}
+					
 					cur_stat_id = cur_data_dict['stat_id'];
 					cur_stat_name = 'fail'
 					for (var i = 0; i < stat_id_list.length; i++) {
@@ -280,6 +295,9 @@ function onSubmitButtonClicked() {
 							cur_stat_name = stat_id_list[i]['stat_name']
 						}
 					}
+					
+					var table_html = '';
+					table_html += '<tr>';
 					table_html += '<td>';
 					table_html += cur_stat_name;
 					table_html += '</td>';
@@ -296,13 +314,19 @@ function onSubmitButtonClicked() {
 						table_html += '<td>'+cur_num.toString()+'</td>';
 					}
 					table_html += '</tr>';
+					table_dict[cur_country_name] += table_html;
 				}
 				
-				table_html += '</table>';
-				
+				final_html_string = ''
+				for (k = 0; k < country_input.length; k++){
+					cur_country_name = country_input[k]
+					table_dict[cur_country_name] += '</table>';
+					final_html_string += table_dict[cur_country_name];
+				}
+					
 				var results_div = document.getElementById('Results-Div');
 				if (results_div) {
-					results_div.innerHTML = table_html;
+					results_div.innerHTML = final_html_string;
 				}
 
 			})
