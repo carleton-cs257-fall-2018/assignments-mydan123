@@ -68,15 +68,18 @@ function makeDataTable() {
 				table_html += '</td>';
 				
 				for (var i=1960; i < 2018; i++) {
-					cur_key = 'year_'+i.toString();
+					var cellTag = "";
+                    cur_key = 'year_'+i.toString();
 					cur_num = cur_data_dict[cur_key];
 					if (cur_num !== null) {
 						cur_num = cur_num.toString();
+                        cellTag = "fullCell"
 					}
 					else {
 						cur_num='';
+                        cellTag = "emptyCell";
 					}
-					table_html += '<td>'+cur_num.toString()+'</td>';
+					table_html += '<td class = "'+cellTag+'">'+cur_num.toString()+'</td>';
 				}
 				table_html += '</tr>';
 			}
