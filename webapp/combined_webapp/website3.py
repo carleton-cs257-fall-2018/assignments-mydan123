@@ -13,7 +13,7 @@ def get_main_page():
 @app.route('/country/<country>')
 def get_country_page(country):
 	global api_port
-	return flask.render_template('country_page3.html', api_port=api_port, country_name=str(country))
+	return flask.render_template('country_page3.html', api_port=api_port, port=port, country_name=str(country))
 	
 if __name__ == '__main__':
 	if len(sys.argv) != 4:

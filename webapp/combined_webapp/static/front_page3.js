@@ -222,6 +222,12 @@ function onSubmitButtonClicked() {
 		return
 	}
 	
+	if (year_input.length === 0){
+		for (year = 1960; year <= 2017; year++){
+			year_input.push(year.toString())
+		}
+	}
+	
 	table_dict = []
 	for (k = 0; k < country_input.length; k++){
 		cur_country_name = country_input[k]
