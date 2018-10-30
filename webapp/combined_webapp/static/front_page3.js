@@ -322,9 +322,9 @@ function onSubmitButtonClicked() {
 							cur_num='';
 							cellTag = "emptyCell";
 						}
-						table_html += '<td>'+cur_num.toString()+'</td>';
+						table_html += '<td class="'+cellTag+'">'+cur_num.toString()+'</td>';
 					}
-					table_html += '</tr"'+cellTag+'"">';
+					table_html += '</tr>';
 					table_dict[cur_country_name] += table_html;
 				}
 
