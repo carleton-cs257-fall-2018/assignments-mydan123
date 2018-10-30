@@ -98,8 +98,6 @@ def data_for_country():
 	#Trims off trailing " AND"
 	if optional_args:
 		select_string = select_string[:-4]
-
-	print(select_string)	
 	
 	try:
 		cursor.execute(select_string)
