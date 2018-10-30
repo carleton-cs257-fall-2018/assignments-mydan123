@@ -6,6 +6,11 @@ function initialize() {
     if (selectYearButton) {
         selectYearButton.onclick = onSelectYearClicked;
     }
+
+    var submitButton = document.getElementById('submit');
+    if (submitButton) {
+        submitButton.onclick = onSubmitClicked;
+    }
     getCountryListNavbar();
 }
 
@@ -81,80 +86,79 @@ function getCountryListNavbar() {
 
    function getSpecifiedYearsfromUser() {
 
-        var selectedYears = [];
-        var listOfCheckboxes = document.getElementsByName("yearCheckbox");
+        var finalListOfYearsSelected = [];
+        var userSelectedYears = [];
         var startYear = document.getElementById('start-year').value;
         var endYear = document.getElementById('end-year').value;
+
+        var listOfCheckboxes = document.getElementsByName("yearCheckbox");
         for (checkbox in listOfCheckboxes){
             if (checkbox.checked == true){
-              selectedYears.push(checkbox.value)
+              userSelectedYears.push(checkbox.value)
             }
         }
-        for (year = startYear; year <= endYear; year++){
-          selectedYears.push(year)
+        userSelectedYears = userSelectedYears.sort();
+
+        finalListOfYearsSelected.push(startYear);
+        finalListOfYearsSelected.push(endYear);
+        finalListOfYearsSelected.push(userSelectedYears);
+    }
+
+    function onSubmitClicked(){
+
+        var url = getBaseURL() + "/data/?";
+
+        var dataParameters = getDataInputfromUser();
+        var countryParameters = getCountryInputfromUser();
+        var yearParameters = getSpecifiedYearsfromUser();
+
+        var startYear = yearParameters[0];
+        var endYear = yearParameters[1];
+        var listOfYearsSelected = yearParameters[3];
+
+        if (dataParameters.length != 0){
+            for (data in dataParameters){
+                url += "stat_name=" + data + "&";
+            }
         }
-        selectedYears = selectedYears.sort();
-      return selectedYears;
-    }
+
+        if (countryParameters.length != 0){
+            for (country in countryParameters){
+                url += "country_name=" + country + "&";
+            }
+        }
+
+        if (listOfYearsSelected.length != 0){
+            for (year in listOfYearsSelected){
+                url += "year=" + year + "&";
+            }
+        }
+
+        url += "start_year=" + startYear + "&";
+        url += "end_year=" + endYear;
+
+        fetch(url, {method: 'get'})
+
+            .then((response) => response.json())
+            .then(function(listOfdictionaries) {
+                var tableBody = '';
+
+                //Table goes here
 
 
-  /*function SubmitButtonClicked() {
-    url = getBaseURL() + "/data/";
-
-    if (listOfCountries.length != 0){
-      for(country in listOfCountries) {
-        url += "country_name=" + country + "&";
-      }
-    }
-
-    if len(listofData != 0){
-      for(country in listOfCountries) {
-        url += "stat_name=" + country + "&";
-      }
-    }
-
-    fetch(url, {method: 'get'})
-
-        .then((response) => response.json())
-        .then(function(listOfCountries) {
-            // Build the table body.
-            var tableBody = '';
-            for (var k = 0; k < authorsList.length; k++) {
-                tableBody += '<tr>';
-
-                tableBody += '<td><a onclick="getAuthor(' + authorsList[k]['id'] + ",'"
-                                + authorsList[k]['first_name'] + ' ' + authorsList[k]['last_name'] + "')\">"
-                                + authorsList[k]['last_name'] + ', '
-                                + authorsList[k]['first_name'] + '</a></td>';
-
-                tableBody += '<td>' + authorsList[k]['birth_year'] + '-';
-                if (authorsList[k]['death_year'] != 0) {
-                    tableBody += authorsList[k]['death_year'];
+                var resultsTableElement = document.getElementById('outputted-data');
+                if (resultsTableElement) {
+                    resultsTableElement.innerHTML = tableBody;
                 }
-                tableBody += '</td>';
-                tableBody += '</tr>';
-            }
+            })
 
-            // Put the table body we just built inside the table that's already on the page.
-            var resultsTableElement = document.getElementById('results_table');
-            if (resultsTableElement) {
-                resultsTableElement.innerHTML = tableBody;
-            }
-        })
-
-        // Log the error if anything went wrong during the fetch.
-        .catch(function(error) {
-            console.log(error);
-        });
+            .catch(function(error) {
+                console.log(error);
+            });
     }
 
   function getBaseURL() {
     var baseURL = window.location.protocol + '//' + window.location.hostname + ':' + api_port;
     return baseURL;
   }
-
-  function initialize() {
-      var submit = document.getElementById('submit');
-      submit.onclick = submit;
-  }*/
 window.onload = initialize;

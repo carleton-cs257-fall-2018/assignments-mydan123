@@ -23,17 +23,16 @@
         <h4 class = "title" style = "margin: 50px 20px 0 300px">Modify Search by Year</h4>
         <p>Start Year: <input id="start-year" type="text" /></p>
         <p>End Year: <input id="end-year" type="text" /></p>
-        <button id = "select-year" class = "Selectyear" >Select Specific Year: </button>
 
-        <div id="all-years"></div><br>
+        <button id = "select-year" class = "SelectyearButton" >Select Specific Year: </button>
+        <div class = "ParameterDisplay" id="all-years"></div>
 
         <h4 class = "title" style = "margin: 50px 20px 0 290px">Modify Search by Country</h4><br><br>
-        <input id="Algeria" type="checkbox"/>Algeria</input>
-        <input id="Tunisia" type="checkbox"/>Tunisia</input><br>
+        <div class = "ParameterDisplay" id="all-countries"></div><br>
 
         <h4 class = "title" style = "margin: 50px 20px 0 300px">Modify Search by Data</h4><br><br>
+        <div class = "ParameterDisplay" id="all-data"></div><br>
 
-        <input id="gdp_usd" type="checkbox"/><label for="gdp_usd">GDP in US Dollars</label><br>
         <button class = "Submit" id = "submit">Submit</h4><br>
         <div id = "outputted-data"></div>
 

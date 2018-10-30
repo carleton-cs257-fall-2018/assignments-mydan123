@@ -84,7 +84,7 @@ button.Submit {
 }
 
 
-button.Selectyear {
+button.SelectyearButton {
   background-color: light grey;
   text-align : center;
   cursor: pointer;
@@ -93,4 +93,10 @@ button.Selectyear {
   padding:5px;
   font-size: 12px;
   border: solid black;
+}
+
+.ParameterDisplay {
+  margin : 20px;
+  column-count : 5;
+  column-count : 40px;
 }
