@@ -64,9 +64,9 @@ button.Select-Countries {
     transition: all .5s;
     color: black;
     padding: 20px;
-    font-size: 20px;
+    font-size: 16px;
     border: solid black;
-    width: 300px;
+    width: 200px;
     margin: 100px 0px 35px;
 }
 
@@ -77,4 +77,20 @@ button.Select-Countries li {
 button.Select-Countries:hover{
   background-color: #555;
   color : white;
+}
+
+button.Submit {
+  margin: 100px 0px 35px
+}
+
+
+button.Selectyear {
+  background-color: light grey;
+  text-align : center;
+  cursor: pointer;
+  transition: all .5s;
+  color: black;
+  padding:5px;
+  font-size: 12px;
+  border: solid black;
 }
