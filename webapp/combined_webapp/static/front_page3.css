@@ -22,15 +22,18 @@
 .Navbar-Div {
 	width: 15%;
 	float: left;
-	height: 1000px;
+	min-height: 100%;
 }
 
 .Content-Div {
-	height: 1000px;
 	width: 85%;
 	float: left;
-	overflow-x: scroll;
-	overflow: scroll;
+	overflow-x: auto;
+}
+
+.Selection-Div {
+	width: 85%;
+	float: left;
 }
 
 /* Vertical navigation */
@@ -112,11 +115,9 @@ table, th, td {
 }
 
 .fullCell {
-    
     background-color: lightgreen;
 }
 
-.emptyCell {
-    
+.emptyCell {    
     background-color: lightcoral;
 }
