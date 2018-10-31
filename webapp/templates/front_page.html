@@ -3,45 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>Front Page</title>
-    <link rel="stylesheet" href="front_page.css" type="text/css" />
-    <script type="text/javascript" src="front_page.js"></script>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='front_page.css') }}" type="text/css" />
+    <script>var api_port = {{ api_port }};</script>
+    <script>var port = {{ port }};</script>
+    <script type="text/javascript" src="{{ url_for('static', filename='front_page.js') }}" defer></script>
 </head>
 
 <body>
-    <h2 class = "title">Data on the Middle East</h2>
+	<div class="Header-Div">
+		<a name="Top-of-Page"><h2 class = "title">Data on the Middle East</h2></a>
+		<ul class = "horizontal-navbar">
+			<li><a id = "backButton">Home</a></li>
+		</ul>
+	</div>
+	<div class="Navbar-Div">
+		<h4 class = "title">Country Index</h4>
+		<ul class = "vertical-navbar" id = "vert-navbar"></ul>
+	</div>
 
-    <div style="width:800px; margin:0 auto; position: relative">
-      <ul class = "horizontal-navbar">
-          <li><a href="https://duckduckgo.com/">Home</a></li>
-          <li><a href="https://www.google.com/">About the Data</a></li>
-          <li><a href="https://www.bing.com/">Country Profiles</a></li>
-          <li><a href="https://www.carleton.edu/">Glossary</a></li>
-      </ul>
+	<p style="text-align:right"><a href = "#Submit-Link">Jump to Bottom</a></p>
+	
+	<div class="Content-Div">
+		<div id = "Results-Div">
+		<!-- To be filled with a table created by the submit button -->
+		</div>
+	</div>
 
-      <div style="position : absolute">
+	<div class="Selection-Div">
+		<h4 class = "title" style = "margin: 10px 20px 10px 300px">Modify Search by Year</h4>
+		<p>Start Year: <input id="start-year" type="text" /></p>
+		<p>End Year: <input id="end-year" type="text" /></p>
+		<button class = "Select-Button" id = "Select-Years-Button">&#9776; Select Years</button><br>
+		<div id="Select-Years-Div" class='Checkbox-Div'>
+		<!-- To be filled by the Select-Years-Button button -->
+		</div><br>
 
-        <h4 class = "title" style = "margin: 50px 20px 0 300px">Modify Search by Year</h4>
-        <p>Start Year: <input id="start-year" type="text" /></p>
-        <p>End Year: <input id="end-year" type="text" /></p>
+		<h4 class = "title" style = "margin: 10px 20px 10px 290px">Modify Search by Country</h4><br>
+		<button class = "Select-Button" id="Select-Countries-Button">&#9776; Select Countries</button><br>
+		<div id="Select-Countries-Div" class='Checkbox-Div'>
+		<!-- To be filled by the Select-Countries-Button -->
+		</div><br>
 
-        <button id = "select-year" class = "SelectyearButton" >Select Specific Year: </button>
-        <div class = "ParameterDisplay" id="all-years"></div>
-
-        <h4 class = "title" style = "margin: 50px 20px 0 290px">Modify Search by Country</h4><br><br>
-        <div class = "ParameterDisplay" id="all-countries"></div><br>
-
-        <h4 class = "title" style = "margin: 50px 20px 0 300px">Modify Search by Data</h4><br><br>
-        <div class = "ParameterDisplay" id="all-data"></div><br>
-
-        <button class = "Submit" id = "submit">Submit</h4><br>
-        <div id = "outputted-data"></div>
-
-      </div>
-    </div>
-
-    <div>
-        <h4 class = "title">Country Index</h4>
-        <ul class = "vertical-navbar" id = "vert-navbar"></ul>
-    </div>
+		<h4 class = "title" style = "margin: 10px 20px 10px 300px">Modify Search by Data</h4><br>
+		<button class = "Select-Button" id="Select-Stats-Button">&#9776; Select Stats</button>
+		<div id="Select-Stats-Div" class='Checkbox-Div'>
+		<!-- To be filled by the Select-Stats-Button -->
+		</div><br>
+		<a name="Submit-Link"><button class = "Submit" id = "Submit-Button">Submit</button></a><br>
+	</div>
+	<p style="text-align:right"><a href = "#Top-of-Page">Jump to Top</p>
 </body>
 </html>

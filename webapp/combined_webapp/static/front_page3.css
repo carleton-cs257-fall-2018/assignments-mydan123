@@ -12,7 +12,7 @@
     background-color: #EEEEEE;
     color: black;
     display: block;
-	width: 50%;
+	width: 55%;
 }
 
 #Select-Years-Div {
@@ -76,10 +76,9 @@ ul.vertical-navbar li a:hover {
 /* Horizontal navigation */
 ul.horizontal-navbar {
     list-style-type: none;
-    padding; 5px;
+    padding: 5px;
     overflow: hidden;
     background-color: white;
-    width : 800px;
     margin : 0 auto;
 }
 

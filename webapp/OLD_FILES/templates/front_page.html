@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Front Page</title>
+    <link rel="stylesheet" href="front_page.css" type="text/css" />
+    <script type="text/javascript" src="front_page.js"></script>
+</head>
+
+<body>
+    <h2 class = "title">Data on the Middle East</h2>
+
+    <div style="width:800px; margin:0 auto; position: relative">
+      <ul class = "horizontal-navbar">
+          <li><a href="https://duckduckgo.com/">Home</a></li>
+          <li><a href="https://www.google.com/">About the Data</a></li>
+          <li><a href="https://www.bing.com/">Country Profiles</a></li>
+          <li><a href="https://www.carleton.edu/">Glossary</a></li>
+      </ul>
+
+      <div style="position : absolute">
+
+        <h4 class = "title" style = "margin: 50px 20px 0 300px">Modify Search by Year</h4>
+        <p>Start Year: <input id="start-year" type="text" /></p>
+        <p>End Year: <input id="end-year" type="text" /></p>
+
+        <button id = "select-year" class = "SelectyearButton" >Select Specific Year: </button>
+        <div class = "ParameterDisplay" id="all-years"></div>
+
+        <h4 class = "title" style = "margin: 50px 20px 0 290px">Modify Search by Country</h4><br><br>
+        <div class = "ParameterDisplay" id="all-countries"></div><br>
+
+        <h4 class = "title" style = "margin: 50px 20px 0 300px">Modify Search by Data</h4><br><br>
+        <div class = "ParameterDisplay" id="all-data"></div><br>
+
+        <button class = "Submit" id = "submit">Submit</h4><br>
+        <div id = "outputted-data"></div>
+
+      </div>
+    </div>
+
+    <div>
+        <h4 class = "title">Country Index</h4>
+        <ul class = "vertical-navbar" id = "vert-navbar"></ul>
+    </div>
+</body>
+</html>
