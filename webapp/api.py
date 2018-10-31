@@ -15,6 +15,10 @@ app = flask.Flask(__name__)
 def hello():
 	return 'No data requested.'
 
+@app.after_request
+def set_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
 
 
 '''
@@ -246,10 +250,6 @@ def return_one_stat_and_id(stat_name):
 	return json.dumps(stat_list)
 
 
-@app.after_request
-def set_headers(response):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    return response
 
 
 
