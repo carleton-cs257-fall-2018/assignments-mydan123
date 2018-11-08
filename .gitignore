@@ -6,49 +6,49 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
-.idea/**/workspace.xml
-.idea/**/tasks.xml
-.idea/dictionaries
+final/dungeoncrawlmvc/.idea/**/workspace.xml
+final/dungeoncrawlmvc/.idea/**/tasks.xml
+final/dungeoncrawlmvc/.idea/dictionaries
 
 # Sensitive or high-churn files
-.idea/**/dataSources/
-.idea/**/dataSources.ids
-.idea/**/dataSources.local.xml
-.idea/**/sqlDataSources.xml
-.idea/**/dynamic.xml
-.idea/**/uiDesigner.xml
+final/dungeoncrawlmvc/.idea/**/dataSources/
+final/dungeoncrawlmvc/.idea/**/dataSources.ids
+final/dungeoncrawlmvc/.idea/**/dataSources.local.xml
+final/dungeoncrawlmvc/.idea/**/sqlDataSources.xml
+final/dungeoncrawlmvc/.idea/**/dynamic.xml
+final/dungeoncrawlmvc/.idea/**/uiDesigner.xml
 
 # Gradle
-.idea/**/gradle.xml
-.idea/**/libraries
+final/dungeoncrawlmvc/.idea/**/gradle.xml
+final/dungeoncrawlmvc/.idea/**/libraries
 
 # CMake
-cmake-build-debug/
-cmake-build-release/
+final/dungeoncrawlmvc/cmake-build-debug/
+final/dungeoncrawlmvc/cmake-build-release/
 
 # Mongo Explorer plugin
-.idea/**/mongoSettings.xml
+final/dungeoncrawlmvc/.idea/**/mongoSettings.xml
 
 # File-based project format
 *.iws
 
 # IntelliJ
-out/
+final/dungeoncrawlmvc/out/
 
 # mpeltonen/sbt-idea plugin
-.idea_modules/
+final/dungeoncrawlmvc/.idea_modules/
 
 # JIRA plugin
-atlassian-ide-plugin.xml
+final/dungeoncrawlmvc/atlassian-ide-plugin.xml
 
 # Cursive Clojure plugin
-.idea/replstate.xml
+final/dungeoncrawlmvc/.idea/replstate.xml
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-fabric.properties
+final/dungeoncrawlmvc/com_crashlytics_export_strings.xml
+final/dungeoncrawlmvc/crashlytics.properties
+final/dungeoncrawlmvc/crashlytics-build.properties
+final/dungeoncrawlmvc/fabric.properties
 
 # Editor-based Rest Client
-.idea/httpRequests
+final/dungeoncrawlmvc/.idea/httpRequests
