@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.BorderPane?>
-<BorderPane fx:controller="dbusis.dungeoncrawl.Controller" xmlns:fx="http://javafx.com/fxml">
+<BorderPane fx:controller="dbusis.dungeoncrawl.Controller" xmlns:fx="http://javafx.com/fxml" style="-fx-background-color: rgba(14,7,56,0.62)">
     <!-- See https://apps.carleton.edu/creativeservices/identity/college_colors/ for official Carleton colors -->
     <top>
         <BorderPane prefHeight="35" style="-fx-background-color: #0B5091; -fx-padding: 10px, 5px, 10px, 5px" >

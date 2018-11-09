@@ -42,6 +42,7 @@ public class Controller implements EventHandler<KeyEvent> {
         }
 
         if (keyRecognized) {
+            this.dungeonModel.updateDiscoveredSquares();
             this.update();
             keyEvent.consume();
         }
