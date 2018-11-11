@@ -204,36 +204,21 @@ public class DungeonView extends Group {
 
         displayPolies.get("topWedge").setVisible(true);
         displayPolies.get("bottomWedge").setVisible(true);
-
         BGDrawWall(displayPolies.get("leftWedge"), model.getSquareValue(wallPositions.get("left")));
         BGDrawWall(displayPolies.get("rightWedge"), model.getSquareValue(wallPositions.get("right")));
 
         if (model.getSquareValue(wallPositions.get("front")) == DungeonModel.SquareValue.WALL
                 || model.getSquareValue(wallPositions.get("front")) == DungeonModel.SquareValue.GOAL) {
-            BGDrawCloseWall(displayPolies.get("front"), model.getSquareValue(wallPositions.get("front")));
+            BGDrawCloseWall(displayPolies.get("closeEnd"), model.getSquareValue(wallPositions.get("front")));
         } else {
-            displayPolies.get("farLeftWedge").setVisible(true);
-            displayPolies.get("farRightWedge").setVisible(true);
             displayPolies.get("farTopWedge").setVisible(true);
             displayPolies.get("farBottomWedge").setVisible(true);
+            BGDrawWall(displayPolies.get("farLeftWedge"), model.getSquareValue(wallPositions.get("frontLeft")));
+            BGDrawWall(displayPolies.get("farRightWedge"), model.getSquareValue(wallPositions.get("frontRight")));
             displayPolies.get("farEnd").setVisible(true);
 
             if (model.getSquareValue(wallPositions.get("front")) == DungeonModel.SquareValue.KEY){
                 displayPolies.get("key").setVisible(true);
-            }
-
-            displayPolies.get("farTopWedge").setFill(defaultColors.get("farTopWedge"));
-            displayPolies.get("farBottomWedge").setFill(defaultColors.get("farBottomWedge"));
-            displayPolies.get("farEnd").setFill(defaultColors.get("farEnd"));
-            if (model.getSquareValue(wallPositions.get("frontLeft")) == DungeonModel.SquareValue.WALL){
-                displayPolies.get("farLeftWedge").setFill(defaultColors.get("farLeftWedge"));
-            } else {
-                displayPolies.get("farLeftWedge").setFill(this.OPEN_COLOR);
-            }
-            if (model.getSquareValue(wallPositions.get("frontRight")) == DungeonModel.SquareValue.WALL){
-                displayPolies.get("farRightWedge").setFill(defaultColors.get("farRightWedge"));
-            } else {
-                displayPolies.get("farRightWedge").setFill(this.OPEN_COLOR);
             }
         }
     }
@@ -262,11 +247,11 @@ public class DungeonView extends Group {
     }
 
     private void BGDrawCloseWall(Shape wall, DungeonModel.SquareValue wallValue){
-        displayPolies.get("closeEnd").setVisible(true);
+        wall.setVisible(true);
         if (wallValue == DungeonModel.SquareValue.WALL) {
-            displayPolies.get("closeEnd").setFill(defaultColors.get("closeEnd"));
+            wall.setFill(defaultColors.get("closeEnd"));
         } else if (wallValue == DungeonModel.SquareValue.GOAL){
-            displayPolies.get("closeEnd").setFill(DOOR_COLOR);
+            wall.setFill(DOOR_COLOR);
             displayPolies.get("keyHole").setVisible(true);
         }
     }

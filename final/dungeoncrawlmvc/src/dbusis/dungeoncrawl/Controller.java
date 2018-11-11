@@ -21,7 +21,7 @@ public class Controller implements EventHandler<KeyEvent> {
 
     private void update() {
         this.dungeonView.update(this.dungeonModel);
-        this.messageLabel.setText("Use the keys surrounding the S to run from the daleks.");
+        this.messageLabel.setText("Use WASD or the Arrow Keys to find the key and then the exit!");
     }
 
     @Override

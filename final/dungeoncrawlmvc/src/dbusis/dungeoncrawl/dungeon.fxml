@@ -20,7 +20,7 @@
     <bottom>
         <HBox prefHeight="35" style="-fx-padding: 10px, 5px, 10px, 5px; -fx-background-color: #F3B61D">
             <Label style="-fx-font-size: 140%; -fx-text-fill: white"
-                   text="Help: ? / Teleport: T / Stay: S / Move: W E D C X Z A / New game: G" />
+                   text="Up, Down keys: Move forwards or backwards. / Left, Right keys: Turn left or right." />
         </HBox>
     </bottom>
 </BorderPane>
