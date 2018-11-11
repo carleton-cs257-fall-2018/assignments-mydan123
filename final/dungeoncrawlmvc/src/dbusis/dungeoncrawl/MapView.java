@@ -1,6 +1,5 @@
 package dbusis.dungeoncrawl;
 
-import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -10,14 +9,12 @@ public class MapView extends Group {
     public final static double MAP_HEIGHT = 120.0;
     private Rectangle[][] dungeonMap;
 
-    @FXML private int dungeonRows=10;
-    @FXML private int dungeonColumns=10;
-
+    private int dungeonRows=10;
+    private int dungeonColumns=10;
 
     public MapView() {
         InitializeMap();
     }
-
 
     private void InitializeMap(){
         int rows = this.dungeonRows;
@@ -67,6 +64,5 @@ public class MapView extends Group {
     public void update(DungeonModel model) {
         updateMap(model);
     }
-
 
 }

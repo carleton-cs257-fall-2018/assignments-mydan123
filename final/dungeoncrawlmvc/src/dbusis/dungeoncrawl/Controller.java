@@ -17,7 +17,7 @@ public class Controller implements EventHandler<KeyEvent> {
     }
 
     public void initialize() {
-        this.dungeonModel = new DungeonModel(10,10);
+        this.dungeonModel = new DungeonModel();
         this.update();
     }
 

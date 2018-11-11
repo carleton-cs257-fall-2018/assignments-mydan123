@@ -1,9 +1,7 @@
 package dbusis.dungeoncrawl;
 
-import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;

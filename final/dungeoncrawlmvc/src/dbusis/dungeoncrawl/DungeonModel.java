@@ -2,12 +2,25 @@ package dbusis.dungeoncrawl;
 
 import java.util.HashMap;
 
+/**
+ * Class that acts as a model of a 10x10 dungeon. Each square in the dungeon can be empty,
+ * a wall, the exit, or the key. Also holds information about player position and direction,
+ * which squares have been discovered by the player, and whether the player has picked up
+ * the key.
+ *
+ * @author Daniel Busis
+ */
 public class DungeonModel {
-
+    /**
+     * Possible contents of each dungeon square
+     */
     public enum SquareValue {
         EMPTY, WALL, GOAL, KEY
     }
 
+    /**
+     * Directions the player can be facing
+     */
     public enum PlayerDirection {
         NORTH, EAST, SOUTH, WEST
     }
@@ -21,10 +34,14 @@ public class DungeonModel {
 
     private boolean keyAcquired = false;
 
+
     public boolean isKeyAcquired() {
         return keyAcquired;
     }
 
+    /**
+     * Changes stored player direction to one direction counter-clockwise.
+     */
     public void rotatePlayerCounterclockwise(){
         switch (playerDir){
             case NORTH:
@@ -42,6 +59,9 @@ public class DungeonModel {
         }
     }
 
+    /**
+     * Changes stored player direction to one direction clockwise.
+     */
     public void rotatePlayerClockwise(){
         switch (playerDir){
             case NORTH:
@@ -59,6 +79,11 @@ public class DungeonModel {
         }
     }
 
+    /**
+     * Moves the player into a new square, if that square is a valid destination.
+     * @param forward Moves the player in the direction he is facing if true,
+     *                in the opposite direction if false.
+     */
     public void movePlayer(boolean forward){
         int move_dir;
         if (forward) {
@@ -103,6 +128,13 @@ public class DungeonModel {
         }
     }
 
+    /**
+     * Gets the contents of aa single square in the dungeon. Any square outside of
+     * the bounds of the dungeon is treated as a wall.
+     * @param row Row of the square whose contents is to be returned.
+     * @param column Column of the square whose contents is to be returned.
+     * @return The value of the square in position row, column.
+     */
     public SquareValue getSquareValue(int row, int column) {
         if (isPosValid(new int[] {row, column})){
             return dungeonLayout[row][column];
@@ -112,10 +144,21 @@ public class DungeonModel {
         }
     }
 
+    /**
+     * Overload of getSquareValue to accept an int array.
+     * @param pos Array of [row, column].
+     * @return Value of the square in position row, column.
+     */
     public SquareValue getSquareValue(int[] pos) {
         return getSquareValue(pos[0], pos[1]);
     }
 
+    /**
+     * Returns a hash map of the positions of the five squares potentially within the player's
+     * field of view.
+     * @return A hash map with keys "left", "front", "right", "frontLeft", "frontRight" matched
+     * with [row, column] positions.
+     */
     public HashMap<String, int[]> getVisibleSquares() {
         HashMap<String, int[]> visibleSquares = new HashMap<>();
 
@@ -148,6 +191,12 @@ public class DungeonModel {
         return visibleSquares;
     }
 
+    /**
+     * Any squares that the player can see are set to be visible.
+     * Player can see squares to the left, right, and front, and if
+     * the square in front is empty, they can also see the squares to
+     * the front left and the front right.
+     */
     public void updateDiscoveredSquares(){
         HashMap<String, int[]> curVisibleSquares = getVisibleSquares();
 
@@ -166,12 +215,23 @@ public class DungeonModel {
         }
     }
 
+    /**
+     * Returns whether a square position is within the bounds of the map.
+     * @param squarePos [row, column] position of a square.
+     * @return true if the square is within the map, false otherwise
+     */
     private boolean isPosValid(int[] squarePos){
         int row = squarePos[0];
         int column = squarePos[1];
         return (row>=0 && row<this.getDungeonRows() && column>=0 && column<this.getDungeonColumns());
     }
 
+    /**
+     * Returns wether a square position is marked as discovered.
+     * @param squareRow The row of the square
+     * @param squareColumn The column of the square
+     * @return True if the square has been discovered, false otherwise.
+     */
     public boolean isDiscovered(int squareRow, int squareColumn){
         if (isPosValid(new int[] {squareRow, squareColumn})) {
             return discoveredSquares[squareRow][squareColumn];
@@ -200,9 +260,12 @@ public class DungeonModel {
         return this.dungeonLayout[0].length;
     }
 
-    public DungeonModel(int dungeonRows, int dungeonColumns) {
-        this.dungeonLayout = new SquareValue[dungeonRows][dungeonColumns];
-        this.discoveredSquares = new boolean[dungeonRows][dungeonColumns];
+    /**
+     * Constructor for the DungeonModel class. Currently, hard-codes a specific 10x10 dungeon.
+     */
+    public DungeonModel() {
+        //this.dungeonLayout = new SquareValue[dungeonRows][dungeonColumns];
+        this.discoveredSquares = new boolean[10][10];
         this.dungeonLayout = new SquareValue[][]{
                 {SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.GOAL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL},
                 {SquareValue.WALL, SquareValue.WALL, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.WALL},
