@@ -21,6 +21,10 @@ public class DungeonModel {
 
     private boolean keyAcquired = false;
 
+    public boolean isKeyAcquired() {
+        return keyAcquired;
+    }
+
     public void rotatePlayerCounterclockwise(){
         switch (playerDir){
             case NORTH:

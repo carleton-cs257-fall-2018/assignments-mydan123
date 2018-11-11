@@ -9,6 +9,8 @@ import javafx.scene.input.KeyEvent;
 public class Controller implements EventHandler<KeyEvent> {
     @FXML private Label messageLabel;
     @FXML private DungeonView dungeonView;
+    @FXML private MapView mapView;
+    @FXML private InventoryView inventoryView;
     private DungeonModel dungeonModel;
 
     public Controller() {
@@ -21,6 +23,8 @@ public class Controller implements EventHandler<KeyEvent> {
 
     private void update() {
         this.dungeonView.update(this.dungeonModel);
+        this.mapView.update(this.dungeonModel);
+        this.inventoryView.update(this.dungeonModel);
         this.messageLabel.setText("Use WASD or the Arrow Keys to find the key and then the exit!");
     }
 
