@@ -9,6 +9,9 @@ import javafx.scene.shape.Shape;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Displays a first-person view of a dungeon corridor, based on a DungeonModel.
+ */
 public class DungeonView extends Group {
     private Map<String,javafx.scene.shape.Shape> displayPolies = new HashMap<>();
     private Map<String, Color> defaultColors = new HashMap<>();
@@ -19,6 +22,9 @@ public class DungeonView extends Group {
         InitializeDungeonBG();
     }
 
+    /**
+     * Creates the polygon and rectangle objects to be displayed within the view.
+     */
     private void InitializeDungeonBG() {
         Polygon leftWedge = new Polygon();
         leftWedge.getPoints().addAll(
@@ -167,6 +173,11 @@ public class DungeonView extends Group {
         this.getChildren().add(keyHole);
     }
 
+    /**
+     * Displays the correct walls, ceiling, and floor for the player's
+     * current perspective, and in the correct colors.
+     * @param model The DungeonModel
+     */
     private void updateDungeonBG(DungeonModel model) {
         BGHideAll();
         BGSetAllDefaultColors();
@@ -194,18 +205,29 @@ public class DungeonView extends Group {
         }
     }
 
+    /**
+     * Hides all Shapes in the view.
+     */
     private void BGHideAll(){
         for (String key : displayPolies.keySet()){
             displayPolies.get(key).setVisible(false);
         }
     }
 
+    /**
+     * Sets all Shapes in the view to their default colors.
+     */
     private void BGSetAllDefaultColors(){
         for (String key : displayPolies.keySet()) {
             displayPolies.get(key).setFill(defaultColors.get(key));
         }
     }
 
+    /**
+     * Draws a side-facing wall to be the correct color.
+     * @param wall The wall Shape object to be drawn.
+     * @param wallValue The contents of the square connected to that wall.
+     */
     private void BGDrawWall(Shape wall, DungeonModel.SquareValue wallValue){
         wall.setVisible(true);
         if (wallValue == DungeonModel.SquareValue.WALL) {
@@ -217,6 +239,11 @@ public class DungeonView extends Group {
         }
     }
 
+    /**
+     * Draws a dead-end, player-facing wall.
+     * @param wall The wall Shape object to be drawn.
+     * @param wallValue The contents of the square connected to the wall.
+     */
     private void BGDrawCloseWall(Shape wall, DungeonModel.SquareValue wallValue){
         wall.setVisible(true);
         if (wallValue == DungeonModel.SquareValue.WALL) {
@@ -227,6 +254,10 @@ public class DungeonView extends Group {
         }
     }
 
+    /**
+     * Updates the view.
+     * @param model The DungeonModel.
+     */
     public void update(DungeonModel model) {
         updateDungeonBG(model);
     }

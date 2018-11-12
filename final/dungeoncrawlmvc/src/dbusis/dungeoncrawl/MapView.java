@@ -4,6 +4,9 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * View which displays a mini-map of discovered and undiscovered squares within the dungeon.
+ */
 public class MapView extends Group {
     public final static double MAP_WIDTH = 120.0;
     public final static double MAP_HEIGHT = 120.0;
@@ -16,6 +19,9 @@ public class MapView extends Group {
         InitializeMap();
     }
 
+    /**
+     * Creates the Rectangles that are the grid used to display the MapView.
+     */
     private void InitializeMap(){
         int rows = this.dungeonRows;
         int columns = this.dungeonColumns;
@@ -36,6 +42,10 @@ public class MapView extends Group {
         }
     }
 
+    /**
+     * Uses a DungeonModel to display cells in the correct colors based on their contents.
+     * @param model The DungeonModel being viewed.
+     */
     private void updateMap(DungeonModel model) {
         for (int row = 0; row < this.dungeonRows; row++) {
             for (int column = 0; column < this.dungeonColumns; column++) {
@@ -61,6 +71,10 @@ public class MapView extends Group {
         }
     }
 
+    /**
+     * Updates te map to match a given DungeonModel.
+     * @param model A DungeonModel to be viewed.
+     */
     public void update(DungeonModel model) {
         updateMap(model);
     }
