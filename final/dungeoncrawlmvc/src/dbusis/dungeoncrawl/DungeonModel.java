@@ -33,16 +33,24 @@ public class DungeonModel {
     private boolean[][] discoveredSquares;
 
     private boolean keyAcquired = false;
-
+    private boolean exitReached = false;
 
     public boolean isKeyAcquired() {
         return keyAcquired;
+    }
+
+    public boolean isExitReached() {
+        return exitReached;
     }
 
     /**
      * Changes stored player direction to one direction counter-clockwise.
      */
     public void rotatePlayerCounterclockwise(){
+        if (this.exitReached) {
+            return;
+        }
+
         switch (playerDir){
             case NORTH:
                 playerDir = PlayerDirection.WEST;
@@ -63,6 +71,10 @@ public class DungeonModel {
      * Changes stored player direction to one direction clockwise.
      */
     public void rotatePlayerClockwise(){
+        if (this.exitReached) {
+            return;
+        }
+
         switch (playerDir){
             case NORTH:
                 playerDir = PlayerDirection.EAST;
@@ -85,6 +97,10 @@ public class DungeonModel {
      *                in the opposite direction if false.
      */
     public void movePlayer(boolean forward){
+        if (this.exitReached) {
+            return;
+        }
+
         int move_dir;
         if (forward) {
             move_dir = 1;
@@ -125,6 +141,7 @@ public class DungeonModel {
         } else if (getSquareValue(newRow,newColumn) == SquareValue.GOAL && this.keyAcquired){
             playerRow = newRow;
             playerColumn = newColumn;
+            this.exitReached = true;
         }
     }
 

@@ -25,7 +25,11 @@ public class Controller implements EventHandler<KeyEvent> {
         this.dungeonView.update(this.dungeonModel);
         this.mapView.update(this.dungeonModel);
         this.inventoryView.update(this.dungeonModel);
-        this.messageLabel.setText("Use WASD or the Arrow Keys to find the key and then the exit!");
+        if (this.dungeonModel.isExitReached()) {
+            this.messageLabel.setText("You've found the exit! Press N to ascend to the next floor!");
+        } else {
+            this.messageLabel.setText("Use WASD or the Arrow Keys to find the key and then the exit!");
+        }
     }
 
     @Override
@@ -41,6 +45,14 @@ public class Controller implements EventHandler<KeyEvent> {
             this.dungeonModel.movePlayer(true);
         } else if (code == KeyCode.DOWN || code == KeyCode.S) {
             this.dungeonModel.movePlayer(false);
+        } else if (code == KeyCode.M) {
+            this.mapView.setVisible(!this.mapView.isVisible());
+            this.mapView.setManaged(!this.mapView.isManaged());
+        } else if (code == KeyCode.I) {
+            this.inventoryView.setVisible(!this.inventoryView.isVisible());
+            this.inventoryView.setManaged(!this.inventoryView.isManaged());
+        } else if (code == KeyCode.N && this.dungeonModel.isExitReached()) {
+            this.dungeonModel = new DungeonModel();
         } else {
             keyRecognized = false;
         }

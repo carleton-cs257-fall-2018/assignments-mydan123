@@ -17,16 +17,16 @@
     </center>
 
     <right>
-        <BorderPane >
+        <BorderPane prefWidth="150">
             <top>
-                <VBox alignment="TOP_CENTER" prefHeight="200" style="-fx-padding: 10px; -fx-background-color: rgba(14,7,56,0.75)">
+                <VBox alignment="TOP_CENTER" style="-fx-padding: 10px; -fx-background-color: rgba(14,7,56,0.75)">
                     <Label style="-fx-font-size: 140%; -fx-text-fill: white; -fx-padding: 10px;"
                            text="Map:" />
                     <MapView fx:id="mapView"/>
                 </VBox>
             </top>
             <bottom>
-                <VBox alignment="TOP_CENTER" prefHeight="150" style="-fx-padding: 10px; -fx-background-color: #a78e6d">
+                <VBox alignment="TOP_CENTER" style="-fx-padding: 10px; -fx-background-color: #a78e6d">
                     <Label style="-fx-font-size: 140%; -fx-text-fill: white; -fx-padding: 10px;"
                            text="Inventory:" />
                     <InventoryView fx:id="inventoryView"/>
@@ -35,12 +35,10 @@
         </BorderPane>
     </right>
 
-
-
     <bottom>
         <HBox prefHeight="35" style="-fx-padding: 10px, 5px, 10px, 5px; -fx-background-color: #F3B61D">
-            <Label style="-fx-font-size: 140%; -fx-text-fill: white"
-                   text="Up, Down keys: Move forwards or backwards. / Left, Right keys: Turn left or right." />
+            <Label style="-fx-font-size: 120%; -fx-text-fill: white"
+                   text="Up, Down keys: Move forwards or backwards. / Left, Right keys: Turn left or right. / M,I: Toggle Map, Inventory" />
         </HBox>
     </bottom>
 </BorderPane>
