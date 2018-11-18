@@ -2,7 +2,10 @@ package dbusis.dungeoncrawl;
 
 import javafx.fxml.FXML;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -11,6 +14,7 @@ public class Controller implements EventHandler<KeyEvent> {
     @FXML private DungeonView dungeonView;
     @FXML private MapView mapView;
     @FXML private InventoryView inventoryView;
+    @FXML private CompassView compassView;
     private DungeonModel dungeonModel;
 
     public Controller() {
@@ -25,6 +29,7 @@ public class Controller implements EventHandler<KeyEvent> {
         this.dungeonView.update(this.dungeonModel);
         this.mapView.update(this.dungeonModel);
         this.inventoryView.update(this.dungeonModel);
+        this.compassView.update(this.dungeonModel);
         if (this.dungeonModel.isExitReached()) {
             this.messageLabel.setText("You've found the exit! Press N to ascend to the next floor!");
         } else {
