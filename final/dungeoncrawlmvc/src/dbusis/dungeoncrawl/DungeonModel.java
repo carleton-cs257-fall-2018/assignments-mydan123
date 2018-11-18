@@ -97,27 +97,41 @@ public class DungeonModel {
             int curRow = curCellNum%cols;
             int curCol = curCellNum/cols;
             if (isValidWallPos(curRow,curCol,newMaze)) {
-                newMaze[curRow][curCol] = new DungeonSquare(SquareValue.WALL);
+                newMaze[curRow][curCol].setContents(SquareValue.WALL);
+                System.out.println(curCol+" "+curRow+" "+"VALID");
+            } else {
+                System.out.println(curCol+" "+curRow+" "+"INVALID");
             }
         }
 
         return newMaze;
     }
 
-    private boolean isValidWallPos(int row, int col, DungeonSquare[][] maze){
+    private int[][] getAdjacentPositionsDiags(int row, int col){
         int[][] adjacentPositions = new int[][] {
                 {row-1,col-1},{row-1,col},{row-1,col+1},{row,col+1},
                 {row+1,col+1},{row+1,col},{row+1,col-1},{row,col-1}};
-        List<Integer[]> separateEmptyAreas = new ArrayList<>(8);
+        return adjacentPositions;
+    }
+
+    private int[][] getAdjacentPositionsNoDiags(int row, int col){
+        int[][] adjacentPositions = new int[][] {
+                {row-1,col},{row,col+1},{row+1,col},{row,col-1}};
+        return adjacentPositions;
+    }
+
+    private boolean isValidWallPos(int row, int col, DungeonSquare[][] maze){
+        int[][] adjacentPositions = getAdjacentPositionsDiags(row, col);
+        List<int[]> separateEmptyAreas = new ArrayList<>(8);
         boolean lastSeenEmpty = false;
-        for (int i=0;i<8;i++){
+        for (int i=0;i<adjacentPositions.length;i++){
             int curRow = adjacentPositions[i][0];
             int curCol = adjacentPositions[i][1];
             if(!isRealWall(curRow,curCol,maze) || maze[curRow][curCol].getContents() == SquareValue.WALL){
                 lastSeenEmpty = false;
             } else if(!lastSeenEmpty && maze[curRow][curCol].getContents() == SquareValue.EMPTY){
                 lastSeenEmpty = true;
-                separateEmptyAreas.add(new Integer[] {curRow, curCol});
+                separateEmptyAreas.add(new int[] {curRow, curCol});
             }
         }
 
@@ -148,8 +162,36 @@ public class DungeonModel {
         }
     }
 
-    private boolean existsPathBetween(Integer[] pos1, Integer[] pos2, DungeonSquare[][] maze){
-        return true;
+    private boolean existsPathBetween(int[] startPos, int[] goal, DungeonSquare[][] maze){
+        List<int[]> visitedPositions = new ArrayList<>();
+        List<int[]> positionsToVisit = new ArrayList<>();
+        positionsToVisit.add(startPos);
+
+        while(positionsToVisit.size()>0){
+            int[] curPos = positionsToVisit.remove(0);
+            if (curPos[0] == goal[0] && curPos[1] == goal[1]){
+                return true;
+            }
+            visitedPositions.add(curPos);
+
+            int[][] curAdjPos = getAdjacentPositionsNoDiags(curPos[0],curPos[1]);
+            for (int i=0; i<curAdjPos.length; i++){
+                if (isRealWall(curAdjPos[i][0], curAdjPos[i][1],maze) &&
+                        !isPosInList(curAdjPos[i],visitedPositions) &&
+                        maze[curAdjPos[i][0]][curAdjPos[i][1]].getContents() == SquareValue.EMPTY){
+                    positionsToVisit.add(curAdjPos[i]);
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean isPosInList(int[] pos, List<int[]> posList){
+        for (int i=0; i<posList.size(); i++){
+            int[] curPos = posList.get(i);
+            if(curPos[0] == pos[0] && curPos[1] == pos[1]) return true;
+        }
+        return false;
     }
 
     /**
