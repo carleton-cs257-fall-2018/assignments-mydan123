@@ -1,6 +1,6 @@
 package dbusis.dungeoncrawl;
 
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * Class that acts as a model of a 10x10 dungeon. Each square in the dungeon can be empty,
@@ -11,6 +11,35 @@ import java.util.HashMap;
  * @author Daniel Busis
  */
 public class DungeonModel {
+
+    /**
+     * Meant to represent a single square in the dungeon
+     */
+    private class DungeonSquare {
+        private boolean visible = true;
+        private SquareValue contents;
+
+        public DungeonSquare(SquareValue squareContents){
+            this.contents = squareContents;
+        }
+
+        public boolean isVisible() {
+            return visible;
+        }
+
+        public void setVisible(boolean visible) {
+            this.visible = visible;
+        }
+
+        public SquareValue getContents() {
+            return contents;
+        }
+
+        public void setContents(SquareValue contents) {
+            this.contents = contents;
+        }
+    }
+
     /**
      * Possible contents of each dungeon square
      */
@@ -29,8 +58,7 @@ public class DungeonModel {
     private int playerRow;
     private int playerColumn;
 
-    private SquareValue[][] dungeonLayout;
-    private boolean[][] discoveredSquares;
+    private DungeonSquare[][] dungeonLayout;
 
     private boolean keyAcquired = false;
     private boolean exitReached = false;
@@ -41,6 +69,87 @@ public class DungeonModel {
 
     public boolean isExitReached() {
         return exitReached;
+    }
+
+    /**
+     * Creates a new maze layout
+     * @param rows Number of rows in the maze
+     * @param cols NUmber of columns in the maze
+     * @return A square array of DungeonSquares that form a maze.
+     */
+    private DungeonSquare[][] makeMaze(int rows, int cols){
+        Random rand = new Random();
+        ArrayList<Integer> cellOrder = new ArrayList<>(rows*cols);
+        for (int i=0; i<rows*cols; i++){
+            cellOrder.add(i);
+        }
+        Collections.shuffle(cellOrder, rand);
+
+        DungeonSquare[][] newMaze = new DungeonSquare[rows][cols];
+        for (int i=0; i<rows; i++){
+            for (int j=0; j<cols; j++){
+                newMaze[i][j] = new DungeonSquare(SquareValue.EMPTY);
+            }
+        }
+
+        while(!cellOrder.isEmpty()){
+            int curCellNum = cellOrder.remove(0);
+            int curRow = curCellNum%cols;
+            int curCol = curCellNum/cols;
+            if (isValidWallPos(curRow,curCol,newMaze)) {
+                newMaze[curRow][curCol] = new DungeonSquare(SquareValue.WALL);
+            }
+        }
+
+        return newMaze;
+    }
+
+    private boolean isValidWallPos(int row, int col, DungeonSquare[][] maze){
+        int[][] adjacentPositions = new int[][] {
+                {row-1,col-1},{row-1,col},{row-1,col+1},{row,col+1},
+                {row+1,col+1},{row+1,col},{row+1,col-1},{row,col-1}};
+        List<Integer[]> separateEmptyAreas = new ArrayList<>(8);
+        boolean lastSeenEmpty = false;
+        for (int i=0;i<8;i++){
+            int curRow = adjacentPositions[i][0];
+            int curCol = adjacentPositions[i][1];
+            if(!isRealWall(curRow,curCol,maze) || maze[curRow][curCol].getContents() == SquareValue.WALL){
+                lastSeenEmpty = false;
+            } else if(!lastSeenEmpty && maze[curRow][curCol].getContents() == SquareValue.EMPTY){
+                lastSeenEmpty = true;
+                separateEmptyAreas.add(new Integer[] {curRow, curCol});
+            }
+        }
+
+        if (separateEmptyAreas.size() > 1 &&
+                (isRealWall(row-1,col-1,maze) && maze[row-1][col-1].getContents() == SquareValue.EMPTY) &&
+                (isRealWall(row,col-1,maze) && maze[row][col-1].getContents() == SquareValue.EMPTY)){
+            separateEmptyAreas.remove(0);
+        }
+
+        if (separateEmptyAreas.size() > 1) {
+            for (int i = 0; i < separateEmptyAreas.size(); i++) {
+                if (!existsPathBetween(separateEmptyAreas.get(i), separateEmptyAreas.get((i + 1) % separateEmptyAreas.size()), maze)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private boolean isRealWall(int row, int col, DungeonSquare[][] maze){
+        if (row < 0 || row >= maze.length){
+            return false;
+        } else if (col < 0 || col >= maze[0].length){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean existsPathBetween(Integer[] pos1, Integer[] pos2, DungeonSquare[][] maze){
+        return true;
     }
 
     /**
@@ -137,7 +246,7 @@ public class DungeonModel {
             playerRow = newRow;
             playerColumn = newColumn;
             this.keyAcquired = true;
-            dungeonLayout[newRow][newColumn] = SquareValue.EMPTY;
+            dungeonLayout[newRow][newColumn].setContents(SquareValue.EMPTY);
         } else if (getSquareValue(newRow,newColumn) == SquareValue.GOAL && this.keyAcquired){
             playerRow = newRow;
             playerColumn = newColumn;
@@ -154,7 +263,7 @@ public class DungeonModel {
      */
     public SquareValue getSquareValue(int row, int column) {
         if (isPosValid(new int[] {row, column})){
-            return dungeonLayout[row][column];
+            return dungeonLayout[row][column].getContents();
         }
         else{
             return SquareValue.WALL;
@@ -217,18 +326,18 @@ public class DungeonModel {
     public void updateDiscoveredSquares(){
         HashMap<String, int[]> curVisibleSquares = getVisibleSquares();
 
-        discoveredSquares[playerRow][playerColumn] = true;
+        dungeonLayout[playerRow][playerColumn].setVisible(true);
         int[] leftSquare = curVisibleSquares.get("left");
-        if (isPosValid(leftSquare)) discoveredSquares[leftSquare[0]][leftSquare[1]] = true;
+        if (isPosValid(leftSquare)) dungeonLayout[leftSquare[0]][leftSquare[1]].setVisible(true);
         int[] rightSquare = curVisibleSquares.get("right");
-        if (isPosValid(rightSquare)) discoveredSquares[rightSquare[0]][rightSquare[1]] = true;
+        if (isPosValid(rightSquare)) dungeonLayout[rightSquare[0]][rightSquare[1]].setVisible(true);
         int[] frontSquare = curVisibleSquares.get("front");
-        if (isPosValid(frontSquare)) discoveredSquares[frontSquare[0]][frontSquare[1]] = true;
+        if (isPosValid(frontSquare)) dungeonLayout[frontSquare[0]][frontSquare[1]].setVisible(true);
         if (getSquareValue(curVisibleSquares.get("front")) != SquareValue.WALL) {
             int[] frontLeftSquare = curVisibleSquares.get("frontLeft");
-            if (isPosValid(frontLeftSquare)) discoveredSquares[frontLeftSquare[0]][frontLeftSquare[1]] = true;
+            if (isPosValid(frontLeftSquare)) dungeonLayout[frontLeftSquare[0]][frontLeftSquare[1]].setVisible(true);
             int[] frontRightSquare = curVisibleSquares.get("frontRight");
-            if (isPosValid(frontRightSquare)) discoveredSquares[frontRightSquare[0]][frontRightSquare[1]] = true;
+            if (isPosValid(frontRightSquare)) dungeonLayout[frontRightSquare[0]][frontRightSquare[1]].setVisible(true);
         }
     }
 
@@ -251,7 +360,7 @@ public class DungeonModel {
      */
     public boolean isDiscovered(int squareRow, int squareColumn){
         if (isPosValid(new int[] {squareRow, squareColumn})) {
-            return discoveredSquares[squareRow][squareColumn];
+            return dungeonLayout[squareRow][squareColumn].isVisible();
         } else {
             return false;
         }
@@ -282,19 +391,19 @@ public class DungeonModel {
      */
     public DungeonModel() {
         //this.dungeonLayout = new SquareValue[dungeonRows][dungeonColumns];
-        this.discoveredSquares = new boolean[10][10];
-        this.dungeonLayout = new SquareValue[][]{
-                {SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.GOAL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL},
-                {SquareValue.WALL, SquareValue.WALL, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.WALL},
-                {SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.EMPTY, SquareValue.WALL},
-                {SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.WALL, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY},
-                {SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.EMPTY, SquareValue.WALL, SquareValue.EMPTY, SquareValue.WALL, SquareValue.WALL},
-                {SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.WALL},
-                {SquareValue.WALL, SquareValue.EMPTY, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.WALL, SquareValue.EMPTY, SquareValue.WALL},
-                {SquareValue.WALL, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.WALL, SquareValue.EMPTY, SquareValue.EMPTY, SquareValue.EMPTY},
-                {SquareValue.WALL, SquareValue.EMPTY, SquareValue.WALL, SquareValue.EMPTY, SquareValue.WALL, SquareValue.EMPTY, SquareValue.WALL, SquareValue.EMPTY, SquareValue.WALL, SquareValue.EMPTY},
-                {SquareValue.WALL, SquareValue.EMPTY, SquareValue.WALL, SquareValue.EMPTY, SquareValue.WALL, SquareValue.EMPTY, SquareValue.WALL, SquareValue.EMPTY, SquareValue.KEY, SquareValue.EMPTY}
+        this.dungeonLayout = new DungeonSquare[][]{
+                {new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.GOAL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL)},
+                {new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.WALL)},
+                {new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.WALL)},
+                {new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY)},
+                {new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL)},
+                {new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.WALL)},
+                {new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.WALL)},
+                {new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.EMPTY)},
+                {new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY)},
+                {new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.WALL), new DungeonSquare(SquareValue.EMPTY), new DungeonSquare(SquareValue.KEY), new DungeonSquare(SquareValue.EMPTY)}
         };
+        this.dungeonLayout = this.makeMaze(10,10);
         playerDir = PlayerDirection.NORTH;
         playerRow = 9;
         playerColumn = 1;
