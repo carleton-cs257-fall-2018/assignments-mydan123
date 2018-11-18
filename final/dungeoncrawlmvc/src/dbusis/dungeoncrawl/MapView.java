@@ -25,8 +25,8 @@ public class MapView extends Group {
     private void InitializeMap(){
         int rows = this.dungeonRows;
         int columns = this.dungeonColumns;
-        double square_width = this.MAP_WIDTH/columns;
-        double square_height = this.MAP_HEIGHT/rows;
+        double square_width = MAP_WIDTH/columns;
+        double square_height = MAP_HEIGHT/rows;
         this.dungeonMap = new Rectangle[rows][columns];
 
         for(int row = 0; row < rows; row++){
