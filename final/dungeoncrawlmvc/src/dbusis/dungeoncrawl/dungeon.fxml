@@ -50,7 +50,7 @@
         <bottom>
             <HBox prefHeight="35" style="-fx-padding: 10px, 5px, 10px, 5px; -fx-background-color: #F3B61D">
                 <Label style="-fx-font-size: 120%; -fx-text-fill: white"
-                       text="Up, Down keys: Move forwards or backwards. / Left, Right keys: Turn left or right. / M,I: Toggle Map, Inventory" />
+                       text="Up, Down: Move forwards or backwards. / Left, Right: Turn left or right. / M,I: Toggle Map, Inventory / ESC: Options" />
             </HBox>
         </bottom>
     </BorderPane>

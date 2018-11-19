@@ -28,6 +28,19 @@ public class Controller implements EventHandler<Event> {
     public Controller() {
     }
 
+    /**
+     * @TODO: Add map and inv toggle to options
+     * @TODO: Add instructions to close options menu
+     * @TODO: Disable most actions when options menu is open
+     * @TODO: Add sound effects for key and door
+     * @TODO: Improve footsteps sound effect?
+     * @TODO: Move volume settings to the model? Or and additional model?
+     * @TODO: Add a HelpView with instructions
+     * @TODO: Add visual for entering the door room. (Staircase?)
+     * @TODO: Add opening cutscene?
+     * @TODO: COMMENTS!
+     */
+
     public void initialize() {
         this.dungeonModel = new DungeonModel();
         initializeOptionsView();
