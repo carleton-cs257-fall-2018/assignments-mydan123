@@ -234,10 +234,11 @@ public class DungeonModel {
      * Moves the player into a new square, if that square is a valid destination.
      * @param forward Moves the player in the direction he is facing if true,
      *                in the opposite direction if false.
+     * @return Whether the player moved
      */
-    public void movePlayer(boolean forward){
+    public boolean movePlayer(boolean forward){
         if (this.exitReached) {
-            return;
+            return false;
         }
 
         int move_dir;
@@ -281,7 +282,10 @@ public class DungeonModel {
             playerRow = newRow;
             playerColumn = newColumn;
             this.exitReached = true;
+        } else {
+            return false;
         }
+        return true;
     }
 
     /**

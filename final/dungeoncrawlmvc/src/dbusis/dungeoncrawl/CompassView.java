@@ -4,6 +4,7 @@ import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+
 /**
  * A class that displays what the player has picked up in a DungeonModel.
  */

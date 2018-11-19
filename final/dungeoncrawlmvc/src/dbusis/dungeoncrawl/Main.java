@@ -1,3 +1,9 @@
+/**
+ * @author Daniel Busis
+ *
+ * Thanks to bensound.com for the royalty-free music.
+ */
+
 package dbusis.dungeoncrawl;
 
 import javafx.application.Application;
