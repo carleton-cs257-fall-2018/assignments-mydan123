@@ -5,49 +5,53 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import dbusis.dungeoncrawl.InventoryView?>
-<?import javafx.scene.Node?>
 <?import dbusis.dungeoncrawl.CompassView?>
-<BorderPane fx:controller="dbusis.dungeoncrawl.Controller" xmlns:fx="http://javafx.com/fxml" style="-fx-background-color: rgba(14,7,56,0.62)">
-    <top>
-        <BorderPane prefHeight="35" style="-fx-background-color: #0B5091; -fx-padding: 10px, 5px, 10px, 5px;" >
-            <right><Label fx:id="messageLabel" style="-fx-font-size: 150%; -fx-text-fill: white"/></right>
-        </BorderPane>
-    </top>
+<?import javafx.scene.layout.StackPane?>
+<?import dbusis.dungeoncrawl.OptionsView?>
+<StackPane fx:controller="dbusis.dungeoncrawl.Controller" xmlns:fx="http://javafx.com/fxml">
+    <OptionsView fx:id="optionsView" style="-fx-background-color: #eb9cf4" maxWidth="400" maxHeight="300"/>
+    <BorderPane style="-fx-background-color: rgb(43,21,172)">
+        <top>
+            <BorderPane prefHeight="35" style="-fx-background-color: #0B5091; -fx-padding: 10px, 5px, 10px, 5px;" >
+                <right><Label fx:id="messageLabel" style="-fx-font-size: 150%; -fx-text-fill: white"/></right>
+            </BorderPane>
+        </top>
 
-    <center>
-        <DungeonView fx:id="dungeonView"/>
-    </center>
+        <center>
+            <DungeonView fx:id="dungeonView"/>
+        </center>
 
-    <right>
-        <BorderPane prefWidth="150">
-            <top>
-                <VBox alignment="TOP_CENTER" style="-fx-padding: 10px; -fx-background-color: rgba(14,7,56,0.75)">
-                    <Label style="-fx-font-size: 140%; -fx-text-fill: white; -fx-padding: 10px;"
-                           text="Map:" />
-                    <MapView fx:id="mapView"/>
-                </VBox>
-            </top>
-            <center>
-                <VBox alignment="CENTER" style="-fx-padding: 10px; -fx-background-color: rgb(116,124,168)">
-                    <Label style="-fx-font-size: 140%; -fx-text-fill: white; -fx-padding: 10px;"
-                           text="Compass:" />
-                    <CompassView fx:id="compassView"/>
-                </VBox>
-            </center>
-            <bottom>
-                <VBox alignment="TOP_CENTER" style="-fx-padding: 10px; -fx-background-color: #a78e6d">
-                    <Label style="-fx-font-size: 140%; -fx-text-fill: white; -fx-padding: 10px;"
-                           text="Inventory:" />
-                    <InventoryView fx:id="inventoryView"/>
-                </VBox>
-            </bottom>
-        </BorderPane>
-    </right>
+        <right>
+            <BorderPane prefWidth="150">
+                <top>
+                    <VBox alignment="TOP_CENTER" style="-fx-padding: 10px; -fx-background-color: rgba(14,7,56,0.75)">
+                        <Label style="-fx-font-size: 140%; -fx-text-fill: white; -fx-padding: 10px;"
+                               text="Map:" />
+                        <MapView fx:id="mapView"/>
+                    </VBox>
+                </top>
+                <center>
+                    <VBox alignment="CENTER" style="-fx-padding: 10px; -fx-background-color: rgb(116,124,168)">
+                        <Label style="-fx-font-size: 140%; -fx-text-fill: white; -fx-padding: 10px;"
+                               text="Compass:" />
+                        <CompassView fx:id="compassView"/>
+                    </VBox>
+                </center>
+                <bottom>
+                    <VBox alignment="TOP_CENTER" style="-fx-padding: 10px; -fx-background-color: #a78e6d">
+                        <Label style="-fx-font-size: 140%; -fx-text-fill: white; -fx-padding: 10px;"
+                               text="Inventory:" />
+                        <InventoryView fx:id="inventoryView"/>
+                    </VBox>
+                </bottom>
+            </BorderPane>
+        </right>
 
-    <bottom>
-        <HBox prefHeight="35" style="-fx-padding: 10px, 5px, 10px, 5px; -fx-background-color: #F3B61D">
-            <Label style="-fx-font-size: 120%; -fx-text-fill: white"
-                   text="Up, Down keys: Move forwards or backwards. / Left, Right keys: Turn left or right. / M,I: Toggle Map, Inventory" />
-        </HBox>
-    </bottom>
-</BorderPane>
+        <bottom>
+            <HBox prefHeight="35" style="-fx-padding: 10px, 5px, 10px, 5px; -fx-background-color: #F3B61D">
+                <Label style="-fx-font-size: 120%; -fx-text-fill: white"
+                       text="Up, Down keys: Move forwards or backwards. / Left, Right keys: Turn left or right. / M,I: Toggle Map, Inventory" />
+            </HBox>
+        </bottom>
+    </BorderPane>
+</StackPane>

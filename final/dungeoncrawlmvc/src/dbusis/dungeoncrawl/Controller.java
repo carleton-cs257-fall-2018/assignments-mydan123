@@ -17,6 +17,7 @@ public class Controller implements EventHandler<KeyEvent> {
     @FXML private MapView mapView;
     @FXML private InventoryView inventoryView;
     @FXML private CompassView compassView;
+    @FXML private OptionsView optionsView;
     private MediaPlayer backgroundMusicPlayer;
     private AudioClip footstepMusicPlayer;
     private DungeonModel dungeonModel;
@@ -26,8 +27,16 @@ public class Controller implements EventHandler<KeyEvent> {
 
     public void initialize() {
         this.dungeonModel = new DungeonModel();
+        initializeOptionsView();
         initializeSoundPlayers();
         this.update();
+    }
+
+    private void initializeOptionsView(){
+        this.optionsView.setParentController(this);
+        this.optionsView.toFront();
+        this.optionsView.setVisible(false);
+        this.optionsView.setManaged(false);
     }
 
     private void initializeSoundPlayers(){
@@ -106,6 +115,9 @@ public class Controller implements EventHandler<KeyEvent> {
             changeMusicVolume(.1);
         } else if (code == KeyCode.J) {
             changeMusicVolume(-.1);
+        } else if (code == KeyCode.ESCAPE) {
+            this.optionsView.setVisible(!this.optionsView.isVisible());
+            this.optionsView.setManaged(!this.optionsView.isManaged());
         } else {
             keyRecognized = false;
         }
