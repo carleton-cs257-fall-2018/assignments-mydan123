@@ -1,11 +1,39 @@
-Daleks
-Jeff Ondich, May 2018
+Name:
+Daniel Busis
 
-This project is intended as an illustration of using
-the Model-View-Controller pattern in a JavaFX program.
-It was developed for Carleton College's Spring 2018
-CS257 Software Design class.
+Final_phase2 updates:
+Everything in my project works correctly, to my knowledge. 
+I was a bit confused about how to handle audio. I ended up handling it directly 
+via the controller, treating audio classes (MediaPlayer and AudioClip) as Views that were pre-created.
+Not sure if this is the best way to handle it in MVC.
+Also, I realize that I have some leftover code between hardcoding a 10x10 dungeon grid and allowing
+for other sizes. This was something I basically never got around to implementing, as I tried early on
+and got frustrated by the order JavaFX objects were implemented by the FXML loader. 
 
-Note the fancy maize and blue bars on the game board.
-School spirit, baby.
+Description:
+My project is a pseudo-3D game in which the player walks down rectangular, underground hallways. 
+The hallways are represented as a grid of squares that the player can be standing in, and a 
+minimap on the irght side of the screen displays areas the player has discovered. The purpose
+is to find a key somehwere on the map and then use it to unlock a door somewhere else.
 
+Why MVC is appropriate:
+MVC is appropriate for my project because my project consists of a single model that has data
+about a poition, a group of squares, and some properties such as whether a key has been picked
+up and the direction a player is facing. These properties need to be viewed in a variety of ways:
+there is a first-person perspective of a tunnel, a minimap that displays discovered squares and
+the player's position within them, and an inventory that diplays whether the player has acquired
+the key. 
+
+Core classes:
+ - Main: Uses a .fxml file to set up the stage.
+ - Controller: Handles key events, tells the model and views to update themselves.
+ - DungeonModel: Contains information about what is in each square of the dungeon,
+       the player's position, the direction the player is facing, which squares have
+	   been revealed, and whther the player has the key.
+ - DungeonView: Handles displaying a first-person perspective of the player's view
+       within the dungeon.
+ - MapView: Displays a map of the squares of the dungeon which the player has
+       discovered.
+ - InventoryView: Displays an outline of the key, and fills in that outline when the
+       player collects the key.
+	   
