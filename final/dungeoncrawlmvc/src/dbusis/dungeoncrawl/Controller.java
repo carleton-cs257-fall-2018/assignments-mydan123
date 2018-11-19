@@ -1,17 +1,20 @@
 package dbusis.dungeoncrawl;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 
-public class Controller implements EventHandler<KeyEvent> {
+public class Controller implements EventHandler<Event> {
     @FXML private Label messageLabel;
     @FXML private DungeonView dungeonView;
     @FXML private MapView mapView;
@@ -62,6 +65,7 @@ public class Controller implements EventHandler<KeyEvent> {
         } else {
             this.messageLabel.setText("Use WASD or the Arrow Keys to find the key and then the exit!");
         }
+        this.optionsView.update(this.dungeonModel);
     }
 
     private void toggleMusic(){
@@ -72,9 +76,10 @@ public class Controller implements EventHandler<KeyEvent> {
         }
     }
 
+    @SuppressWarnings("Duplicates")
     private void changeMusicVolume(Double changeAmount){
-        Double curVolume = backgroundMusicPlayer.getVolume();
-        Double newVolume = curVolume + changeAmount;
+        double curVolume = backgroundMusicPlayer.getVolume();
+        double newVolume = curVolume + changeAmount;
         if (newVolume >= 0.0 && newVolume <= 1.0){
             backgroundMusicPlayer.setVolume(newVolume);
         } else {
@@ -86,8 +91,54 @@ public class Controller implements EventHandler<KeyEvent> {
         }
     }
 
+    @SuppressWarnings("Duplicates")
+    private void changeSFXVolume(Double changeAmount){
+        double curVolume = footstepMusicPlayer.getVolume();
+        double newVolume = curVolume + changeAmount;
+        if (newVolume >= 0.0 && newVolume <= 1.0){
+            footstepMusicPlayer.setVolume(newVolume);
+        } else {
+            if (changeAmount > 0){
+                footstepMusicPlayer.setVolume(1.0);
+            } else {
+                footstepMusicPlayer.setVolume(0.0);
+            }
+        }
+    }
+
+    public double getMusicVolume(){
+        return backgroundMusicPlayer.getVolume();
+    }
+
+    public double getSFXVolume(){
+        return footstepMusicPlayer.getVolume();
+    }
+
     @Override
-    public void handle(KeyEvent keyEvent) {
+    public void handle(Event event) {
+        if (event instanceof KeyEvent) {
+            this.handleKeyEvent((KeyEvent) event);
+        } else if (event instanceof MouseEvent) {
+            this.handleMouseEvent((MouseEvent) event);
+        }
+
+        event.consume();
+        this.update();
+    }
+
+    private void handleMouseEvent(MouseEvent mouseEvent){
+        if (((Node) mouseEvent.getSource()).getId() == "musicVolDown"){
+            changeMusicVolume(-0.1);
+        } else if (((Node) mouseEvent.getSource()).getId() == "musicVolUp"){
+            changeMusicVolume(0.1);
+        } else if (((Node) mouseEvent.getSource()).getId() == "sfxVolDown"){
+            changeSFXVolume(-0.1);
+        } else if (((Node) mouseEvent.getSource()).getId() == "sfxVolUp"){
+            changeSFXVolume(0.1);
+        }
+    }
+
+    private void handleKeyEvent(KeyEvent keyEvent){
         boolean keyRecognized = true;
         KeyCode code = keyEvent.getCode();
 
@@ -124,8 +175,6 @@ public class Controller implements EventHandler<KeyEvent> {
 
         if (keyRecognized) {
             this.dungeonModel.updateDiscoveredSquares();
-            this.update();
-            keyEvent.consume();
         }
     }
 }
