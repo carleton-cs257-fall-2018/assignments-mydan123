@@ -28,7 +28,7 @@
                 </VBox>
             </top>
             <center>
-                <VBox alignment="CENTER" style="-fx-padding: 10px;">
+                <VBox alignment="CENTER" style="-fx-padding: 10px; -fx-background-color: rgb(116,124,168)">
                     <Label style="-fx-font-size: 140%; -fx-text-fill: white; -fx-padding: 10px;"
                            text="Compass:" />
                     <CompassView fx:id="compassView"/>

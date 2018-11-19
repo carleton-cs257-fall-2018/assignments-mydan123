@@ -1,44 +1,97 @@
 package dbusis.dungeoncrawl;
 
 import javafx.scene.Group;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.transform.Rotate;
 
 
 /**
  * A class that displays what the player has picked up in a DungeonModel.
  */
 public class CompassView extends Group {
-    ImageView compView;
+    private Polygon directionPointer;
+    private Rotate northRotate = new Rotate(0.0,50.0,50.0);
+    private Rotate northRotateUndo = new Rotate(-0.0,50.0,50.0);
+    private Rotate eastRotate = new Rotate(90.0,50.0,50.0);
+    private Rotate eastRotateUndo = new Rotate(-90.0,50.0,50.0);
+    private Rotate southRotate = new Rotate(180.0,50.0,50.0);
+    private Rotate southRotateUndo = new Rotate(-180.0,50.0,50.0);
+    private Rotate westRotate = new Rotate(270.0,50.0,50.0);
+    private Rotate westRotateUndo = new Rotate(-270.0,50.0,50.0);
+    private Rotate previousRotateUndo = northRotateUndo;
 
     public CompassView() {
-        Image compassPic = new Image("/res/compass.png");
-        ImageView compassView = new ImageView();
-        compassView.setFitWidth(100);
-        compassView.setFitHeight(100);
-        compassView.setSmooth(true);
-        compassView.setCache(true);
-        compassView.setImage(compassPic);
-        this.getChildren().add(compassView);
-        compView = compassView;
+        initializeCompass();
+    }
+
+    private void initializeCompass(){
+        Text textN = new Text();
+        textN.setText("N");
+        textN.setWrappingWidth(40.0);
+        textN.setX(30);
+        textN.setY(0);
+        textN.setTextAlignment(TextAlignment.CENTER);
+        this.getChildren().add(textN);
+
+        Text textE = new Text();
+        textE.setText("E");
+        textE.setWrappingWidth(20.0);
+        textE.setX(90);
+        textE.setY(50);
+        textE.setTextAlignment(TextAlignment.CENTER);
+        this.getChildren().add(textE);
+
+        Text textS = new Text();
+        textS.setText("S");
+        textS.setWrappingWidth(40.0);
+        textS.setX(30);
+        textS.setY(100);
+        textS.setTextAlignment(TextAlignment.CENTER);
+        this.getChildren().add(textS);
+
+        Text textW = new Text();
+        textW.setText("W");
+        textW.setWrappingWidth(20.0);
+        textW.setX(-10);
+        textW.setY(50);
+        textW.setTextAlignment(TextAlignment.CENTER);
+        this.getChildren().add(textW);
+
+        directionPointer = new Polygon();
+        directionPointer.getPoints().addAll(
+           25.0,65.0,
+                50.0,20.0,
+                75.0,65.0,
+                50.0,55.0
+        );
+        directionPointer.setFill(Color.valueOf("#1aad57"));
+        this.getChildren().add(directionPointer);
     }
 
     /**
      * Creates the empty key object within the inventory.
      */
     public void update(DungeonModel model){
+        this.directionPointer.getTransforms().add(previousRotateUndo);
         switch (model.getPlayerDirection()){
             case NORTH:
-                compView.setRotate(0.0);
-                break;
-            case WEST:
-                compView.setRotate(90.0);
-                break;
-            case SOUTH:
-                compView.setRotate(180.0);
+                this.directionPointer.getTransforms().add(northRotate);
+                this.previousRotateUndo = northRotateUndo;
                 break;
             case EAST:
-                compView.setRotate(270.0);
+                this.directionPointer.getTransforms().add(eastRotate);
+                this.previousRotateUndo = eastRotateUndo;
+                break;
+            case SOUTH:
+                this.directionPointer.getTransforms().add(southRotate);
+                this.previousRotateUndo = southRotateUndo;
+                break;
+            case WEST:
+                this.directionPointer.getTransforms().add(westRotate);
+                this.previousRotateUndo = westRotateUndo;
                 break;
         }
     }
