@@ -1,3 +1,14 @@
+/**
+ * DungeonView.java
+ * @author Daniel Busis, 2018
+ *
+ * Displays a first-person view of a dungeon corridor,
+ * based on a DungeonModel.
+ *
+ * Thanks to bensound.com for the royalty-free music.
+ */
+
+
 package dbusis.dungeoncrawl;
 
 import javafx.scene.Group;
@@ -9,9 +20,6 @@ import javafx.scene.shape.Shape;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Displays a first-person view of a dungeon corridor, based on a DungeonModel.
- */
 public class DungeonView extends Group {
     private Map<String,javafx.scene.shape.Shape> displayPolies = new HashMap<>();
     private Map<String, Color> defaultColors = new HashMap<>();

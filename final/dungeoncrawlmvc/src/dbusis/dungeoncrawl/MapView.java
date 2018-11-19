@@ -1,12 +1,20 @@
+/**
+ * MapView.java
+ * @author Daniel Busis, 2018
+ *
+ * View which displays a mini-map of discovered and undiscovered squares within the dungeon,
+ * based on a DungeonModel.
+ *
+ * Thanks to bensound.com for the royalty-free music.
+ */
+
+
 package dbusis.dungeoncrawl;
 
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-/**
- * View which displays a mini-map of discovered and undiscovered squares within the dungeon.
- */
 public class MapView extends Group {
     public final static double MAP_WIDTH = 120.0;
     public final static double MAP_HEIGHT = 120.0;

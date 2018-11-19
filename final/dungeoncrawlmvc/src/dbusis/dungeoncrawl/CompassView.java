@@ -1,3 +1,13 @@
+/**
+ * CompassView.java
+ * @author Daniel Busis, 2018
+ *
+ * A class that displays which cardinal direction the player
+ * is facing in a DungeonModel.
+ *
+ * Thanks to bensound.com for the royalty-free music.
+ */
+
 package dbusis.dungeoncrawl;
 
 import javafx.scene.Group;
@@ -7,10 +17,6 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.transform.Rotate;
 
-
-/**
- * A class that displays what the player has picked up in a DungeonModel.
- */
 public class CompassView extends Group {
     private Polygon directionPointer;
     private Rotate northRotate = new Rotate(0.0,50.0,50.0);

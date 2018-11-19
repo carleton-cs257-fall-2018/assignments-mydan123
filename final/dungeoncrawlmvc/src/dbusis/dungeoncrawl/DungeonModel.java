@@ -1,15 +1,18 @@
+/**
+ * DungeonModel.java
+ * @author Daniel Busis, 2018
+ *
+ * Models a grid of DungeonSquares, a maze of walls and empty
+ * passages that contains a key, a door, and a player. Squares
+ * can be discovered or undiscovered by the player.
+ *
+ * Thanks to bensound.com for the royalty-free music.
+ */
+
 package dbusis.dungeoncrawl;
 
 import java.util.*;
 
-/**
- * Class that acts as a model of a 10x10 dungeon. Each square in the dungeon can be empty,
- * a wall, the exit, or the key. Also holds information about player position and direction,
- * which squares have been discovered by the player, and whether the player has picked up
- * the key.
- *
- * @author Daniel Busis
- */
 public class DungeonModel {
 
     /**

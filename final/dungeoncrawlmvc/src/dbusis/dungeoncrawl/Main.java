@@ -1,5 +1,9 @@
 /**
- * @author Daniel Busis
+ * Main.java
+ * @author Daniel Busis, 2018
+ *
+ * Initializes the JavaFX window for this DungeonCrawl application.
+ * The window is set to be an un-resizeable 800x600
  *
  * Thanks to bensound.com for the royalty-free music.
  */

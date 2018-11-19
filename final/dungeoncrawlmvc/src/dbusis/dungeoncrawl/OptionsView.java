@@ -1,3 +1,13 @@
+/**
+ * OptionsView.java
+ * @author Daniel Busis, 2018
+ *
+ * A class which displays an options menu to the user,
+ * to adjust volumes and toggle UI elements.
+ *
+ * Thanks to bensound.com for the royalty-free music.
+ */
+
 package dbusis.dungeoncrawl;
 
 import javafx.geometry.Insets;
@@ -7,10 +17,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-
-/**
- * A class that displays what the player has picked up in a DungeonModel.
- */
 public class OptionsView extends Region {
     private Controller parentController;
     private Rectangle[] musicVolBars = new Rectangle[10];

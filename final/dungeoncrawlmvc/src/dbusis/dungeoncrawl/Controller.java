@@ -1,3 +1,19 @@
+/**
+ * Controller.java
+ * @author Daniel Busis, 2018
+ *
+ * Handles MouseEvents and KeyEvents for the DungeonCrawl application,
+ * and directs the Views by having them be displayed or not displayed
+ * at appropriate times.
+ *
+ * Whenever an event is handled, updates all views in the application.
+ *
+ * Also directs audio for the application to play/stop at appropriate times,
+ * as well as directing audio classes to adjust their volume.
+ *
+ * Thanks to bensound.com for the royalty-free music.
+ */
+
 package dbusis.dungeoncrawl;
 
 import javafx.event.Event;
@@ -29,18 +45,17 @@ public class Controller implements EventHandler<Event> {
     }
 
     /**
-     * @TODO: Add map and inv toggle to options
      * @TODO: Add instructions to close options menu
      * @TODO: Disable most actions when options menu is open
      * @TODO: Add sound effects for key and door
      * @TODO: Improve footsteps sound effect?
-     * @TODO: Move volume settings to the model? Or and additional model?
+     * @TODO: Move volume settings to the model? Or an additional model?
      * @TODO: Add a HelpView with instructions
      * @TODO: Add visual for entering the door room. (Staircase?)
      * @TODO: COMMENTS!
-     * @TODO: Options menu border
      * @TODO: Map/inv label toggles
      * @TODO: Strings to public final static Strings.
+     * @TODO: 10x10 hardcoded square limit?
      */
 
     public void initialize() {
@@ -166,18 +181,25 @@ public class Controller implements EventHandler<Event> {
 
     private void handleMouseEvent(MouseEvent mouseEvent){
         String eventSourceID = ((Node) mouseEvent.getSource()).getId();
-        if (eventSourceID == "musicVolDown"){
-            changeMusicVolume(-0.1);
-        } else if (eventSourceID == "musicVolUp"){
-            changeMusicVolume(0.1);
-        } else if (eventSourceID == "sfxVolDown"){
-            changeSFXVolume(-0.1);
-        } else if (eventSourceID == "sfxVolUp"){
-            changeSFXVolume(0.1);
-        } else if (eventSourceID == "toggleMap"){
-            toggleMapView();
-        } else if (eventSourceID == "toggleInv"){
-            toggleInventoryView();
+        switch (eventSourceID) {
+            case "musicVolDown":
+                changeMusicVolume(-0.1);
+                break;
+            case "musicVolUp":
+                changeMusicVolume(0.1);
+                break;
+            case "sfxVolDown":
+                changeSFXVolume(-0.1);
+                break;
+            case "sfxVolUp":
+                changeSFXVolume(0.1);
+                break;
+            case "toggleMap":
+                toggleMapView();
+                break;
+            case "toggleInv":
+                toggleInventoryView();
+                break;
         }
     }
 
@@ -203,10 +225,6 @@ public class Controller implements EventHandler<Event> {
             this.dungeonModel = new DungeonModel();
         } else if (code == KeyCode.P) {
             this.toggleMusic();
-        } else if (code == KeyCode.K) {
-            this.changeMusicVolume(.1);
-        } else if (code == KeyCode.J) {
-            this.changeMusicVolume(-.1);
         } else if (code == KeyCode.ESCAPE) {
             this.toggleOptionsView();
         } else {

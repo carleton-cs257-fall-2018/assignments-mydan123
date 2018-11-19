@@ -1,12 +1,18 @@
+/**
+ * InventoryView.java
+ * @author Daniel Busis, 2018
+ *
+ * A class that displays what the player has picked up in a DungeonModel.
+ *
+ * Thanks to bensound.com for the royalty-free music.
+ */
+
 package dbusis.dungeoncrawl;
 
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polyline;
 
-/**
- * A class that displays what the player has picked up in a DungeonModel.
- */
 public class InventoryView extends Group {
     private Polyline key;
 
