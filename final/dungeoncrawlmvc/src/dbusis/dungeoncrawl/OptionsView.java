@@ -163,9 +163,6 @@ public class OptionsView extends Region {
         this.getChildren().add(invButtonBox);
     }
 
-    /**
-     * Creates the empty key object within the inventory.
-     */
     public void update(DungeonModel model){
         double curMusicVol = parentController.getMusicVolume();
         int musicBarCutoff = (int)(Math.round(curMusicVol*musicVolBars.length*100.0)/100.0);

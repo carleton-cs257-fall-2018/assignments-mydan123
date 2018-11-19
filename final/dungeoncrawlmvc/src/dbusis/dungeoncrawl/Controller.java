@@ -44,20 +44,6 @@ public class Controller implements EventHandler<Event> {
     public Controller() {
     }
 
-    /**
-     * @TODO: Add instructions to close options menu
-     * @TODO: Disable most actions when options menu is open
-     * @TODO: Add sound effects for key and door
-     * @TODO: Improve footsteps sound effect?
-     * @TODO: Move volume settings to the model? Or an additional model?
-     * @TODO: Add a HelpView with instructions
-     * @TODO: Add visual for entering the door room. (Staircase?)
-     * @TODO: COMMENTS!
-     * @TODO: Map/inv label toggles
-     * @TODO: Strings to public final static Strings.
-     * @TODO: 10x10 hardcoded square limit?
-     */
-
     public void initialize() {
         this.dungeonModel = new DungeonModel();
         initializeOptionsView();
@@ -114,6 +100,8 @@ public class Controller implements EventHandler<Event> {
         }
     }
 
+    //Note: This method and the following method appear to be duplicates, but one deals with
+    //MediaPlayer class and the other with AudioClip class, which are similar but do not share parents.
     @SuppressWarnings("Duplicates")
     private void changeMusicVolume(Double changeAmount){
         double curVolume = backgroundMusicPlayer.getVolume();
