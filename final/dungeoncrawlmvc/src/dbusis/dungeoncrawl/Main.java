@@ -18,7 +18,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("dungeon.fxml"));
         Parent root = loader.load();
-        primaryStage.setTitle("Daleks");
+        primaryStage.setTitle("DungeonCrawl");
+        primaryStage.setResizable(false);
 
         Controller controller = loader.getController();
         root.setOnKeyPressed(controller);

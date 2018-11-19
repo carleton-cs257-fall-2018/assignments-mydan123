@@ -37,8 +37,10 @@ public class Controller implements EventHandler<Event> {
      * @TODO: Move volume settings to the model? Or and additional model?
      * @TODO: Add a HelpView with instructions
      * @TODO: Add visual for entering the door room. (Staircase?)
-     * @TODO: Add opening cutscene?
      * @TODO: COMMENTS!
+     * @TODO: Options menu border
+     * @TODO: Map/inv label toggles
+     * @TODO: Strings to public final static Strings.
      */
 
     public void initialize() {
@@ -59,13 +61,21 @@ public class Controller implements EventHandler<Event> {
         File musicFile = new File("src/res/bensound-epic.mp3");
         Media musicMedia = new Media(musicFile.toURI().toString());
         backgroundMusicPlayer = new MediaPlayer(musicMedia);
-        backgroundMusicPlayer.setVolume(0.3);
+        backgroundMusicPlayer.setVolume(0.30);
         backgroundMusicPlayer.setAutoPlay(true);
         backgroundMusicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 
         File footstepFile = new File("src/res/footstep-trim.wav");
         footstepMusicPlayer = new AudioClip(footstepFile.toURI().toString());
-        footstepMusicPlayer.setVolume(0.8);
+        footstepMusicPlayer.setVolume(0.80);
+    }
+
+    public boolean getMapShown() {
+        return this.mapView.isVisible();
+    }
+
+    public boolean getInventoryShown() {
+        return this.inventoryView.isVisible();
     }
 
     private void update() {
@@ -127,6 +137,21 @@ public class Controller implements EventHandler<Event> {
         return footstepMusicPlayer.getVolume();
     }
 
+    private void toggleInventoryView(){
+        this.inventoryView.setVisible(!this.inventoryView.isVisible());
+        this.inventoryView.setManaged(!this.inventoryView.isManaged());
+    }
+    
+    private void toggleMapView(){
+        this.mapView.setVisible(!this.mapView.isVisible());
+        this.mapView.setManaged(!this.mapView.isManaged());
+    }
+
+    private void toggleOptionsView(){
+        this.optionsView.setVisible(!this.optionsView.isVisible());
+        this.optionsView.setManaged(!this.optionsView.isManaged());
+    }
+
     @Override
     public void handle(Event event) {
         if (event instanceof KeyEvent) {
@@ -140,14 +165,19 @@ public class Controller implements EventHandler<Event> {
     }
 
     private void handleMouseEvent(MouseEvent mouseEvent){
-        if (((Node) mouseEvent.getSource()).getId() == "musicVolDown"){
+        String eventSourceID = ((Node) mouseEvent.getSource()).getId();
+        if (eventSourceID == "musicVolDown"){
             changeMusicVolume(-0.1);
-        } else if (((Node) mouseEvent.getSource()).getId() == "musicVolUp"){
+        } else if (eventSourceID == "musicVolUp"){
             changeMusicVolume(0.1);
-        } else if (((Node) mouseEvent.getSource()).getId() == "sfxVolDown"){
+        } else if (eventSourceID == "sfxVolDown"){
             changeSFXVolume(-0.1);
-        } else if (((Node) mouseEvent.getSource()).getId() == "sfxVolUp"){
+        } else if (eventSourceID == "sfxVolUp"){
             changeSFXVolume(0.1);
+        } else if (eventSourceID == "toggleMap"){
+            toggleMapView();
+        } else if (eventSourceID == "toggleInv"){
+            toggleInventoryView();
         }
     }
 
@@ -166,22 +196,19 @@ public class Controller implements EventHandler<Event> {
             boolean didMove = this.dungeonModel.movePlayer(false);
             if (didMove) this.footstepMusicPlayer.play();
         } else if (code == KeyCode.M) {
-            this.mapView.setVisible(!this.mapView.isVisible());
-            this.mapView.setManaged(!this.mapView.isManaged());
+            this.toggleMapView();
         } else if (code == KeyCode.I) {
-            this.inventoryView.setVisible(!this.inventoryView.isVisible());
-            this.inventoryView.setManaged(!this.inventoryView.isManaged());
+            this.toggleInventoryView();
         } else if (code == KeyCode.N && this.dungeonModel.isExitReached()) {
             this.dungeonModel = new DungeonModel();
         } else if (code == KeyCode.P) {
-            toggleMusic();
+            this.toggleMusic();
         } else if (code == KeyCode.K) {
-            changeMusicVolume(.1);
+            this.changeMusicVolume(.1);
         } else if (code == KeyCode.J) {
-            changeMusicVolume(-.1);
+            this.changeMusicVolume(-.1);
         } else if (code == KeyCode.ESCAPE) {
-            this.optionsView.setVisible(!this.optionsView.isVisible());
-            this.optionsView.setManaged(!this.optionsView.isManaged());
+            this.toggleOptionsView();
         } else {
             keyRecognized = false;
         }

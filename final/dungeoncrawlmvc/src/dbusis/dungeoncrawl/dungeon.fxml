@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import dbusis.dungeoncrawl.OptionsView?>
 <StackPane fx:controller="dbusis.dungeoncrawl.Controller" xmlns:fx="http://javafx.com/fxml">
-    <OptionsView fx:id="optionsView" style="-fx-background-color: #eb9cf4" maxWidth="400" maxHeight="300"/>
+    <OptionsView fx:id="optionsView" style="-fx-background-color: #eb9cf4; -fx-border-style: solid; -fx-border-color: #593e5e"
+                 maxWidth="400" maxHeight="300"/>
     <BorderPane style="-fx-background-color: rgb(43,21,172)">
         <top>
             <BorderPane prefHeight="35" style="-fx-background-color: #0B5091; -fx-padding: 10px, 5px, 10px, 5px;" >
